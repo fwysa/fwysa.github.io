@@ -1,0 +1,1 @@
+export default "/dist/img/outline_article_black_18dp.png";

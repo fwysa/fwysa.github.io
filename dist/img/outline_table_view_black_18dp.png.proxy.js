@@ -1,0 +1,1 @@
+export default "/dist/img/outline_table_view_black_18dp.png";
