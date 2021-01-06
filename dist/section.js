@@ -6,7 +6,7 @@ import expand_less from "./img/round_expand_less_black_18dp.png.proxy.js";
 import expand_more from "./img/round_expand_more_black_18dp.png.proxy.js";
 export default function Section(props) {
   const [showing, setShowing] = useState(false);
-  content = /* @__PURE__ */ h("div", {
+  var content = /* @__PURE__ */ h("div", {
     className: "content"
   }, /* @__PURE__ */ h("hr", null), props.children);
   return /* @__PURE__ */ h("div", {
