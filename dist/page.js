@@ -44,6 +44,10 @@ function Page() {
     abstract: "Virtual"
   }, /* @__PURE__ */ h(EmbeddedDoc, {
     url: "https://docs.google.com/document/d/e/2PACX-1vTjx8C22yQY-st19rOoYv9lXK_XklxodDlsXzVja24NIfwVS5lzYhxNOB9ftY4Zzh6sDOFzQfcpNM6Z/pub?embedded=true"
-  }))));
+  }))), /* @__PURE__ */ h(Section, {
+    abstract: "For Leaders"
+  }, /* @__PURE__ */ h("p", null, /* @__PURE__ */ h("span", null, "For Family Home Evening Group Leaders:"), /* @__PURE__ */ h("ul", null, /* @__PURE__ */ h("li", null, /* @__PURE__ */ h("a", {
+    href: "https://drive.google.com/drive/folders/1wHdfCUdI_yxgCzZbtU9WkI5_g6D5qWdn"
+  }, "Link to Google Drive Folder"))))));
 }
 export default Page;
