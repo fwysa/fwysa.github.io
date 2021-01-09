@@ -41,6 +41,10 @@ function Page() {
   }, /* @__PURE__ */ h(EmbeddedDoc, {
     url: "https://docs.google.com/document/d/e/2PACX-1vR5FqLon16N6MjhPxsSWHwjRnbTY0YBcMv-oaAH64D92eVcC8pV-Ug0Me1-yuJsdXnbW97OjU_K1p2o/pub?embedded=true"
   })), /* @__PURE__ */ h(Section, {
+    abstract: "Gallatin"
+  }, /* @__PURE__ */ h(EmbeddedDoc, {
+    url: "https://docs.google.com/document/d/e/2PACX-1vQa6sc0fUAlp8ochjXWXRMiMV_a5gZna3pfSWlDKvEOZ6JGQeZax708RZycCHw9YVwWNU5iIW71dS3p/pub?embedded=true"
+  })), /* @__PURE__ */ h(Section, {
     abstract: "Virtual"
   }, /* @__PURE__ */ h(EmbeddedDoc, {
     url: "https://docs.google.com/document/d/e/2PACX-1vTjx8C22yQY-st19rOoYv9lXK_XklxodDlsXzVja24NIfwVS5lzYhxNOB9ftY4Zzh6sDOFzQfcpNM6Z/pub?embedded=true"
