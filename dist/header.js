@@ -16,9 +16,9 @@ export default function Header() {
   })), /* @__PURE__ */ h("div", {
     className: "icons"
   }, /* @__PURE__ */ h(HeaderLink, {
-    text: "Bulletin",
+    text: "HE Leaders",
     img: img_bulletin,
-    src: "https://docs.google.com/document/d/1GsfL8zG4m5TpaONIvfsLjlX1Nl1-HLQjq-Yzbyn9bx8/edit?usp=drive_web"
+    src: "https://drive.google.com/drive/folders/1wHdfCUdI_yxgCzZbtU9WkI5_g6D5qWdn"
   }), /* @__PURE__ */ h(HeaderLink, {
     text: "Form",
     img: img_form,

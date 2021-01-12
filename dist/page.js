@@ -12,9 +12,13 @@ function Page() {
     href: "https://us02web.zoom.us/j/83949872985?pwd=MFNJd0FqaWxZd0VhN1VMSWdhYU9udz09"
   }, "839 4987 2985")), /* @__PURE__ */ h("br", null), /* @__PURE__ */ h("span", null, "Passcode: 704698")), /* @__PURE__ */ h("p", null, "Institute and Home Evening:"), /* @__PURE__ */ h(Block, null, /* @__PURE__ */ h("span", null, "Meeting ID: ", /* @__PURE__ */ h("a", {
     href: "https://byui.zoom.us/j/6727612227"
-  }, "672 761 2227")), /* @__PURE__ */ h("br", null), /* @__PURE__ */ h("span", null, "No passcode required"))), /* @__PURE__ */ h(Section, {
+  }, "672 761 2227")), /* @__PURE__ */ h("br", null), /* @__PURE__ */ h("span", null, "No passcode required")), /* @__PURE__ */ h("p", null, "Ward Bulletin: ", /* @__PURE__ */ h("a", {
+    href: "https://docs.google.com/document/d/1GsfL8zG4m5TpaONIvfsLjlX1Nl1-HLQjq-Yzbyn9bx8/edit?usp=drive_web"
+  }, "Link"))), /* @__PURE__ */ h(Section, {
     abstract: "Schedule an Interview"
-  }, /* @__PURE__ */ h(Section, {
+  }, /* @__PURE__ */ h("p", null, "Want to talk with Bishop? ", /* @__PURE__ */ h("a", {
+    href: "https://calendly.com/fwysabishop/visit?back=1&month=2020-12"
+  }, "Schedule a visit")), /* @__PURE__ */ h(Section, {
     abstract: "Temple Recommend Interview"
   }, /* @__PURE__ */ h(Section, {
     abstract: "With Bishop"
@@ -24,9 +28,7 @@ function Page() {
     abstract: "With a Stake Presidency Member"
   }, /* @__PURE__ */ h("p", null, "Fill out this form: ", /* @__PURE__ */ h("a", {
     href: "https://farwestmissouristake.org/interview-request/"
-  }, "Request an Interview Link")))), /* @__PURE__ */ h("p", null, "Need to talk with Bishop? ", /* @__PURE__ */ h("a", {
-    href: "https://calendly.com/fwysabishop/visit?back=1&month=2020-12"
-  }, "Schedule an interview."))), /* @__PURE__ */ h(Section, {
+  }, "Request an Interview Link"))))), /* @__PURE__ */ h(Section, {
     abstract: "Family Home Evening Info"
   }, /* @__PURE__ */ h(Section, {
     abstract: "Cameron"
@@ -49,9 +51,9 @@ function Page() {
   }, /* @__PURE__ */ h(EmbeddedDoc, {
     url: "https://docs.google.com/document/d/e/2PACX-1vTjx8C22yQY-st19rOoYv9lXK_XklxodDlsXzVja24NIfwVS5lzYhxNOB9ftY4Zzh6sDOFzQfcpNM6Z/pub?embedded=true"
   }))), /* @__PURE__ */ h(Section, {
-    abstract: "For Leaders"
-  }, /* @__PURE__ */ h("p", null, /* @__PURE__ */ h("span", null, "For Family Home Evening Group Leaders:"), /* @__PURE__ */ h("ul", null, /* @__PURE__ */ h("li", null, /* @__PURE__ */ h("a", {
-    href: "https://drive.google.com/drive/folders/1wHdfCUdI_yxgCzZbtU9WkI5_g6D5qWdn"
-  }, "Link to Google Drive Folder"))))));
+    abstract: "Activities"
+  }, /* @__PURE__ */ h(EmbeddedDoc, {
+    url: "https://docs.google.com/document/d/e/2PACX-1vRauqGGUJLsFZXECix3Ff3dtv_QikViUugRjbWa0u-kg9CGY-b-mq5bPlylSWjZzBgPGG1PAg0ARlym/pub?embedded=true"
+  })));
 }
 export default Page;
