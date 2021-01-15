@@ -40,9 +40,11 @@ class DB {
     let u = this.genDocBase("user", name);
     u.info = {
       status: "uncontacted",
+      source: "",
       gender: "",
       homeWard: "",
-      fheGroup: ""
+      fheGroup: "",
+      imageUrl: ""
     };
     u.contact = {
       preferred: {
@@ -56,6 +58,13 @@ class DB {
       household: {
         phone: "",
         email: ""
+      },
+      notify: {
+        homeEvening: false,
+        wardActivity: false
+      },
+      facebook: {
+        notified: false
       }
     };
     this.pouchdb.put(u, (err, result) => {
