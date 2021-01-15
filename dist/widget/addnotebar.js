@@ -11,6 +11,7 @@ export default function AddUserBar(props) {
   };
   const noteAddHandler = () => {
     props.addcb(author, noteText);
+    setNoteText("");
   };
   const less = /* @__PURE__ */ h("div", {
     className: "whitebackground addnote"
