@@ -24,7 +24,9 @@ export default function Bio(props) {
     className: "bioinfolower"
   }, /* @__PURE__ */ h("span", null, "Gender: ", /* @__PURE__ */ h("span", {
     className: "userdata"
-  }, props.data.info.gender)), /* @__PURE__ */ h("br", null), /* @__PURE__ */ h("span", null, "Home Ward: ", /* @__PURE__ */ h("span", {
+  }, props.data.info.gender)), /* @__PURE__ */ h("br", null), /* @__PURE__ */ h("span", null, "Home Evening Group: ", /* @__PURE__ */ h("span", {
+    className: "userdata"
+  }, props.data.info.fheGroup)), /* @__PURE__ */ h("br", null), /* @__PURE__ */ h("span", null, "Home Ward: ", /* @__PURE__ */ h("span", {
     className: "userdata"
   }, props.data.info.homeWard)), /* @__PURE__ */ h("br", null), /* @__PURE__ */ h("span", null, "Preferred Contact: ", /* @__PURE__ */ h("span", {
     className: "userdata"
