@@ -1,0 +1,17 @@
+.outericon {
+	margin-left: 0.3em;
+	margin-right: 0.3em;
+}
+.outericon a {
+	display: flex;
+	flex-direction: column;
+}
+
+.outericon img {
+	align-self: center;
+	width: 2em;
+}
+
+.outericon span {
+	font-size: smaller;
+}

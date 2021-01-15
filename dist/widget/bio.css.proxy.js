@@ -1,6 +1,6 @@
 // [snowpack] add styles to the page (skip if no document exists)
 if (typeof document !== 'undefined') {
-  const code = ":root {\n\t--lightblue: #20abd7;\n\t--mediumblue: #157493;\n\t--darkblue: #105970;\n}\n\nhtml, body, #root, .app {\n  width: 100%;\n  height: 100%;\n  margin: 0;\n}\n";
+  const code = ".bio {\n\tdisplay: flex;\n\tflex-direction: row;\n\tjustify-content: space-between;\n}\n\n.bioinfo {\n\tflex-grow: 1;\n\tdisplay: flex;\n\tflex-direction: column;\n}\n\n.bioinfo hr {\n\tmargin-left: 0;\n\tmargin-right: 0;\n}\n";
 
   const styleEl = document.createElement("style");
   const codeEl = document.createTextNode(code);

@@ -1,0 +1,9 @@
+.page {
+	width: 100%;
+	max-width: 1000px; /*FIXME*/
+	align-self: center;
+}
+
+.page .c0 {
+	padding: 0;
+}

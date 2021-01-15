@@ -1,0 +1,1 @@
+export default "/dist/widget/img/outline_insert_chart_black_18dp.png";

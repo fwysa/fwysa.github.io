@@ -1,0 +1,1 @@
+export default "/dist/widget/img/round_expand_less_black_18dp.png";
