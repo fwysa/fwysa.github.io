@@ -24,11 +24,17 @@ export default function Bio(props) {
     className: "bioinfolower"
   }, /* @__PURE__ */ h("span", null, "Gender: ", /* @__PURE__ */ h("span", {
     className: "userdata"
-  }, props.data.info.gender)), /* @__PURE__ */ h("br", null), /* @__PURE__ */ h("span", null, "Home Evening Group: ", /* @__PURE__ */ h("span", {
+  }, props.data.info.gender), " Status: ", /* @__PURE__ */ h("span", {
+    className: "userdata"
+  }, props.data.info.status)), /* @__PURE__ */ h("br", null), /* @__PURE__ */ h("span", null, "Home Evening Group: ", /* @__PURE__ */ h("span", {
     className: "userdata"
   }, props.data.info.fheGroup)), /* @__PURE__ */ h("br", null), /* @__PURE__ */ h("span", null, "Home Ward: ", /* @__PURE__ */ h("span", {
     className: "userdata"
   }, props.data.info.homeWard)), /* @__PURE__ */ h("br", null), /* @__PURE__ */ h("span", null, "Preferred Contact: ", /* @__PURE__ */ h("span", {
     className: "userdata"
-  }, props.data.contact.preferred.value, " (", props.data.contact.preferred.type, ")"))))), showMore ? /* @__PURE__ */ h("hr", null) : null, showMore ? belowFold : null);
+  }, props.data.contact.preferred.value, " (", props.data.contact.preferred.type, ")")), /* @__PURE__ */ h("br", null), /* @__PURE__ */ h("span", null, "Notify: FHE? ", /* @__PURE__ */ h("span", {
+    className: "userdata"
+  }, props.data.contact.notify.homeEvening ? "Yes" : "No"), /* @__PURE__ */ h("span", null, " Activities? ", /* @__PURE__ */ h("span", {
+    className: "userdata"
+  }, " ", props.data.contact.notify.wardActivity ? "Yes" : "No")))))), showMore ? /* @__PURE__ */ h("hr", null) : null, showMore ? belowFold : null);
 }
