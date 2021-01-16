@@ -5,6 +5,7 @@ import expand_more from "./img/round_expand_more_black_18dp.png.proxy.js";
 import create_icon from "./img/outline_create_black_18dp.png.proxy.js";
 import save_icon from "./img/outline_save_black_18dp.png.proxy.js";
 import EditableText from "./editabletext.js";
+import EditableTextArea from "./editabletextarea.js";
 import EditableCheckBox from "./editablecheckbox.js";
 import EditableMultipleChoice from "./editablemultiplechoice.js";
 import CONSTANTS from "../constants.js";
@@ -20,6 +21,13 @@ export default function Bio(props) {
   const [preferredContactValue, setPreferredContactValue] = useState(props.data.contact.preferred.value);
   const [notifyFHE, setNotifyFHE] = useState(props.data.contact.notify.homeEvening);
   const [notifyActivities, setNotifyActivities] = useState(props.data.contact.notify.wardActivity);
+  const [source, setSource] = useState(props.data.info.source);
+  const [info, setInfo] = useState(props.data.info.infotext);
+  const [notifiedFacebook, setNotifiedFacebook] = useState(props.data.contact.facebook.notified);
+  const [individualPhone, setIndividualPhone] = useState(props.data.contact.individual.phone);
+  const [individualEmail, setIndividualEmail] = useState(props.data.contact.individual.email);
+  const [householdPhone, setHouseholdPhone] = useState(props.data.contact.household.phone);
+  const [householdEmail, setHouseholdEmail] = useState(props.data.contact.household.email);
   const showMoreClickHandler = () => {
     if (isEditing) {
       saveEditedUser();
@@ -42,17 +50,53 @@ export default function Bio(props) {
     co.info.status = status;
     co.info.fheGroup = homeEveningGroup;
     co.info.homeWard = homeWard;
+    co.info.source = source;
+    co.info.infotext = info;
     co.contact.preferred.type = preferredContactType;
     co.contact.preferred.value = preferredContactValue;
+    co.contact.individual.phone = individualPhone;
+    co.contact.individual.email = individualEmail;
+    co.contact.household.phone = householdPhone;
+    co.contact.household.email = householdEmail;
     co.contact.notify.homeEvening = notifyFHE;
     co.contact.notify.wardActivity = notifyActivities;
+    co.contact.facebook.notified = notifiedFacebook;
     props.updateusercb(co, (res) => {
       console.log("Updated user", res);
     });
   };
   const belowFold = /* @__PURE__ */ h("div", {
     className: "biobelowfold"
-  });
+  }, /* @__PURE__ */ h(EditableMultipleChoice, {
+    val: source,
+    setcb: setSource,
+    show: isEditing,
+    choices: CONSTANTS.sources
+  }, /* @__PURE__ */ h("strong", null, "Source:")), /* @__PURE__ */ h("br", null), /* @__PURE__ */ h(EditableCheckBox, {
+    val: notifiedFacebook,
+    setcb: setNotifiedFacebook,
+    show: isEditing
+  }, /* @__PURE__ */ h("strong", null, "Notified on Facebook?")), /* @__PURE__ */ h("br", null), /* @__PURE__ */ h(EditableTextArea, {
+    val: info,
+    setcb: setInfo,
+    show: isEditing
+  }, /* @__PURE__ */ h("strong", null, "Info:")), /* @__PURE__ */ h("br", null), /* @__PURE__ */ h(EditableText, {
+    val: individualPhone,
+    setcb: setIndividualPhone,
+    show: isEditing
+  }, /* @__PURE__ */ h("strong", null, "Individual Phone:")), /* @__PURE__ */ h("br", null), /* @__PURE__ */ h(EditableText, {
+    val: individualEmail,
+    setcb: setIndividualEmail,
+    show: isEditing
+  }, /* @__PURE__ */ h("strong", null, "Individual Email:")), /* @__PURE__ */ h("br", null), /* @__PURE__ */ h(EditableText, {
+    val: householdPhone,
+    setcb: setHouseholdPhone,
+    show: isEditing
+  }, /* @__PURE__ */ h("strong", null, "Household Phone:")), /* @__PURE__ */ h("br", null), /* @__PURE__ */ h(EditableText, {
+    val: householdEmail,
+    setcb: setHouseholdEmail,
+    show: isEditing
+  }, /* @__PURE__ */ h("strong", null, "Household Email:")));
   return /* @__PURE__ */ h("div", {
     className: "whitebackground bio"
   }, /* @__PURE__ */ h("div", {
