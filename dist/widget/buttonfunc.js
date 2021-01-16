@@ -5,7 +5,10 @@ export default function ButtonLink(props) {
     className: "whitebackground button",
     onClick: props.cb
   }, /* @__PURE__ */ h("a", {
-    href: "#"
+    href: "#",
+    onClick: (e) => {
+      e.preventDefault();
+    }
   }, /* @__PURE__ */ h("div", {
     className: "buttonchild"
   }, props.children)));
