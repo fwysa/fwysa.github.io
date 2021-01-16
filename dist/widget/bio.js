@@ -1,5 +1,5 @@
 import {h} from "../../web_modules/preact.js";
-import {useState} from "../../web_modules/preact/hooks.js";
+import {useState, useEffect} from "../../web_modules/preact/hooks.js";
 import expand_less from "./img/round_expand_less_black_18dp.png.proxy.js";
 import expand_more from "./img/round_expand_more_black_18dp.png.proxy.js";
 import create_icon from "./img/outline_create_black_18dp.png.proxy.js";
@@ -28,6 +28,24 @@ export default function Bio(props) {
   const [individualEmail, setIndividualEmail] = useState(props.data.contact.individual.email);
   const [householdPhone, setHouseholdPhone] = useState(props.data.contact.household.phone);
   const [householdEmail, setHouseholdEmail] = useState(props.data.contact.household.email);
+  useEffect(() => {
+    console.log("PROPS.DATA FIRED");
+    setGender(props.data.info.gender);
+    setStatus(props.data.info.status);
+    setHomeEveningGroup(props.data.info.fheGroup);
+    setHomeWard(props.data.info.homeWard);
+    setPreferredContactType(props.data.contact.preferred.type);
+    setPreferredContactValue(props.data.contact.preferred.value);
+    setNotifyFHE(props.data.contact.notify.homeEvening);
+    setNotifyActivities(props.data.contact.notify.wardActivity);
+    setSource(props.data.info.source);
+    setInfo(props.data.info.infotext);
+    setNotifiedFacebook(props.data.contact.facebook.notified);
+    setIndividualPhone(props.data.contact.individual.phone);
+    setIndividualEmail(props.data.contact.individual.email);
+    setHouseholdPhone(props.data.contact.household.phone);
+    setHouseholdEmail(props.data.contact.household.email);
+  }, [props.data]);
   const showMoreClickHandler = () => {
     if (isEditing) {
       saveEditedUser();

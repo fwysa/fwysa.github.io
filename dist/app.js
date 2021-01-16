@@ -5,6 +5,7 @@ import "./app.css.proxy.js";
 import DefaultPage from "./page/default.js";
 import NotePage from "./page/note.js";
 import LeaderPage from "./page/leaders.js";
+import AddNamesPage from "./page/addnames.js";
 function App() {
   return /* @__PURE__ */ h("div", {
     className: "app"
@@ -14,6 +15,8 @@ function App() {
     path: "/notes"
   }), /* @__PURE__ */ h(LeaderPage, {
     path: "/leaders"
+  }), /* @__PURE__ */ h(AddNamesPage, {
+    path: "/addnames"
   })));
 }
 export default App;

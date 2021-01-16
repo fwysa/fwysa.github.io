@@ -7,6 +7,8 @@ function LeaderPage() {
     href: "/"
   }, "Main Page"), /* @__PURE__ */ h(ButtonLink, {
     href: "/notes"
-  }, "Notes"));
+  }, "Notes"), /* @__PURE__ */ h(ButtonLink, {
+    href: "/addnames"
+  }, "Add Names"));
 }
 export default LeaderPage;

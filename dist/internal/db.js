@@ -1,6 +1,7 @@
 import PouchDBFind from "../../web_modules/pouchdb-find.js";
 import PouchDB from "../../web_modules/pouchdb-browser.js";
 PouchDB.plugin(PouchDBFind);
+import CONSTANTS from "../constants.js";
 const CLOUDANT_URL = "https://bd155bbe-8d8e-42a6-9a3a-4d316144c379-bluemix:82c46900cd9ba0d2f0a7174710f99b447960bd385bf07c94b30be16f556bcd1a@bd155bbe-8d8e-42a6-9a3a-4d316144c379-bluemix.cloudantnosqldb.appdomain.cloud/ocz";
 const SYNC_OPTS = {
   live: true,
@@ -39,7 +40,7 @@ class DB {
   addUser(name, cb) {
     let u = this.genDocBase("user", name);
     u.info = {
-      status: "uncontacted",
+      status: CONSTANTS.statuses[0],
       source: "",
       gender: "",
       homeWard: "",
@@ -144,4 +145,6 @@ class DB {
     });
   }
 }
-export default DB;
+let d = new DB();
+console.log("DB:", d);
+export default d;

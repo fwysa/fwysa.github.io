@@ -8,10 +8,8 @@ import Bio from "../widget/bio.js";
 import Selection from "../widget/selection.js";
 import Block from "../widget/block.js";
 import EmbeddedDoc from "../widget/embedded_doc.js";
-import DB from "../internal/db.js";
+import db from "../internal/db.js";
 const ADD_USER = "* Add Name *";
-let db = new DB();
-console.log(db);
 function Page() {
   const [listOfNames, setListOfNames] = useState([]);
   const [refreshNames, setRefreshNames] = useState(false);
@@ -33,7 +31,6 @@ function Page() {
   useEffect(() => {
     if (name !== "" && name !== ADD_USER) {
       db.getUser(name, (user) => {
-        console.log("GOT USER", user);
         setCurUser(user);
         setRefreshCurrentUser(false);
       });
@@ -56,7 +53,6 @@ function Page() {
     }
   }, [name, refreshNotes]);
   useEffect(() => {
-    console.log("INSPECTING CHANGES");
     let chg = db.pouchdb.changes({
       since: "now",
       live: true,
@@ -81,7 +77,6 @@ function Page() {
       console.log("SYNC ERROR (abort is normal / from reload)", e);
     });
     return () => {
-      console.log("IGNORING CHANGES");
       chg.cancel();
     };
   }, [name]);
