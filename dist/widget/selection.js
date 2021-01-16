@@ -1,6 +1,5 @@
 import {h} from "../../web_modules/preact.js";
 import {useState} from "../../web_modules/preact/hooks.js";
-import "./selection.css.proxy.js";
 export default function Selection(props) {
   const [val, setVal] = useState("");
   let options = props.selectValues.map((val2) => {
@@ -12,7 +11,7 @@ export default function Selection(props) {
     className: "whitebackground selection"
   }, /* @__PURE__ */ h("select", {
     value: val,
-    class: "selectbox",
+    class: "fullwidth",
     onChange: (e) => {
       setVal(e.target.value);
       props.cb(e.target.value);

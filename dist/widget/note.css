@@ -1,11 +1,6 @@
-.note hr {
-	margin-top: 0.2em;
-	margin-bottom: 0.1em;
-}
-
 .notelower {
 	font-size: smaller;
-	color: #666;
+	color: var(--lighttext);
 	display: flex;
 	flex-direction: row;
 	justify-content: space-between;

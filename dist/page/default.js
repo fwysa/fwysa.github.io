@@ -2,7 +2,6 @@ import {h} from "../../web_modules/preact.js";
 import Section from "../widget/section.js";
 import Block from "../widget/block.js";
 import EmbeddedDoc from "../widget/embedded_doc.js";
-import "./helper/page.css.proxy.js";
 function DefaultPage() {
   return /* @__PURE__ */ h("div", {
     className: "page"

@@ -15,11 +15,29 @@
 	flex-direction: column;
 }
 
-.bioinfo hr {
-	margin-top: 0.2em;
-	margin-bottom: 0.1em;
-	margin-left: 0;
-	margin-right: 0;
+.bioinfoupper {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	white-space: nowrap;
+}
+
+.biobuttons {
+	display: flex;
+	flex-direction: row;
+}
+
+.biobuttons img {
+	margin-top: -0.2em;
+	margin-bottom: -0.2em;
+	max-height: 1.7em;
+}
+
+.biobuttons .expandbutton {
+	flex-grow: 1;
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-end;
 }
 
 .bioinfolower {

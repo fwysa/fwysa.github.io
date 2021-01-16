@@ -8,7 +8,6 @@ import Bio from "../widget/bio.js";
 import Selection from "../widget/selection.js";
 import Block from "../widget/block.js";
 import EmbeddedDoc from "../widget/embedded_doc.js";
-import "./helper/page.css.proxy.js";
 import DB from "../internal/db.js";
 const ADD_USER = "* Add Name *";
 let db = new DB();
@@ -17,6 +16,7 @@ function Page() {
   const [listOfNames, setListOfNames] = useState([]);
   const [refreshNames, setRefreshNames] = useState(false);
   const [refreshNotes, setRefreshNotes] = useState(false);
+  const [refreshCurrentUser, setRefreshCurrentUser] = useState(false);
   const [name, setName] = useState("");
   const [curUser, setCurUser] = useState({});
   const [notes, setNotes] = useState([]);
@@ -35,9 +35,10 @@ function Page() {
       db.getUser(name, (user) => {
         console.log("GOT USER", user);
         setCurUser(user);
+        setRefreshCurrentUser(false);
       });
     }
-  }, [name]);
+  }, [name, refreshCurrentUser]);
   useEffect(() => {
     setRefreshNotes(false);
     if (name !== "") {
@@ -63,8 +64,15 @@ function Page() {
     }).on("change", (c) => {
       setRefreshNames(true);
       if (c.doc.name === name) {
-        console.log("Someone changed a note");
-        setRefreshNotes(true);
+        if (c.doc.type === "note") {
+          console.log("Someone changed a note");
+          setRefreshNotes(true);
+        } else if (c.doc.type === "user") {
+          console.log("Someone changed the user we're on");
+          setRefreshCurrentUser(true);
+        } else {
+          console.log("Someone changed something, but it was a ", c.doc.type, ", not a user or note, so we don't care");
+        }
       } else {
         console.log("No need to refresh notes, we're on", name, "and they're on", c.doc.name);
       }
@@ -98,6 +106,10 @@ function Page() {
   const clickNoteHandler = () => {
     setAddingNote(true);
   };
+  const updateUserHandler = (data, cb) => {
+    db.updateRecord(data, cb);
+    setRefreshCurrentUser(true);
+  };
   return /* @__PURE__ */ h("div", {
     className: "page"
   }, /* @__PURE__ */ h(Selection, {
@@ -108,6 +120,7 @@ function Page() {
   }), addingUser ? /* @__PURE__ */ h(AddUserBar, {
     cb: addUserHandler
   }) : null, curUser.name !== void 0 ? /* @__PURE__ */ h(Bio, {
+    updateusercb: updateUserHandler,
     data: curUser
   }) : null, curUser.name !== void 0 ? /* @__PURE__ */ h(AddNoteBar, {
     editing: addingNote,

@@ -76,7 +76,7 @@ class DB {
       }
     });
   }
-  updateUser(name, cb, timeout = 1e3) {
+  updateUser(name, cb) {
     this.pouchdb.find({
       selector: {
         name,
@@ -93,7 +93,17 @@ class DB {
       console.log(err);
     });
   }
-  getUser(name, cb, timeout = 1e3) {
+  updateRecord(dat, cb) {
+    this.pouchdb.put(dat, (err, result) => {
+      if (err) {
+        console.log("UPDATE RECORD ERROR", err);
+      } else {
+        cb(result);
+      }
+    });
+    console.log("UPDATE RECORD", dat);
+  }
+  getUser(name, cb) {
     this.pouchdb.find({
       selector: {
         name,
@@ -105,7 +115,7 @@ class DB {
       console.log(err);
     });
   }
-  getNotes(name, cb, timeout = 1e3) {
+  getNotes(name, cb) {
     this.pouchdb.find({
       selector: {
         name,

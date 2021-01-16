@@ -7,11 +7,45 @@
 	overflow: auto;
 }
 
+.page {
+	width: 100%;
+	max-width: var(--maxcontentwidth);
+	align-self: center;
+}
+
+.page c0 {
+	padding: 0;
+}
+
 .whitebackground {
-	margin: 8px;
-	padding: 5px;
-	border: 1px solid rgba(0,0,0,0.2);
-	background-color: #fff; /*FIXME*/
-	border-radius: 8px;
-	box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2); /*Values taken from w3c*/
+	margin: var(--sectionmargin);
+	padding: var(--blockpadding);
+	border: var(--borderdetails);
+	background-color: var(--white);
+	border-radius: var(--rounding);
+	box-shadow: var(--shadowdetails);
+}
+
+hr {
+	margin-top: 0.2em;
+	margin-bottom: 0.1em;
+	margin-left: 0;
+	margin-right: 0;
+}
+
+textarea {
+	width: 100%;
+}
+
+.fullwidth {
+	width: 100%;
+}
+
+.fullheight {
+	height: 100%;
+}
+
+.full {
+	width: 100%;
+	height: 100%;
 }
