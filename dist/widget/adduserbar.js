@@ -1,10 +1,15 @@
 import {h} from "../../web_modules/preact.js";
 import {useState} from "../../web_modules/preact/hooks.js";
-export default function AddUserBar(props) {
+import DB from "../internal/db.js";
+export default function AddUserBar() {
   const [name, setName] = useState("");
+  const clickHandler = () => {
+    DB.addUser(name);
+    setName("");
+  };
   return /* @__PURE__ */ h("div", {
     className: "whitebackground adduser"
-  }, /* @__PURE__ */ h("input", {
+  }, /* @__PURE__ */ h("span", null, "Add a name:"), /* @__PURE__ */ h("br", null), /* @__PURE__ */ h("input", {
     value: name,
     onChange: (e) => {
       setName(e.target.value);
@@ -12,8 +17,6 @@ export default function AddUserBar(props) {
     type: "text",
     placeholder: "Enter new name"
   }), /* @__PURE__ */ h("button", {
-    onClick: () => {
-      props.cb(name);
-    }
+    onClick: clickHandler
   }, "Submit"));
 }

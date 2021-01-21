@@ -1,15 +1,17 @@
 import {h} from "../../web_modules/preact.js";
+import {useUserProperty} from "../internal/db.js";
 export default function EditableCheckBox(props) {
+  const [value, setValue] = useUserProperty(props.name, props.property);
   const editChangeHandler = (e) => {
-    props.setcb(e.target.checked);
+    setValue(e.target.checked);
   };
   const normal = /* @__PURE__ */ h("span", null, /* @__PURE__ */ h("input", {
-    checked: props.val,
+    checked: value,
     type: "checkbox",
     disabled: true
   }));
   const editing = /* @__PURE__ */ h("span", null, /* @__PURE__ */ h("input", {
-    checked: props.val,
+    checked: value,
     type: "checkbox",
     onChange: editChangeHandler
   }));

@@ -1,0 +1,1 @@
+export default "/dist/widget/img/outline_highlight_off_black_18dp.png";

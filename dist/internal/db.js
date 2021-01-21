@@ -1,3 +1,4 @@
+import {useState, useEffect} from "../../web_modules/preact/hooks.js";
 import PouchDBFind from "../../web_modules/pouchdb-find.js";
 import PouchDB from "../../web_modules/pouchdb-browser.js";
 PouchDB.plugin(PouchDBFind);
@@ -7,9 +8,37 @@ const SYNC_OPTS = {
   live: true,
   retry: true
 };
+const EMPTY_USER_TEMPLATE = {
+  status: CONSTANTS.statuses[0],
+  source: "",
+  gender: "",
+  homeWard: "",
+  fheGroup: "",
+  imageUrl: "",
+  infotext: "",
+  assignedCaller: "",
+  preferredContactType: "",
+  preferredContactValue: "",
+  individualPhone: "",
+  individualEmail: "",
+  householdPhone: "",
+  householdEmail: "",
+  notifyHomeEvening: false,
+  notifyWardActivity: false,
+  notifiedFacebook: false
+};
+function applyChangeset(original, newset) {
+  return {...original, ...newset};
+}
 class DB {
   constructor() {
     this.pouchdb = new PouchDB("ocz");
+    this.startReplication();
+    this.changeListeners = {};
+    this.listenForChanges();
+    this.listenID = 0;
+  }
+  startReplication() {
     this.pouchdb.replicate.from(CLOUDANT_URL).on("complete", (info) => {
       console.log("FINISHED INITIAL REPLICATION");
       this.pouchdb.sync(CLOUDANT_URL, SYNC_OPTS).on("error", (e) => {
@@ -17,6 +46,30 @@ class DB {
       });
     }).on("error", (e) => {
       console.log("INITIAL REPLICATION ERROR", e);
+    });
+  }
+  addChangeListener(cb) {
+    let i = String(this.listenID);
+    this.listenID++;
+    console.log("ADDING CHANGE LISTENER", i);
+    this.changeListeners[i] = cb;
+    return i;
+  }
+  removeChangeListener(i) {
+    console.log("REMOVING CHANGE LISTENER", i);
+    delete this.changeListeners[i];
+  }
+  listenForChanges() {
+    let chg = this.pouchdb.changes({
+      since: "now",
+      live: true,
+      include_docs: true
+    }).on("change", (c) => {
+      for (const [id, cb] of Object.entries(this.changeListeners)) {
+        cb(c.doc);
+      }
+    }).on("error", (e) => {
+      console.log(e);
     });
   }
   genDocBase(type, name) {
@@ -39,35 +92,7 @@ class DB {
   }
   addUser(name, cb) {
     let u = this.genDocBase("user", name);
-    u.info = {
-      status: CONSTANTS.statuses[0],
-      source: "",
-      gender: "",
-      homeWard: "",
-      fheGroup: "",
-      imageUrl: ""
-    };
-    u.contact = {
-      preferred: {
-        type: "",
-        value: ""
-      },
-      individual: {
-        phone: "",
-        email: ""
-      },
-      household: {
-        phone: "",
-        email: ""
-      },
-      notify: {
-        homeEvening: false,
-        wardActivity: false
-      },
-      facebook: {
-        notified: false
-      }
-    };
+    u = applyChangeset(u, EMPTY_USER_TEMPLATE);
     this.pouchdb.put(u, (err, result) => {
       if (err) {
         console.log(err);
@@ -77,11 +102,11 @@ class DB {
       }
     });
   }
-  updateUser(name, cb) {
+  updateRecord(name, type, cb) {
     this.pouchdb.find({
       selector: {
         name,
-        type: "user"
+        type
       }
     }).then((res) => {
       let ret = cb(res.docs[0]);
@@ -94,33 +119,22 @@ class DB {
       console.log(err);
     });
   }
-  updateRecord(dat, cb) {
+  putDoc(dat, cb) {
     this.pouchdb.put(dat, (err, result) => {
       if (err) {
         console.log("UPDATE RECORD ERROR", err);
       } else {
-        cb(result);
+        if (cb !== void 0) {
+          cb(result);
+        }
       }
     });
-    console.log("UPDATE RECORD", dat);
   }
-  getUser(name, cb) {
+  getDocs(type, name, cb) {
     this.pouchdb.find({
       selector: {
         name,
-        type: "user"
-      }
-    }).then((res) => {
-      cb(res.docs[0]);
-    }).catch((err) => {
-      console.log(err);
-    });
-  }
-  getNotes(name, cb) {
-    this.pouchdb.find({
-      selector: {
-        name,
-        type: "note"
+        type
       }
     }).then((res) => {
       cb(res.docs);
@@ -144,7 +158,85 @@ class DB {
       console.log(err);
     });
   }
+  addCallerList() {
+    let base = this.genDocBase("meta", "callers");
+    base.list = [];
+    this.pouchdb.put(base, (err, result) => {
+      if (err) {
+        console.log(err);
+      }
+      console.log(result);
+    });
+  }
 }
-let d = new DB();
-console.log("DB:", d);
-export default d;
+let DB_INSTANCE = new DB();
+console.log("DB:", DB_INSTANCE);
+function useDBRecentChanges(type = "", name = "") {
+  const [last, setLast] = useState({});
+  useEffect(() => {
+    let chg = DB_INSTANCE.addChangeListener((doc) => {
+      if ((type === "" || type === doc.type) && (name === "" || name === doc.name)) {
+        setLast(doc);
+      }
+    });
+    return () => {
+      DB_INSTANCE.removeChangeListener(chg);
+    };
+  }, [type, name]);
+  return last;
+}
+function useUser(name) {
+  const [currentUser, setCurrentUser] = useState(EMPTY_USER_TEMPLATE);
+  const change = useDBRecentChanges("user", name);
+  useEffect(() => {
+    DB_INSTANCE.getDocs("user", name, (docs) => {
+      setCurrentUser(docs[0]);
+    });
+  }, [name, change]);
+  const updateUser = (changeset) => {
+    const changed = applyChangeset(currentUser, changeset);
+    DB_INSTANCE.putDoc(changed);
+  };
+  return [currentUser, updateUser];
+}
+function useNotes(name) {
+  const [currentNotes, setCurrentNotes] = useState([]);
+  const change = useDBRecentChanges("note", name);
+  useEffect(() => {
+    DB_INSTANCE.getDocs("note", name, (docs) => {
+      setCurrentNotes(docs);
+    });
+  }, [name, change]);
+  const addNote = (author, noteText) => {
+    let n = applyChangeset(DB_INSTANCE.genDocBase("note", name), {note: noteText, author});
+    DB_INSTANCE.putDoc(n);
+  };
+  return [currentNotes, addNote];
+}
+function useNames() {
+  const [names, setNames] = useState([]);
+  const change = useDBRecentChanges("user", "");
+  useEffect(() => {
+    DB_INSTANCE.getUserNames(setNames);
+  }, [change]);
+  return names;
+}
+function useUserProperty(name, property) {
+  const [currentUser, setCurrentUser] = useState(EMPTY_USER_TEMPLATE);
+  const change = useDBRecentChanges("user", name);
+  useEffect(() => {
+    DB_INSTANCE.getDocs("user", name, (docs) => {
+      setCurrentUser(docs[0]);
+    });
+  }, [name, change]);
+  const updateUserProperty = (val) => {
+    let changeset = {};
+    changeset[property] = val;
+    const changed = applyChangeset(currentUser, changeset);
+    DB_INSTANCE.putDoc(changed);
+  };
+  console.log("useUserProperty", name, property, currentUser[property]);
+  return [currentUser[property], updateUserProperty];
+}
+export {useDBRecentChanges, useUser, useNotes, useNames, useUserProperty};
+export default DB_INSTANCE;

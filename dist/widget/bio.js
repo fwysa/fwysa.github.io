@@ -1,5 +1,6 @@
 import {h} from "../../web_modules/preact.js";
 import {useState, useEffect} from "../../web_modules/preact/hooks.js";
+import {useUserProperty} from "../internal/db.js";
 import expand_less from "./img/round_expand_less_black_18dp.png.proxy.js";
 import expand_more from "./img/round_expand_more_black_18dp.png.proxy.js";
 import create_icon from "./img/outline_create_black_18dp.png.proxy.js";
@@ -13,106 +14,46 @@ import "./bio.css.proxy.js";
 export default function Bio(props) {
   const [showMore, setShowMore] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
-  const [gender, setGender] = useState(props.data.info.gender);
-  const [status, setStatus] = useState(props.data.info.status);
-  const [homeEveningGroup, setHomeEveningGroup] = useState(props.data.info.fheGroup);
-  const [homeWard, setHomeWard] = useState(props.data.info.homeWard);
-  const [preferredContactType, setPreferredContactType] = useState(props.data.contact.preferred.type);
-  const [preferredContactValue, setPreferredContactValue] = useState(props.data.contact.preferred.value);
-  const [notifyFHE, setNotifyFHE] = useState(props.data.contact.notify.homeEvening);
-  const [notifyActivities, setNotifyActivities] = useState(props.data.contact.notify.wardActivity);
-  const [source, setSource] = useState(props.data.info.source);
-  const [info, setInfo] = useState(props.data.info.infotext);
-  const [notifiedFacebook, setNotifiedFacebook] = useState(props.data.contact.facebook.notified);
-  const [individualPhone, setIndividualPhone] = useState(props.data.contact.individual.phone);
-  const [individualEmail, setIndividualEmail] = useState(props.data.contact.individual.email);
-  const [householdPhone, setHouseholdPhone] = useState(props.data.contact.household.phone);
-  const [householdEmail, setHouseholdEmail] = useState(props.data.contact.household.email);
-  useEffect(() => {
-    console.log("PROPS.DATA FIRED");
-    setGender(props.data.info.gender);
-    setStatus(props.data.info.status);
-    setHomeEveningGroup(props.data.info.fheGroup);
-    setHomeWard(props.data.info.homeWard);
-    setPreferredContactType(props.data.contact.preferred.type);
-    setPreferredContactValue(props.data.contact.preferred.value);
-    setNotifyFHE(props.data.contact.notify.homeEvening);
-    setNotifyActivities(props.data.contact.notify.wardActivity);
-    setSource(props.data.info.source);
-    setInfo(props.data.info.infotext);
-    setNotifiedFacebook(props.data.contact.facebook.notified);
-    setIndividualPhone(props.data.contact.individual.phone);
-    setIndividualEmail(props.data.contact.individual.email);
-    setHouseholdPhone(props.data.contact.household.phone);
-    setHouseholdEmail(props.data.contact.household.email);
-  }, [props.data]);
   const showMoreClickHandler = () => {
     if (isEditing) {
-      saveEditedUser();
       setIsEditing(false);
     }
     setShowMore(!showMore);
   };
   const editClickHandler = () => {
-    if (!isEditing) {
-      setShowMore(true);
-    } else {
-      saveEditedUser();
-    }
+    setShowMore(!isEditing);
     setIsEditing(!isEditing);
-  };
-  const saveEditedUser = () => {
-    console.log("Saving edited user");
-    let co = props.data;
-    co.info.gender = gender;
-    co.info.status = status;
-    co.info.fheGroup = homeEveningGroup;
-    co.info.homeWard = homeWard;
-    co.info.source = source;
-    co.info.infotext = info;
-    co.contact.preferred.type = preferredContactType;
-    co.contact.preferred.value = preferredContactValue;
-    co.contact.individual.phone = individualPhone;
-    co.contact.individual.email = individualEmail;
-    co.contact.household.phone = householdPhone;
-    co.contact.household.email = householdEmail;
-    co.contact.notify.homeEvening = notifyFHE;
-    co.contact.notify.wardActivity = notifyActivities;
-    co.contact.facebook.notified = notifiedFacebook;
-    props.updateusercb(co, (res) => {
-      console.log("Updated user", res);
-    });
   };
   const belowFold = /* @__PURE__ */ h("div", {
     className: "biobelowfold"
   }, /* @__PURE__ */ h(EditableMultipleChoice, {
-    val: source,
-    setcb: setSource,
+    name: props.name,
+    property: "source",
     show: isEditing,
     choices: CONSTANTS.sources
   }, /* @__PURE__ */ h("strong", null, "Source:")), /* @__PURE__ */ h("br", null), /* @__PURE__ */ h(EditableCheckBox, {
-    val: notifiedFacebook,
-    setcb: setNotifiedFacebook,
+    name: props.name,
+    property: "notifiedFacebook",
     show: isEditing
   }, /* @__PURE__ */ h("strong", null, "Notified on Facebook?")), /* @__PURE__ */ h("br", null), /* @__PURE__ */ h(EditableTextArea, {
-    val: info,
-    setcb: setInfo,
+    name: props.name,
+    property: "infotext",
     show: isEditing
   }, /* @__PURE__ */ h("strong", null, "Info:")), /* @__PURE__ */ h("br", null), /* @__PURE__ */ h(EditableText, {
-    val: individualPhone,
-    setcb: setIndividualPhone,
+    name: props.name,
+    property: "individualPhone",
     show: isEditing
   }, /* @__PURE__ */ h("strong", null, "Individual Phone:")), /* @__PURE__ */ h("br", null), /* @__PURE__ */ h(EditableText, {
-    val: individualEmail,
-    setcb: setIndividualEmail,
+    name: props.name,
+    property: "individualEmail",
     show: isEditing
   }, /* @__PURE__ */ h("strong", null, "Individual Email:")), /* @__PURE__ */ h("br", null), /* @__PURE__ */ h(EditableText, {
-    val: householdPhone,
-    setcb: setHouseholdPhone,
+    name: props.name,
+    property: "householdPhone",
     show: isEditing
   }, /* @__PURE__ */ h("strong", null, "Household Phone:")), /* @__PURE__ */ h("br", null), /* @__PURE__ */ h(EditableText, {
-    val: householdEmail,
-    setcb: setHouseholdEmail,
+    name: props.name,
+    property: "householdEmail",
     show: isEditing
   }, /* @__PURE__ */ h("strong", null, "Household Email:")));
   return /* @__PURE__ */ h("div", {
@@ -126,7 +67,7 @@ export default function Bio(props) {
     className: "bioinfo"
   }, /* @__PURE__ */ h("div", {
     className: "bioinfoupper"
-  }, /* @__PURE__ */ h("span", null, props.data.name), /* @__PURE__ */ h("div", {
+  }, /* @__PURE__ */ h("span", null, props.name), /* @__PURE__ */ h("div", {
     className: "fullwidth biobuttons"
   }, /* @__PURE__ */ h("div", {
     className: "expandbutton",
@@ -141,41 +82,41 @@ export default function Bio(props) {
   })))), /* @__PURE__ */ h("hr", null), /* @__PURE__ */ h("div", {
     className: "bioinfolower"
   }, /* @__PURE__ */ h(EditableMultipleChoice, {
-    val: gender,
-    setcb: setGender,
+    name: props.name,
+    property: "gender",
     show: isEditing,
     choices: CONSTANTS.genders
   }, /* @__PURE__ */ h("strong", null, "Gender:")), /* @__PURE__ */ h("br", null), /* @__PURE__ */ h(EditableMultipleChoice, {
-    val: status,
-    setcb: setStatus,
+    name: props.name,
+    property: "status",
     show: isEditing,
     choices: CONSTANTS.statuses
   }, /* @__PURE__ */ h("strong", null, "Status:")), /* @__PURE__ */ h("br", null), /* @__PURE__ */ h(EditableMultipleChoice, {
-    val: homeEveningGroup,
-    setcb: setHomeEveningGroup,
+    name: props.name,
+    property: "fheGroup",
     show: isEditing,
     choices: CONSTANTS.fheGroups
   }, /* @__PURE__ */ h("strong", null, "Home Evening Group:")), /* @__PURE__ */ h("br", null), /* @__PURE__ */ h(EditableMultipleChoice, {
-    val: homeWard,
-    setcb: setHomeWard,
+    name: props.name,
+    property: "homeWard",
     show: isEditing,
     choices: CONSTANTS.homeWards
   }, /* @__PURE__ */ h("strong", null, "Home Ward:")), /* @__PURE__ */ h("br", null), /* @__PURE__ */ h(EditableMultipleChoice, {
-    val: preferredContactType,
-    setcb: setPreferredContactType,
+    name: props.name,
+    property: "preferredContactType",
     show: isEditing,
     choices: CONSTANTS.contactMethods
   }, /* @__PURE__ */ h("strong", null, "Preferred Contact:")), /* @__PURE__ */ h(EditableText, {
-    val: preferredContactValue,
-    setcb: setPreferredContactValue,
+    name: props.name,
+    property: "preferredContactValue",
     show: isEditing
   }), /* @__PURE__ */ h("br", null), /* @__PURE__ */ h(EditableCheckBox, {
-    val: notifyFHE,
-    setcb: setNotifyFHE,
+    name: props.name,
+    property: "notifyHomeEvening",
     show: isEditing
   }, "Notify: FHE?"), /* @__PURE__ */ h(EditableCheckBox, {
-    val: notifyActivities,
-    setcb: setNotifyActivities,
+    name: props.name,
+    property: "notifyWardActivity",
     show: isEditing
   }, " Activities?")))), showMore ? /* @__PURE__ */ h("hr", null) : null, showMore ? belowFold : null);
 }

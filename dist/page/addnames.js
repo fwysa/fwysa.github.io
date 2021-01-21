@@ -31,7 +31,7 @@ function AddNamesPage() {
       if (n.name !== "") {
         console.log(n.name);
         db.addUser(n.name, () => {
-          db.updateUser(n.name, (us) => {
+          db.updateDoc(n.name, "user", (us) => {
             console.log("UPDATE USER", us);
             us.info = {
               ...us.info,
