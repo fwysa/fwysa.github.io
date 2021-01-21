@@ -1,7 +1,7 @@
 import {h} from "../../web_modules/preact.js";
 import {useUser, useNotes, useUserProperty} from "../internal/db.js";
 function TestPage() {
-  const [gender, updateGender] = useUserProperty("Kian Musser", "status");
+  const [gender, updateGender] = useUserProperty("Kian Musser", "gender");
   const clickHandler = () => {
     updateGender("Male");
   };

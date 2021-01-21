@@ -1,6 +1,6 @@
 import {h} from "../../web_modules/preact.js";
 import {useState, useEffect} from "../../web_modules/preact/hooks.js";
-import {useUserProperty} from "../internal/db.js";
+import {useNames, useUserProperty} from "../internal/db.js";
 import expand_less from "./img/round_expand_less_black_18dp.png.proxy.js";
 import expand_more from "./img/round_expand_more_black_18dp.png.proxy.js";
 import create_icon from "./img/outline_create_black_18dp.png.proxy.js";
@@ -14,6 +14,7 @@ import "./bio.css.proxy.js";
 export default function Bio(props) {
   const [showMore, setShowMore] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
+  const nameList = useNames();
   const showMoreClickHandler = () => {
     if (isEditing) {
       setIsEditing(false);
@@ -27,6 +28,11 @@ export default function Bio(props) {
   const belowFold = /* @__PURE__ */ h("div", {
     className: "biobelowfold"
   }, /* @__PURE__ */ h(EditableMultipleChoice, {
+    name: props.name,
+    property: "assignedCaller",
+    show: isEditing,
+    choices: nameList
+  }, /* @__PURE__ */ h("strong", null, "Assigned Caller:")), /* @__PURE__ */ h("br", null), /* @__PURE__ */ h(EditableMultipleChoice, {
     name: props.name,
     property: "source",
     show: isEditing,
