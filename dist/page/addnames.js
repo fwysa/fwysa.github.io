@@ -32,11 +32,7 @@ function AddNamesPage() {
         console.log(n.name);
         DB.addUser(n.name, () => {
           DB.updateRecord(n.name, "user", (rec) => {
-            let change = {
-              ...n,
-              homeWard: ward,
-              fheGroup
-            };
+            let change = {...n, homeWard: ward, fheGroup};
             return {...rec, ...change};
           });
         });

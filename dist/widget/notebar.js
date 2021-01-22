@@ -1,7 +1,7 @@
 import {h} from "../../web_modules/preact.js";
 import {useState} from "../../web_modules/preact/hooks.js";
 import {useNotes} from "../db/hooks.js";
-import "./notebar.css.proxy.js";
+import Note from "./note.js";
 export default function NoteBar(props) {
   const [author, setAuthor] = useState("");
   const [noteText, setNoteText] = useState("");
@@ -17,13 +17,9 @@ export default function NoteBar(props) {
     setNoteText("");
   };
   const formattedNotes = notes.map((n) => {
-    const d = new Date(n._id);
-    const formattedDate = d.toLocaleTimeString() + " " + d.toLocaleDateString();
-    return /* @__PURE__ */ h("div", {
-      className: "whitebackground note"
-    }, /* @__PURE__ */ h("div", null, /* @__PURE__ */ h("span", null, n.note)), /* @__PURE__ */ h("hr", null), /* @__PURE__ */ h("div", {
-      className: "notelower"
-    }, /* @__PURE__ */ h("span", null, formattedDate), /* @__PURE__ */ h("span", null, n.author)));
+    return /* @__PURE__ */ h(Note, {
+      data: n
+    });
   });
   return /* @__PURE__ */ h("div", {
     className: "notebar"

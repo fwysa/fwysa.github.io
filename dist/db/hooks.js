@@ -102,11 +102,24 @@ function useCallers() {
   };
   return [callers.list, addCaller, removeCaller];
 }
+function useSearch(selector) {
+  const [results, setResults] = useState([]);
+  const change = useDBRecentChanges("", "");
+  useEffect(() => {
+    DB_INSTANCE.pouchdb.find({selector}).then((res) => {
+      setResults(res.docs);
+    }).catch((err) => {
+      console.log(err);
+    });
+  }, [selector, change]);
+  return results;
+}
 export {
   useDBRecentChanges,
   useUser,
   useNotes,
   useNames,
   useUserProperty,
-  useCallers
+  useCallers,
+  useSearch
 };
