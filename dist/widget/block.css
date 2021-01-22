@@ -1,9 +1,9 @@
 .block {
-	padding: 5px;
-	width: max-content;
-	border: var(--borderdetails);
-	border-radius: var(--rounding);
-	margin-left: 1em;
-	margin-right: 1em;
-	align-self: center;
+  padding: 5px;
+  width: max-content;
+  border: var(--borderdetails);
+  border-radius: var(--rounding);
+  margin-left: 1em;
+  margin-right: 1em;
+  align-self: center;
 }

@@ -1,6 +1,6 @@
 import {h} from "../../web_modules/preact.js";
 import {useState} from "../../web_modules/preact/hooks.js";
-import DB from "../internal/db.js";
+import DB from "../db/db.js";
 export default function AddUserBar() {
   const [name, setName] = useState("");
   const clickHandler = () => {

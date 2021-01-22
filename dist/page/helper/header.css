@@ -1,12 +1,12 @@
 .header {
-	background-color: white;
-	/*background-image: linear-gradient(to right, white, var(--lightblue));*/
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-	border: 2px solid rgba(0,0,0,0.2); /* CHANGE */
-	padding: 5px;
-	overflow: auto;
+  background-color: white;
+  /*background-image: linear-gradient(to right, white, var(--lightblue));*/
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 2px solid rgba(0, 0, 0, 0.2); /* CHANGE */
+  padding: 5px;
+  overflow: auto;
 }
 
 /*
@@ -17,5 +17,5 @@
 */
 
 .header .icons {
-	display: flex;
+  display: flex;
 }

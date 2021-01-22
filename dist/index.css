@@ -1,21 +1,24 @@
 :root {
-	--lightblue: #20abd7;
-	--white: #fff;
-	--lighttext: #666;
-	/* ADD ACCENT TEXT*/
-	/*
+  --lightblue: #20abd7;
+  --white: #fff;
+  --lighttext: #666;
+  /* ADD ACCENT TEXT*/
+  /*
 	--mediumblue: #157493;
 	--darkblue: #105970;
 	*/
-	--maxcontentwidth: 1000px;
-	--borderdetails: 1px solid rgba(0,0,0,0.2);
-	--shadowdetails: 0 4px 8px 0 rgba(0,0,0,0.2);
-	--rounding: 4px;
-	--sectionmargin: 6px;
-	--blockpadding: 0.3em;
+  --maxcontentwidth: 1000px;
+  --borderdetails: 1px solid rgba(0, 0, 0, 0.2);
+  --shadowdetails: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  --rounding: 4px;
+  --sectionmargin: 6px;
+  --blockpadding: 0.3em;
 }
 
-html, body, #root, .app {
+html,
+body,
+#root,
+.app {
   width: 100%;
   height: 100%;
   margin: 0;

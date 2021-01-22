@@ -4,7 +4,8 @@ import Selection from "../widget/selection.js";
 import Bio from "../widget/bio.js";
 import NoteBar from "../widget/notebar.js";
 import AddUserBar from "../widget/adduserbar.js";
-import DB, {useUser, useNotes, useNames} from "../internal/db.js";
+import {useUser, useNotes, useNames} from "../db/hooks.js";
+import DB from "../db/db.js";
 function NotePage() {
   const names = useNames();
   const [name, setName] = useState("");
@@ -12,12 +13,15 @@ function NotePage() {
   console.log(names, name, user);
   return /* @__PURE__ */ h("div", {
     className: "page"
-  }, /* @__PURE__ */ h(Selection, {
-    selectValues: names,
+  }, /* @__PURE__ */ h("div", {
+    className: "whitebackground horizontal"
+  }, /* @__PURE__ */ h("span", null, "Choose a name:\xA0"), /* @__PURE__ */ h(Selection, {
+    options: names,
     cb: (choice) => {
       setName(choice);
-    }
-  }), user !== void 0 && user.name !== "" && user.name !== void 0 ? /* @__PURE__ */ h(Bio, {
+    },
+    addblank: true
+  })), user !== void 0 && user.name !== "" && user.name !== void 0 ? /* @__PURE__ */ h(Bio, {
     name
   }) : null, /* @__PURE__ */ h(AddUserBar, null), user !== void 0 && user.name !== "" && user.name !== void 0 ? /* @__PURE__ */ h(NoteBar, {
     name

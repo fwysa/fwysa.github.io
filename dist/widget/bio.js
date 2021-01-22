@@ -1,6 +1,6 @@
 import {h} from "../../web_modules/preact.js";
 import {useState, useEffect} from "../../web_modules/preact/hooks.js";
-import {useNames, useUserProperty} from "../internal/db.js";
+import {useNames, useUserProperty} from "../db/hooks.js";
 import expand_less from "./img/round_expand_less_black_18dp.png.proxy.js";
 import expand_more from "./img/round_expand_more_black_18dp.png.proxy.js";
 import create_icon from "./img/outline_create_black_18dp.png.proxy.js";
@@ -31,12 +31,12 @@ export default function Bio(props) {
     name: props.name,
     property: "assignedCaller",
     show: isEditing,
-    choices: nameList
+    options: nameList
   }, /* @__PURE__ */ h("strong", null, "Assigned Caller:")), /* @__PURE__ */ h("br", null), /* @__PURE__ */ h(EditableMultipleChoice, {
     name: props.name,
     property: "source",
     show: isEditing,
-    choices: CONSTANTS.sources
+    options: CONSTANTS.sources
   }, /* @__PURE__ */ h("strong", null, "Source:")), /* @__PURE__ */ h("br", null), /* @__PURE__ */ h(EditableCheckBox, {
     name: props.name,
     property: "notifiedFacebook",
@@ -91,27 +91,27 @@ export default function Bio(props) {
     name: props.name,
     property: "gender",
     show: isEditing,
-    choices: CONSTANTS.genders
+    options: CONSTANTS.genders
   }, /* @__PURE__ */ h("strong", null, "Gender:")), /* @__PURE__ */ h("br", null), /* @__PURE__ */ h(EditableMultipleChoice, {
     name: props.name,
     property: "status",
     show: isEditing,
-    choices: CONSTANTS.statuses
+    options: CONSTANTS.statuses
   }, /* @__PURE__ */ h("strong", null, "Status:")), /* @__PURE__ */ h("br", null), /* @__PURE__ */ h(EditableMultipleChoice, {
     name: props.name,
     property: "fheGroup",
     show: isEditing,
-    choices: CONSTANTS.fheGroups
+    options: CONSTANTS.fheGroups
   }, /* @__PURE__ */ h("strong", null, "Home Evening Group:")), /* @__PURE__ */ h("br", null), /* @__PURE__ */ h(EditableMultipleChoice, {
     name: props.name,
     property: "homeWard",
     show: isEditing,
-    choices: CONSTANTS.homeWards
+    options: CONSTANTS.homeWards
   }, /* @__PURE__ */ h("strong", null, "Home Ward:")), /* @__PURE__ */ h("br", null), /* @__PURE__ */ h(EditableMultipleChoice, {
     name: props.name,
     property: "preferredContactType",
     show: isEditing,
-    choices: CONSTANTS.contactMethods
+    options: CONSTANTS.contactMethods
   }, /* @__PURE__ */ h("strong", null, "Preferred Contact:")), /* @__PURE__ */ h(EditableText, {
     name: props.name,
     property: "preferredContactValue",
@@ -124,5 +124,5 @@ export default function Bio(props) {
     name: props.name,
     property: "notifyWardActivity",
     show: isEditing
-  }, " Activities?")))), showMore ? /* @__PURE__ */ h("hr", null) : null, showMore ? belowFold : null);
+  }, " ", "Activities?")))), showMore ? /* @__PURE__ */ h("hr", null) : null, showMore ? belowFold : null);
 }

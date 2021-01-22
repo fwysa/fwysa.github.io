@@ -1,24 +1,24 @@
 .section .bar {
-	margin: 0px;
-	padding: var(--sectionmargin);
-	display: flex;
-	justify-content: space-between;
-	/*align-content: center; NEEDED?*/
+  margin: 0px;
+  padding: var(--sectionmargin);
+  display: flex;
+  justify-content: space-between;
+  /*align-content: center; NEEDED?*/
 }
 
 .section .bar img {
-	margin: -7px;
-	margin-right: 0px;
-	max-height: 2em;
+  margin: -7px;
+  margin-right: 0px;
+  max-height: 2em;
 }
 
 .section .content {
-	padding: var(--sectionmargin);
-	display: flex;
-	flex-direction: column;
+  padding: var(--sectionmargin);
+  display: flex;
+  flex-direction: column;
 }
 
 .section .content hr {
-	margin-top: -8px;
-	margin-bottom: 0;
+  margin-top: -8px;
+  margin-bottom: 0;
 }

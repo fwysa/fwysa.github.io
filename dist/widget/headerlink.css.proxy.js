@@ -1,6 +1,6 @@
 // [snowpack] add styles to the page (skip if no document exists)
 if (typeof document !== 'undefined') {
-  const code = ".outericon {\n\tmargin-left: 0.3em;\n\tmargin-right: 0.3em;\n}\n.outericon a {\n\tdisplay: flex;\n\tflex-direction: column;\n}\n\n.outericon img {\n\talign-self: center;\n\twidth: 2em;\n}\n\n.outericon span {\n\tfont-size: smaller;\n}\n";
+  const code = ".outericon {\n  margin-left: 0.3em;\n  margin-right: 0.3em;\n}\n.outericon a {\n  display: flex;\n  flex-direction: column;\n}\n\n.outericon img {\n  align-self: center;\n  width: 2em;\n}\n\n.outericon span {\n  font-size: smaller;\n}\n";
 
   const styleEl = document.createElement("style");
   const codeEl = document.createTextNode(code);

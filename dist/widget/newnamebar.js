@@ -1,7 +1,6 @@
 import {h} from "../../web_modules/preact.js";
 import {useState, useEffect} from "../../web_modules/preact/hooks.js";
-import EditableText from "./editabletext.js";
-import EditableMultipleChoice from "./editablemultiplechoice.js";
+import Selection from "./selection.js";
 import CONSTANTS from "../constants.js";
 export default function NewNameBar(props) {
   const [name, setName] = useState("");
@@ -15,45 +14,55 @@ export default function NewNameBar(props) {
     nArr[props.ind] = {
       name,
       gender,
-      contact: {
-        individual: {
-          phone: individualPhone,
-          email: individualEmail
-        },
-        household: {
-          phone: householdPhone,
-          email: householdEmail
-        }
-      }
+      individualPhone,
+      individualEmail,
+      householdPhone,
+      householdEmail
     };
     props.updatecb(nArr);
-  }, [name, gender, individualPhone, individualEmail, householdPhone, householdEmail]);
+  }, [
+    name,
+    gender,
+    individualPhone,
+    individualEmail,
+    householdPhone,
+    householdEmail
+  ]);
   return /* @__PURE__ */ h("div", {
     className: "whitebackground newnamebar"
-  }, /* @__PURE__ */ h("div", null, /* @__PURE__ */ h(EditableText, {
-    val: name,
-    setcb: setName,
-    show: true
-  }, "Name:"), /* @__PURE__ */ h("br", null), /* @__PURE__ */ h(EditableMultipleChoice, {
-    val: gender,
-    setcb: setGender,
-    choices: CONSTANTS.genders,
-    show: true
-  }, " Gender:"), /* @__PURE__ */ h("br", null), /* @__PURE__ */ h("hr", null), /* @__PURE__ */ h("p", null, "Individual"), /* @__PURE__ */ h(EditableText, {
-    val: individualPhone,
-    setcb: setIndividualPhone,
-    show: true
-  }, "Phone:"), /* @__PURE__ */ h("br", null), /* @__PURE__ */ h(EditableText, {
-    val: individualEmail,
-    setcb: setIndividualEmail,
-    show: true
-  }, " Email:"), /* @__PURE__ */ h("hr", null), /* @__PURE__ */ h("p", null, "Household"), /* @__PURE__ */ h(EditableText, {
-    val: householdPhone,
-    setcb: setHouseholdPhone,
-    show: true
-  }, "Phone:"), /* @__PURE__ */ h("br", null), /* @__PURE__ */ h(EditableText, {
-    val: householdEmail,
-    setcb: setHouseholdEmail,
-    show: true
-  }, " Email:")));
+  }, /* @__PURE__ */ h("div", null, /* @__PURE__ */ h("span", null, "Name:"), /* @__PURE__ */ h("input", {
+    type: "text",
+    value: name,
+    onChange: (e) => {
+      setName(e.target.value);
+    }
+  }), /* @__PURE__ */ h("br", null), /* @__PURE__ */ h("span", null, "Gender:"), /* @__PURE__ */ h(Selection, {
+    value: gender,
+    cb: setGender,
+    options: CONSTANTS.genders
+  }), /* @__PURE__ */ h("hr", null), /* @__PURE__ */ h("p", null, "Individual"), /* @__PURE__ */ h("span", null, "Phone:"), /* @__PURE__ */ h("input", {
+    type: "text",
+    value: individualPhone,
+    onChange: (e) => {
+      setIndividualPhone(e.target.value);
+    }
+  }), /* @__PURE__ */ h("br", null), /* @__PURE__ */ h("span", null, "Email:"), /* @__PURE__ */ h("input", {
+    type: "text",
+    value: individualEmail,
+    onChange: (e) => {
+      setIndividualEmail(e.target.value);
+    }
+  }), /* @__PURE__ */ h("hr", null), /* @__PURE__ */ h("p", null, "Household"), /* @__PURE__ */ h("span", null, "Phone:"), /* @__PURE__ */ h("input", {
+    type: "text",
+    value: householdPhone,
+    onChange: (e) => {
+      setHouseholdPhone(e.target.value);
+    }
+  }), /* @__PURE__ */ h("br", null), /* @__PURE__ */ h("span", null, "Email:"), /* @__PURE__ */ h("input", {
+    type: "text",
+    value: householdEmail,
+    onChange: (e) => {
+      setHouseholdEmail(e.target.value);
+    }
+  })));
 }

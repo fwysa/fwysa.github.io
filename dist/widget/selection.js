@@ -1,20 +1,26 @@
 import {h} from "../../web_modules/preact.js";
 import {useState} from "../../web_modules/preact/hooks.js";
 export default function Selection(props) {
-  const [val, setVal] = useState("");
-  let options = props.selectValues.map((val2) => {
+  let options = props.options.map((val) => {
     return /* @__PURE__ */ h("option", {
-      value: val2
-    }, val2);
+      value: val
+    }, val);
   });
+  if (props.addblank) {
+    options.unshift(/* @__PURE__ */ h("option", {
+      value: ""
+    }));
+  }
   return /* @__PURE__ */ h("div", {
-    className: "whitebackground selection"
+    className: "selection"
   }, /* @__PURE__ */ h("select", {
-    value: val,
-    class: "fullwidth",
+    value: props.value,
     onChange: (e) => {
-      setVal(e.target.value);
-      props.cb(e.target.value);
+      if (!props.addblank || e.target.value !== "") {
+        props.cb(e.target.value);
+      } else {
+        console.log("Tried to submit blank value");
+      }
     }
   }, options));
 }

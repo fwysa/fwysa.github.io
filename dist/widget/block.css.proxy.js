@@ -1,6 +1,6 @@
 // [snowpack] add styles to the page (skip if no document exists)
 if (typeof document !== 'undefined') {
-  const code = ".block {\n\tpadding: 5px;\n\twidth: max-content;\n\tborder: var(--borderdetails);\n\tborder-radius: var(--rounding);\n\tmargin-left: 1em;\n\tmargin-right: 1em;\n\talign-self: center;\n}\n";
+  const code = ".block {\n  padding: 5px;\n  width: max-content;\n  border: var(--borderdetails);\n  border-radius: var(--rounding);\n  margin-left: 1em;\n  margin-right: 1em;\n  align-self: center;\n}\n";
 
   const styleEl = document.createElement("style");
   const codeEl = document.createTextNode(code);

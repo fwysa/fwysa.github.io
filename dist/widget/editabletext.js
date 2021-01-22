@@ -1,5 +1,5 @@
 import {h} from "../../web_modules/preact.js";
-import {useUserProperty} from "../internal/db.js";
+import {useUserProperty} from "../db/hooks.js";
 export default function EditableText(props) {
   const [value, setValue] = useUserProperty(props.name, props.property);
   const editChangeHandler = (e) => {

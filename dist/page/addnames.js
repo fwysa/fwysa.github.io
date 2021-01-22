@@ -1,8 +1,8 @@
 import {h} from "../../web_modules/preact.js";
 import {useState} from "../../web_modules/preact/hooks.js";
 import CONSTANTS from "../constants.js";
-import db from "../internal/db.js";
-import EditableMultipleChoice from "../widget/editablemultiplechoice.js";
+import DB from "../db/db.js";
+import Selection from "../widget/selection.js";
 import ButtonFunc from "../widget/buttonfunc.js";
 import NewNameBar from "../widget/newnamebar.js";
 function AddNamesPage() {
@@ -30,20 +30,14 @@ function AddNamesPage() {
     names.forEach((n) => {
       if (n.name !== "") {
         console.log(n.name);
-        db.addUser(n.name, () => {
-          db.updateDoc(n.name, "user", (us) => {
-            console.log("UPDATE USER", us);
-            us.info = {
-              ...us.info,
-              fheGroup,
+        DB.addUser(n.name, () => {
+          DB.updateRecord(n.name, "user", (rec) => {
+            let change = {
+              ...n,
               homeWard: ward,
-              gender: n.gender
+              fheGroup
             };
-            us.contact = {
-              ...us.contact,
-              ...n.contact
-            };
-            return us;
+            return {...rec, ...change};
           });
         });
       }
@@ -56,17 +50,15 @@ function AddNamesPage() {
     className: "whitebackground"
   }, /* @__PURE__ */ h("span", null, "Add Names")), /* @__PURE__ */ h("div", {
     className: "whitebackground common"
-  }, /* @__PURE__ */ h(EditableMultipleChoice, {
-    val: ward,
-    setcb: setWard,
-    show: true,
-    choices: CONSTANTS.homeWards
-  }, /* @__PURE__ */ h("strong", null, "Home Ward:")), /* @__PURE__ */ h("br", null), /* @__PURE__ */ h(EditableMultipleChoice, {
-    val: fheGroup,
-    setcb: setFheGroup,
-    show: true,
-    choices: CONSTANTS.fheGroups
-  }, /* @__PURE__ */ h("strong", null, "HE Group:"))), /* @__PURE__ */ h("hr", null), formattedNames, /* @__PURE__ */ h(ButtonFunc, {
+  }, /* @__PURE__ */ h("span", null, "Home Ward:"), /* @__PURE__ */ h(Selection, {
+    value: ward,
+    cb: setWard,
+    options: CONSTANTS.homeWards
+  }), /* @__PURE__ */ h("br", null), /* @__PURE__ */ h("span", null, "HE Group:"), /* @__PURE__ */ h(Selection, {
+    value: fheGroup,
+    cb: setFheGroup,
+    options: CONSTANTS.fheGroups
+  })), /* @__PURE__ */ h("hr", null), formattedNames, /* @__PURE__ */ h(ButtonFunc, {
     cb: addNameHandler
   }, "Add Name"), /* @__PURE__ */ h(ButtonFunc, {
     cb: submitHandler

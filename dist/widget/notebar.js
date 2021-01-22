@@ -1,6 +1,6 @@
 import {h} from "../../web_modules/preact.js";
 import {useState} from "../../web_modules/preact/hooks.js";
-import {useNotes} from "../internal/db.js";
+import {useNotes} from "../db/hooks.js";
 import "./notebar.css.proxy.js";
 export default function NoteBar(props) {
   const [author, setAuthor] = useState("");
