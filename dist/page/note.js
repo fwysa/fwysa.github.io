@@ -21,9 +21,11 @@ function NotePage() {
       setName(choice);
     },
     addblank: true
-  })), user !== void 0 && user.name !== "" && user.name !== void 0 ? /* @__PURE__ */ h(Bio, {
+  })), /* @__PURE__ */ h(AddUserBar, null), user !== void 0 && user.name !== "" && user.name !== void 0 ? /* @__PURE__ */ h("div", {
+    className: "whitebackground"
+  }, /* @__PURE__ */ h(Bio, {
     name
-  }) : null, /* @__PURE__ */ h(AddUserBar, null), user !== void 0 && user.name !== "" && user.name !== void 0 ? /* @__PURE__ */ h(NoteBar, {
+  })) : null, user !== void 0 && user.name !== "" && user.name !== void 0 ? /* @__PURE__ */ h(NoteBar, {
     name
   }) : null);
 }

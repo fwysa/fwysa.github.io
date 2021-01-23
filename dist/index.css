@@ -10,7 +10,7 @@
   --maxcontentwidth: 1000px;
   --borderdetails: 1px solid rgba(0, 0, 0, 0.2);
   --shadowdetails: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-  --rounding: 4px;
+  --rounding: 0px;
   --sectionmargin: 6px;
   --blockpadding: 0.3em;
 }

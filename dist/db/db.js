@@ -51,12 +51,10 @@ class DB {
   addChangeListener(cb) {
     let i = String(this.listenID);
     this.listenID++;
-    console.log("ADDING CHANGE LISTENER", i);
     this.changeListeners[i] = cb;
     return i;
   }
   removeChangeListener(i) {
-    console.log("REMOVING CHANGE LISTENER", i);
     delete this.changeListeners[i];
   }
   listenForChanges() {

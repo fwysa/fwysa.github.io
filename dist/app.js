@@ -8,6 +8,7 @@ import LeaderPage from "./page/leaders.js";
 import AddNamesPage from "./page/addnames.js";
 import AssignPage from "./page/assign.js";
 import TestPage from "./page/test.js";
+import CallingPage from "./page/calling.js";
 function App() {
   return /* @__PURE__ */ h("div", {
     className: "app"
@@ -23,6 +24,8 @@ function App() {
     path: "/assign"
   }), /* @__PURE__ */ h(TestPage, {
     path: "/test"
+  }), /* @__PURE__ */ h(CallingPage, {
+    path: "/calling"
   })));
 }
 export default App;

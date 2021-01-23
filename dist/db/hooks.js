@@ -70,7 +70,6 @@ function useUserProperty(name, property) {
     const changed = applyChangeset(currentUser, changeset);
     DB_INSTANCE.putDoc(changed);
   };
-  console.log("useUserProperty", name, property, currentUser[property]);
   return [currentUser[property], updateUserProperty];
 }
 function useCallers() {

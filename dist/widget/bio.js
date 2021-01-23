@@ -58,7 +58,7 @@ export default function Bio(props) {
     show: isEditing
   }, /* @__PURE__ */ h("strong", null, "Household Email:")));
   return /* @__PURE__ */ h("div", {
-    className: "whitebackground bio"
+    className: "bio"
   }, /* @__PURE__ */ h("div", {
     className: "bioabovefold"
   }, /* @__PURE__ */ h("div", {
