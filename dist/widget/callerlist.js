@@ -10,7 +10,7 @@ export default function CallerList(props) {
   const [callers, addCaller, removeCaller] = useCallers();
   const formattedNames = callers.map((n) => {
     return /* @__PURE__ */ h("div", {
-      className: "caller"
+      className: "horizontal caller"
     }, /* @__PURE__ */ h("div", {
       onClick: () => {
         removeCaller(n);
@@ -20,8 +20,10 @@ export default function CallerList(props) {
     })), /* @__PURE__ */ h("span", null, n));
   });
   return /* @__PURE__ */ h("div", {
-    className: "whitebackground namelist"
-  }, /* @__PURE__ */ h("span", null, "Callers:"), /* @__PURE__ */ h("hr", null), /* @__PURE__ */ h("div", null, formattedNames), /* @__PURE__ */ h("div", null, /* @__PURE__ */ h(Selection, {
+    className: "whitebackground callerlist"
+  }, /* @__PURE__ */ h("span", null, "Callers:"), /* @__PURE__ */ h("hr", null), /* @__PURE__ */ h("div", null, formattedNames), /* @__PURE__ */ h("div", {
+    className: "horizontal"
+  }, /* @__PURE__ */ h(Selection, {
     value: newName,
     options: nameList,
     cb: setNewName
