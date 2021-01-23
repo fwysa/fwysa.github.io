@@ -32,6 +32,10 @@
   align-items: center;
 }
 
+.smaller {
+  font-size: smaller;
+}
+
 hr {
   margin-top: 0.2em;
   margin-bottom: 0.1em;

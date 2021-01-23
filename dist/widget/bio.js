@@ -26,7 +26,7 @@ export default function Bio(props) {
     setIsEditing(!isEditing);
   };
   const belowFold = /* @__PURE__ */ h("div", {
-    className: "biobelowfold"
+    className: "smaller biobelowfold"
   }, /* @__PURE__ */ h(EditableMultipleChoice, {
     name: props.name,
     property: "source",
@@ -81,7 +81,7 @@ export default function Bio(props) {
   }, /* @__PURE__ */ h("img", {
     src: isEditing ? save_icon : create_icon
   })))), /* @__PURE__ */ h("hr", null), /* @__PURE__ */ h("div", {
-    className: "bioinfolower"
+    className: "smaller bioinfolower"
   }, /* @__PURE__ */ h("div", {
     className: "bioinfostatus"
   }, /* @__PURE__ */ h(EditableMultipleChoice, {

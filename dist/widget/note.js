@@ -6,6 +6,6 @@ export default function Note(props) {
   return /* @__PURE__ */ h("div", {
     className: "whitebackground note"
   }, /* @__PURE__ */ h("div", null, /* @__PURE__ */ h("span", null, props.data.note)), /* @__PURE__ */ h("hr", null), /* @__PURE__ */ h("div", {
-    className: "notelower"
+    className: "smaller notelower"
   }, /* @__PURE__ */ h("span", null, formattedDate), /* @__PURE__ */ h("span", null, props.data.author)));
 }

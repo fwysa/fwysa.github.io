@@ -1,13 +1,16 @@
 import {h} from "../../web_modules/preact.js";
 import {useState} from "../../web_modules/preact/hooks.js";
 import {useCallers} from "../db/hooks.js";
+import Section from "../widget/section.js";
 import Selection from "../widget/selection.js";
 import SearchResults from "../widget/searchresults.js";
 function CallingPage() {
   const [callers, ,] = useCallers();
   const [name, setName] = useState("");
   const customizeHandler = (r) => {
-    return /* @__PURE__ */ h("div", null, /* @__PURE__ */ h("hr", null), /* @__PURE__ */ h("span", null, "Insert calling stuff here"));
+    return /* @__PURE__ */ h("div", null, /* @__PURE__ */ h("hr", null), /* @__PURE__ */ h(Section, {
+      abstract: "Contact"
+    }, /* @__PURE__ */ h("span", null, "Calling details go here."), /* @__PURE__ */ h("span", null, "Whether it be a script, or a form they can go along and fill in (or the OMA help sheet, or anything else really...)."), /* @__PURE__ */ h("span", null, "TBD")));
   };
   return /* @__PURE__ */ h("div", {
     className: "page"

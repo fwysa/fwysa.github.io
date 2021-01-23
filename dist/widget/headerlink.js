@@ -7,5 +7,7 @@ export default function HeaderLink(props) {
     href: props.src
   }, /* @__PURE__ */ h("img", {
     src: props.img
-  }), /* @__PURE__ */ h("span", null, props.text)));
+  }), /* @__PURE__ */ h("span", {
+    className: "smaller"
+  }, props.text)));
 }

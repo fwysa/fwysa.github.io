@@ -1,5 +1,4 @@
 .notelower {
-  font-size: smaller;
   color: var(--lighttext);
   display: flex;
   flex-direction: row;

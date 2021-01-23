@@ -7,8 +7,12 @@ function LeaderPage() {
     href: "/"
   }, "Main Page"), /* @__PURE__ */ h(ButtonLink, {
     href: "/notes"
-  }, "Notes"), /* @__PURE__ */ h(ButtonLink, {
+  }, "Info and Notes"), /* @__PURE__ */ h(ButtonLink, {
     href: "/addnames"
-  }, "Add Names"));
+  }, "Bulk Add Names"), /* @__PURE__ */ h(ButtonLink, {
+    href: "/assign"
+  }, "Assign Names to Callers"), /* @__PURE__ */ h(ButtonLink, {
+    href: "/calling"
+  }, "Calling Dashboard"));
 }
 export default LeaderPage;

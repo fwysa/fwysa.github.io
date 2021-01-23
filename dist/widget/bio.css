@@ -40,16 +40,8 @@
   justify-content: flex-end;
 }
 
-.bioinfolower {
-  font-size: smaller;
-}
-
 .userdata {
   font-weight: bold;
-}
-
-.biobelowfold {
-  font-size: smaller;
 }
 
 .bioinfostatus {
