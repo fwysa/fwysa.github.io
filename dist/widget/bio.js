@@ -29,11 +29,6 @@ export default function Bio(props) {
     className: "biobelowfold"
   }, /* @__PURE__ */ h(EditableMultipleChoice, {
     name: props.name,
-    property: "assignedCaller",
-    show: isEditing,
-    options: nameList
-  }, /* @__PURE__ */ h("strong", null, "Assigned Caller:")), /* @__PURE__ */ h("br", null), /* @__PURE__ */ h(EditableMultipleChoice, {
-    name: props.name,
     property: "source",
     show: isEditing,
     options: CONSTANTS.sources
@@ -87,17 +82,24 @@ export default function Bio(props) {
     src: isEditing ? save_icon : create_icon
   })))), /* @__PURE__ */ h("hr", null), /* @__PURE__ */ h("div", {
     className: "bioinfolower"
+  }, /* @__PURE__ */ h("div", {
+    className: "bioinfostatus"
   }, /* @__PURE__ */ h(EditableMultipleChoice, {
-    name: props.name,
-    property: "gender",
-    show: isEditing,
-    options: CONSTANTS.genders
-  }, /* @__PURE__ */ h("strong", null, "Gender:")), /* @__PURE__ */ h("br", null), /* @__PURE__ */ h(EditableMultipleChoice, {
     name: props.name,
     property: "status",
     show: isEditing,
     options: CONSTANTS.statuses
   }, /* @__PURE__ */ h("strong", null, "Status:")), /* @__PURE__ */ h("br", null), /* @__PURE__ */ h(EditableMultipleChoice, {
+    name: props.name,
+    property: "assignedCaller",
+    show: isEditing,
+    options: nameList
+  }, /* @__PURE__ */ h("strong", null, "Assigned Caller:"))), /* @__PURE__ */ h(EditableMultipleChoice, {
+    name: props.name,
+    property: "gender",
+    show: isEditing,
+    options: CONSTANTS.genders
+  }, /* @__PURE__ */ h("strong", null, "Gender:")), /* @__PURE__ */ h("br", null), /* @__PURE__ */ h(EditableMultipleChoice, {
     name: props.name,
     property: "fheGroup",
     show: isEditing,

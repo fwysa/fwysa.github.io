@@ -18,6 +18,6 @@ export default function SearchResults(props) {
     }
   });
   return /* @__PURE__ */ h("div", {
-    className: "whitebackground searchresults"
+    className: "searchresults"
   }, formattedResults);
 }

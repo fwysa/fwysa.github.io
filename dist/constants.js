@@ -3,7 +3,6 @@ const CONSTANTS = {
   statuses: [
     "Unassigned",
     "Assigned",
-    "Calling (in process)",
     "Contacted",
     "Not Interested",
     "Unable to Contact",

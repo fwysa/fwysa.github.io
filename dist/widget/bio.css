@@ -51,3 +51,10 @@
 .biobelowfold {
   font-size: smaller;
 }
+
+.bioinfostatus {
+  padding: var(--blockpadding);
+  border: var(--borderdetails);
+  box-shadow: var(--shadowdetails);
+  margin-bottom: var(--blockpadding);
+}

@@ -18,7 +18,7 @@
   flex-direction: column;
 }
 
-.section .content hr {
+.section .content > hr {
   margin-top: -8px;
   margin-bottom: 0;
 }
