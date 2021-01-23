@@ -29,7 +29,7 @@ function AssignPage() {
   })), /* @__PURE__ */ h(Section, {
     abstract: CONSTANTS.statuses[2]
   }, /* @__PURE__ */ h(SearchResults, {
-    selector: {type: "user", status: CONSTANTS.statuses[1]},
+    selector: {type: "user", status: CONSTANTS.statuses[2]},
     customize: customizeHandler
   })), /* @__PURE__ */ h("hr", null), /* @__PURE__ */ h(CallerList, null));
 }
