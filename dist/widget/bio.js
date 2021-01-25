@@ -1,16 +1,16 @@
 import {h} from "../../web_modules/preact.js";
 import {useState, useEffect} from "../../web_modules/preact/hooks.js";
 import {useNames, useUserProperty} from "../db/hooks.js";
-import expand_less from "./img/round_expand_less_black_18dp.png.proxy.js";
-import expand_more from "./img/round_expand_more_black_18dp.png.proxy.js";
-import create_icon from "./img/outline_create_black_18dp.png.proxy.js";
-import save_icon from "./img/outline_save_black_18dp.png.proxy.js";
-import EditableText from "./editabletext.js";
-import EditableTextArea from "./editabletextarea.js";
-import EditableCheckBox from "./editablecheckbox.js";
-import EditableMultipleChoice from "./editablemultiplechoice.js";
+import expand_less from "../img/round_expand_less_black_18dp.png.proxy.js";
+import expand_more from "../img/round_expand_more_black_18dp.png.proxy.js";
+import create_icon from "../img/outline_create_black_18dp.png.proxy.js";
+import save_icon from "../img/outline_save_black_18dp.png.proxy.js";
+import EditableText from "../element/editable/text.js";
+import EditableTextArea from "../element/editable/textarea.js";
+import EditableCheckBox from "../element/editable/checkbox.js";
+import EditableMultipleChoice from "../element/editable/multiplechoice.js";
 import CONSTANTS from "../constants.js";
-import "./bio.css.proxy.js";
+import "./css/bio.css.proxy.js";
 export default function Bio(props) {
   const [showMore, setShowMore] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
@@ -36,7 +36,7 @@ export default function Bio(props) {
     name: props.name,
     property: "notifiedFacebook",
     show: isEditing
-  }, /* @__PURE__ */ h("strong", null, "Notified on Facebook?")), /* @__PURE__ */ h("br", null), /* @__PURE__ */ h(EditableTextArea, {
+  }, /* @__PURE__ */ h("strong", null, "Invited to YSA Facebook page?")), /* @__PURE__ */ h("br", null), /* @__PURE__ */ h(EditableTextArea, {
     name: props.name,
     property: "infotext",
     show: isEditing
@@ -84,17 +84,27 @@ export default function Bio(props) {
     className: "smaller bioinfolower"
   }, /* @__PURE__ */ h("div", {
     className: "bioinfostatus"
+  }, /* @__PURE__ */ h("div", {
+    className: "bionotify horizontal"
   }, /* @__PURE__ */ h(EditableMultipleChoice, {
     name: props.name,
     property: "status",
     show: isEditing,
     options: CONSTANTS.statuses
-  }, /* @__PURE__ */ h("strong", null, "Status:")), /* @__PURE__ */ h("br", null), /* @__PURE__ */ h(EditableMultipleChoice, {
+  }, /* @__PURE__ */ h("strong", null, "Status:")), /* @__PURE__ */ h("div", null, /* @__PURE__ */ h(EditableCheckBox, {
+    name: props.name,
+    property: "notifyHomeEvening",
+    show: isEditing
+  }, "FHE?"), /* @__PURE__ */ h(EditableCheckBox, {
+    name: props.name,
+    property: "notifyWardActivity",
+    show: isEditing
+  }, "Activities?"))), /* @__PURE__ */ h(EditableMultipleChoice, {
     name: props.name,
     property: "assignedCaller",
     show: isEditing,
     options: nameList
-  }, /* @__PURE__ */ h("strong", null, "Assigned Caller:"))), /* @__PURE__ */ h(EditableMultipleChoice, {
+  }, /* @__PURE__ */ h("strong", null, "Assigned Fellowshipper:"))), /* @__PURE__ */ h(EditableMultipleChoice, {
     name: props.name,
     property: "gender",
     show: isEditing,
@@ -118,13 +128,5 @@ export default function Bio(props) {
     name: props.name,
     property: "preferredContactValue",
     show: isEditing
-  }), /* @__PURE__ */ h("br", null), /* @__PURE__ */ h(EditableCheckBox, {
-    name: props.name,
-    property: "notifyHomeEvening",
-    show: isEditing
-  }, "Notify: FHE?"), /* @__PURE__ */ h(EditableCheckBox, {
-    name: props.name,
-    property: "notifyWardActivity",
-    show: isEditing
-  }, " ", "Activities?")))), showMore ? /* @__PURE__ */ h("hr", null) : null, showMore ? belowFold : null);
+  }), /* @__PURE__ */ h("br", null)))), showMore ? /* @__PURE__ */ h("hr", null) : null, showMore ? belowFold : null);
 }

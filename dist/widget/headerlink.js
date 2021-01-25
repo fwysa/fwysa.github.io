@@ -1,5 +1,5 @@
 import {h} from "../../web_modules/preact.js";
-import "./headerlink.css.proxy.js";
+import "./css/headerlink.css.proxy.js";
 export default function HeaderLink(props) {
   return /* @__PURE__ */ h("div", {
     className: "outericon"

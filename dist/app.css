@@ -30,6 +30,21 @@
   display: flex;
   flex-direction: row;
   align-items: center;
+  flex-wrap: wrap;
+}
+
+.vertical {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.padright {
+  margin-right: var(--sectionmargin);
+}
+
+.padleft {
+  margin-left: var(--sectionmargin);
 }
 
 .smaller {

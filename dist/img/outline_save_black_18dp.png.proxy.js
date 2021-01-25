@@ -1,0 +1,1 @@
+export default "/dist/img/outline_save_black_18dp.png";

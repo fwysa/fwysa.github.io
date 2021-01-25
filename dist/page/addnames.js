@@ -2,12 +2,13 @@ import {h} from "../../web_modules/preact.js";
 import {useState} from "../../web_modules/preact/hooks.js";
 import CONSTANTS from "../constants.js";
 import DB from "../db/db.js";
-import Selection from "../widget/selection.js";
-import ButtonFunc from "../widget/buttonfunc.js";
+import Selection from "../element/selection.js";
+import ButtonFunc from "../element/buttonfunc.js";
 import NewNameBar from "../widget/newnamebar.js";
 function AddNamesPage() {
   const [ward, setWard] = useState("");
   const [fheGroup, setFheGroup] = useState("");
+  const [source, setSource] = useState(CONSTANTS.sources[0]);
   const [names, setNames] = useState([]);
   const addNameHandler = () => {
     const updateArray = [...names, {}];
@@ -32,7 +33,12 @@ function AddNamesPage() {
         console.log(n.name);
         DB.addUser(n.name, () => {
           DB.updateRecord(n.name, "user", (rec) => {
-            let change = {...n, homeWard: ward, fheGroup};
+            let change = {
+              ...n,
+              homeWard: ward,
+              fheGroup,
+              source
+            };
             return {...rec, ...change};
           });
         });
@@ -54,6 +60,10 @@ function AddNamesPage() {
     value: fheGroup,
     cb: setFheGroup,
     options: CONSTANTS.fheGroups
+  }), /* @__PURE__ */ h("br", null), /* @__PURE__ */ h("span", null, "Source:"), /* @__PURE__ */ h(Selection, {
+    value: source,
+    cb: setSource,
+    options: CONSTANTS.sources
   })), /* @__PURE__ */ h("hr", null), formattedNames, /* @__PURE__ */ h(ButtonFunc, {
     cb: addNameHandler
   }, "Add Name"), /* @__PURE__ */ h(ButtonFunc, {

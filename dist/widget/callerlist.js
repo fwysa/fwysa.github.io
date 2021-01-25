@@ -1,9 +1,9 @@
 import {h} from "../../web_modules/preact.js";
 import {useState} from "../../web_modules/preact/hooks.js";
-import remove_icon from "./img/outline_highlight_off_black_18dp.png.proxy.js";
-import Selection from "./selection.js";
+import remove_icon from "../img/outline_highlight_off_black_18dp.png.proxy.js";
+import Selection from "../element/selection.js";
 import {useNames, useCallers} from "../db/hooks.js";
-import "./callerlist.css.proxy.js";
+import "./css/callerlist.css.proxy.js";
 export default function CallerList(props) {
   const [newName, setNewName] = useState("");
   const nameList = useNames();
@@ -21,7 +21,7 @@ export default function CallerList(props) {
   });
   return /* @__PURE__ */ h("div", {
     className: "whitebackground callerlist"
-  }, /* @__PURE__ */ h("span", null, "Callers:"), /* @__PURE__ */ h("hr", null), /* @__PURE__ */ h("div", null, formattedNames), /* @__PURE__ */ h("div", {
+  }, /* @__PURE__ */ h("span", null, "Fellowshippers:"), /* @__PURE__ */ h("hr", null), /* @__PURE__ */ h("div", null, formattedNames), /* @__PURE__ */ h("div", {
     className: "horizontal"
   }, /* @__PURE__ */ h(Selection, {
     value: newName,

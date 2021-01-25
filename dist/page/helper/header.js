@@ -1,18 +1,20 @@
 import {h} from "../../../web_modules/preact.js";
 import HeaderLink from "../../widget/headerlink.js";
-import img_bg from "../../widget/img/background.png.proxy.js";
-import img_bulletin from "../../widget/img/outline_article_black_18dp.png.proxy.js";
-import img_form from "../../widget/img/outline_insert_chart_black_18dp.png.proxy.js";
-import img_spreadsheet from "../../widget/img/outline_table_view_black_18dp.png.proxy.js";
+import img_bg from "../../img/background.png.proxy.js";
+import img_bulletin from "../../img/outline_article_black_18dp.png.proxy.js";
+import img_form from "../../img/outline_insert_chart_black_18dp.png.proxy.js";
+import img_spreadsheet from "../../img/outline_table_view_black_18dp.png.proxy.js";
 import "./header.css.proxy.js";
 export default function Header() {
   return /* @__PURE__ */ h("div", {
     className: "header"
   }, /* @__PURE__ */ h("div", {
     className: "logo"
+  }, /* @__PURE__ */ h("a", {
+    href: "/"
   }, /* @__PURE__ */ h("img", {
     src: img_bg
-  })), /* @__PURE__ */ h("div", {
+  }))), /* @__PURE__ */ h("div", {
     className: "icons"
   }, /* @__PURE__ */ h(HeaderLink, {
     text: "HE Leaders",

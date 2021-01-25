@@ -1,8 +1,8 @@
 import {h} from "../../web_modules/preact.js";
 import {useCallers, useUserProperty} from "../db/hooks.js";
-import "./assignbox.css.proxy.js";
+import "./css/assignbox.css.proxy.js";
 import CONSTANTS from "../constants.js";
-import Selection from "./selection.js";
+import Selection from "../element/selection.js";
 export default function AssignBox(props) {
   const [status, setStatus] = useUserProperty(props.name, "status");
   const [assignedCaller, setAssignedCaller] = useUserProperty(props.name, "assignedCaller");
