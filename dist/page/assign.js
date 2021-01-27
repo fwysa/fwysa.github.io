@@ -12,7 +12,7 @@ function AssignPage() {
   const [gender, setGender] = useState("");
   const [homeWard, setHomeWard] = useState("");
   const [count, setCount] = useState(0);
-  const [selector, setSelector] = useState({});
+  const [selector, setSelector] = useState({type: "user"});
   const searchResultHandler = (r) => {
     if (r.type !== "user") {
       console.log("IF YOU'RE READING THIS, IT MEANS WE GOT A NOTE SOMEHOW?! Also, hi!", r);

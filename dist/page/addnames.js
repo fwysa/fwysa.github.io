@@ -2,6 +2,8 @@ import {h} from "../../web_modules/preact.js";
 import {useState} from "../../web_modules/preact/hooks.js";
 import CONSTANTS from "../constants.js";
 import DB from "../db/db.js";
+import SS from "../element/sectionsubtitle.js";
+import HL from "../element/horizontallabel.js";
 import Selection from "../element/selection.js";
 import ButtonFunc from "../element/buttonfunc.js";
 import NewNameBar from "../widget/newnamebar.js";
@@ -50,21 +52,27 @@ function AddNamesPage() {
     className: "page"
   }, /* @__PURE__ */ h("div", {
     className: "whitebackground"
-  }, /* @__PURE__ */ h("span", null, "Add Names")), /* @__PURE__ */ h("div", {
+  }, /* @__PURE__ */ h(SS, null, "Add Names"), /* @__PURE__ */ h("span", null, `First, enter in info shared by everyone you're adding, then click "Add Name" and enter in info for each individual.`)), /* @__PURE__ */ h("div", {
     className: "whitebackground common"
-  }, /* @__PURE__ */ h("span", null, "Home Ward:"), /* @__PURE__ */ h(Selection, {
+  }, /* @__PURE__ */ h(SS, null, "Common"), /* @__PURE__ */ h(HL, {
+    label: "Home Ward:"
+  }, /* @__PURE__ */ h(Selection, {
     value: ward,
     cb: setWard,
     options: CONSTANTS.homeWards
-  }), /* @__PURE__ */ h("br", null), /* @__PURE__ */ h("span", null, "HE Group:"), /* @__PURE__ */ h(Selection, {
+  })), /* @__PURE__ */ h(HL, {
+    label: "HE Group:"
+  }, /* @__PURE__ */ h(Selection, {
     value: fheGroup,
     cb: setFheGroup,
     options: CONSTANTS.fheGroups
-  }), /* @__PURE__ */ h("br", null), /* @__PURE__ */ h("span", null, "Source:"), /* @__PURE__ */ h(Selection, {
+  })), /* @__PURE__ */ h(HL, {
+    label: "Source:"
+  }, /* @__PURE__ */ h(Selection, {
     value: source,
     cb: setSource,
     options: CONSTANTS.sources
-  })), /* @__PURE__ */ h("hr", null), formattedNames, /* @__PURE__ */ h(ButtonFunc, {
+  }))), /* @__PURE__ */ h("hr", null), formattedNames, /* @__PURE__ */ h(ButtonFunc, {
     cb: addNameHandler
   }, "Add Name"), /* @__PURE__ */ h(ButtonFunc, {
     cb: submitHandler
