@@ -3,9 +3,12 @@ import {useState, useEffect} from "../../web_modules/preact/hooks.js";
 import Selection from "../element/selection.js";
 import CONSTANTS from "../constants.js";
 export default function SearchBar(props) {
-  const [gender, setGender] = useState("");
-  const [homeWard, setHomeWard] = useState("");
-  const [status, setStatus] = useState("");
+  const initialGender = props.initialgender !== void 0 ? props.initialgender : "";
+  const initialHomeWard = props.initialhomeward !== void 0 ? props.initialhomeward : "";
+  const initialStatus = props.initialstatus !== void 0 ? props.initialstatus : "";
+  const [gender, setGender] = useState(initialGender);
+  const [homeWard, setHomeWard] = useState(initialHomeWard);
+  const [status, setStatus] = useState(initialStatus);
   const formatSelector = () => {
     let base = {
       type: "user"

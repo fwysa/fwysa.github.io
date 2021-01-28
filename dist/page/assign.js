@@ -7,6 +7,7 @@ import Section from "../element/section.js";
 import Selection from "../element/selection.js";
 import AssignBox from "../widget/assignbox.js";
 import Bio from "../widget/bio.js";
+import Block from "../element/block.js";
 import CONSTANTS from "../constants.js";
 function AssignPage() {
   const [gender, setGender] = useState("");
@@ -29,9 +30,14 @@ function AssignPage() {
   return /* @__PURE__ */ h("div", {
     className: "page"
   }, /* @__PURE__ */ h(SearchBar, {
+    initialstatus: CONSTANTS.statuses[0],
     cb: setSelector,
     count
-  }), /* @__PURE__ */ h(SearchResults, {
+  }), /* @__PURE__ */ h("div", {
+    className: "whitebackground"
+  }, /* @__PURE__ */ h(Block, null, /* @__PURE__ */ h("span", {
+    className: "smaller"
+  }, " ", "* If you can't select the name of the person you want to assign the name to, scroll to the bottom and add it to the list of fellowshippers."))), /* @__PURE__ */ h(SearchResults, {
     selector,
     cb: searchResultHandler,
     countcb: setCount

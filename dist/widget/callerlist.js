@@ -21,7 +21,7 @@ export default function CallerList(props) {
   });
   return /* @__PURE__ */ h("div", {
     className: "whitebackground callerlist"
-  }, /* @__PURE__ */ h("span", null, "Fellowshippers:"), /* @__PURE__ */ h("hr", null), /* @__PURE__ */ h("div", null, formattedNames), /* @__PURE__ */ h("div", {
+  }, /* @__PURE__ */ h("span", null, "Fellowshippers (List of Callers):"), /* @__PURE__ */ h("hr", null), /* @__PURE__ */ h("div", null, formattedNames), /* @__PURE__ */ h("div", {
     className: "horizontal"
   }, /* @__PURE__ */ h(Selection, {
     value: newName,

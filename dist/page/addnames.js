@@ -54,7 +54,7 @@ function AddNamesPage() {
     className: "page"
   }, /* @__PURE__ */ h("div", {
     className: "whitebackground"
-  }, /* @__PURE__ */ h(SS, null, "Add Names"), /* @__PURE__ */ h("span", null, `First, enter in info shared by everyone you're adding, then click "Add Name" and enter in info for each individual.`)), /* @__PURE__ */ h("div", {
+  }, /* @__PURE__ */ h(SS, null, "Add Names"), /* @__PURE__ */ h("span", null, `Enter "Common Info" shared by everyone you're adding, then click "Add Name" and enter in info for each individual. Click "Submit" to save.`)), /* @__PURE__ */ h("div", {
     className: "whitebackground common"
   }, /* @__PURE__ */ h(SS, null, "Common"), /* @__PURE__ */ h(HL, {
     label: "Home Ward:"
