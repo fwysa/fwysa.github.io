@@ -11,6 +11,7 @@ function AddNamesPage() {
   const [ward, setWard] = useState("");
   const [fheGroup, setFheGroup] = useState("");
   const [source, setSource] = useState(CONSTANTS.sources[0]);
+  const [status, setStatus] = useState(CONSTANTS.statuses[0]);
   const [names, setNames] = useState([]);
   const addNameHandler = () => {
     const updateArray = [...names, {}];
@@ -39,7 +40,8 @@ function AddNamesPage() {
               ...n,
               homeWard: ward,
               fheGroup,
-              source
+              source,
+              status
             };
             return {...rec, ...change};
           });
@@ -72,6 +74,12 @@ function AddNamesPage() {
     value: source,
     cb: setSource,
     options: CONSTANTS.sources
+  })), /* @__PURE__ */ h(HL, {
+    label: "Status:"
+  }, /* @__PURE__ */ h(Selection, {
+    value: status,
+    cb: setStatus,
+    options: CONSTANTS.statuses
   }))), /* @__PURE__ */ h("hr", null), formattedNames, /* @__PURE__ */ h(ButtonFunc, {
     cb: addNameHandler
   }, "Add Name"), /* @__PURE__ */ h(ButtonFunc, {
