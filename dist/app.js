@@ -9,6 +9,8 @@ import AddNamesPage from "./page/addnames.js";
 import AssignPage from "./page/assign.js";
 import TestPage from "./page/test.js";
 import CallingPage from "./page/calling.js";
+import ReportPage from "./page/reports.js";
+import FHEGLPage from "./page/fhegl.js";
 function App() {
   return /* @__PURE__ */ h("div", {
     className: "app"
@@ -26,6 +28,10 @@ function App() {
     path: "/test"
   }), /* @__PURE__ */ h(CallingPage, {
     path: "/calling"
+  }), /* @__PURE__ */ h(ReportPage, {
+    path: "/reports"
+  }), /* @__PURE__ */ h(FHEGLPage, {
+    path: "/heleaders"
   })));
 }
 export default App;
