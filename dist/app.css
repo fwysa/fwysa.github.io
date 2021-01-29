@@ -1,16 +1,16 @@
 .app {
   width: 100%;
   height: 100%;
-  background-image: linear-gradient(white, var(--lightblue));
+  background-image: linear-gradient(var(--white), var(--lightblue));
   display: flex;
   flex-direction: column;
-  overflow: auto;
 }
 
 .page {
   width: 100%;
   max-width: var(--maxcontentwidth);
   align-self: center;
+  overflow: auto;
 }
 
 .page c0 {

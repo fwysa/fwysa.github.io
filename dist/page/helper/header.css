@@ -1,12 +1,18 @@
 .header {
-  background-color: white;
+  height: 55px;
+  background-color: var(--white);
   /*background-image: linear-gradient(to right, white, var(--lightblue));*/
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border: 2px solid rgba(0, 0, 0, 0.2); /* CHANGE */
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2); /* CHANGE */
   padding: 5px;
-  overflow: auto;
+}
+
+.header .logo img {
+  max-height: 55px;
+  padding: 0px;
+  margin: 0px;
 }
 
 /*
