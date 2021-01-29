@@ -50,9 +50,3 @@
   box-shadow: var(--shadowdetails);
   margin-bottom: var(--blockpadding);
 }
-
-.bionotify {
-}
-.bionotify > div {
-  margin-left: 1em;
-}

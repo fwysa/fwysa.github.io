@@ -8,28 +8,6 @@ const SYNC_OPTS = {
   live: true,
   retry: true
 };
-const EMPTY_USER_TEMPLATE = {
-  status: CONSTANTS.statuses[0],
-  source: "",
-  gender: "",
-  homeWard: "",
-  fheGroup: "",
-  imageUrl: "",
-  infotext: "",
-  assignedCaller: "",
-  preferredContactType: "",
-  preferredContactValue: "",
-  individualPhone: "",
-  individualEmail: "",
-  householdPhone: "",
-  householdEmail: "",
-  notifyHomeEvening: false,
-  notifyWardActivity: false,
-  notifiedFacebook: false
-};
-function applyChangeset(original, newset) {
-  return {...original, ...newset};
-}
 class DB {
   constructor() {
     this.pouchdb = new PouchDB("ocz");
@@ -70,104 +48,23 @@ class DB {
       console.log(e);
     });
   }
-  genDocBase(type, name) {
-    return {
-      _id: new Date().toISOString(),
-      type,
-      name
-    };
-  }
-  addNote(name, author, note, cb) {
-    let n = this.genDocBase("note", name);
-    n.author = author;
-    n.note = note;
-    this.pouchdb.put(n, (err, result) => {
-      if (err) {
-        console.log(err);
-      }
-      cb(result);
-    });
-  }
-  addUser(name, cb) {
-    let u = this.genDocBase("user", name);
-    u = applyChangeset(u, EMPTY_USER_TEMPLATE);
-    this.pouchdb.put(u, (err, result) => {
-      if (err) {
-        console.log(err);
-      }
+  put(dat, cb) {
+    this.pouchdb.put(dat).then((res) => {
       if (cb !== void 0) {
         cb(result);
       }
-    });
-  }
-  updateRecord(name, type, cb) {
-    this.pouchdb.find({
-      selector: {
-        name,
-        type
-      }
-    }).then((res) => {
-      let ret = cb(res.docs[0]);
-      this.pouchdb.put(ret, (err, result) => {
-        if (err) {
-          console.log(err);
-        }
-      });
     }).catch((err) => {
-      console.log(err);
+      console.log("UPDATE RECORD ERROR", err);
     });
   }
-  putDoc(dat, cb) {
-    this.pouchdb.put(dat, (err, result) => {
-      if (err) {
-        console.log("UPDATE RECORD ERROR", err);
-      } else {
-        if (cb !== void 0) {
-          cb(result);
-        }
-      }
-    });
-  }
-  getDocs(type, name, cb) {
-    this.pouchdb.find({
-      selector: {
-        name,
-        type
-      }
-    }).then((res) => {
+  find(selector, cb) {
+    this.pouchdb.find({selector}).then((res) => {
       cb(res.docs);
     }).catch((err) => {
       console.log(err);
-    });
-  }
-  getUserNames(cb) {
-    this.pouchdb.find({
-      selector: {
-        type: "user"
-      },
-      fields: ["name"]
-    }).then((res) => {
-      let list = [];
-      res.docs.forEach((elem) => {
-        list.push(elem.name);
-      });
-      cb(list);
-    }).catch((err) => {
-      console.log(err);
-    });
-  }
-  addCallerList() {
-    let base = this.genDocBase("meta", "callers");
-    base.list = [];
-    this.pouchdb.put(base, (err, result) => {
-      if (err) {
-        console.log(err);
-      }
-      console.log(result);
     });
   }
 }
 let DB_INSTANCE = new DB();
 console.log("DB:", DB_INSTANCE);
 export default DB_INSTANCE;
-export {EMPTY_USER_TEMPLATE, applyChangeset};

@@ -2,8 +2,13 @@ import {useState, useEffect} from "../../web_modules/preact/hooks.js";
 import PouchDBFind from "../../web_modules/pouchdb-find.js";
 import PouchDB from "../../web_modules/pouchdb-browser.js";
 PouchDB.plugin(PouchDBFind);
-import DB_INSTANCE, {EMPTY_USER_TEMPLATE, applyChangeset} from "./db.js";
-import {sortByLastName} from "./helper.js";
+import DB_INSTANCE from "./db.js";
+import {
+  EMPTY_USER_TEMPLATE,
+  applyChangeset,
+  genDocBase,
+  sortByName
+} from "./helper.js";
 function useDBRecentChanges(type = "", name = "") {
   const [last, setLast] = useState({});
   useEffect(() => {
@@ -22,13 +27,14 @@ function useUser(name) {
   const [currentUser, setCurrentUser] = useState(EMPTY_USER_TEMPLATE);
   const change = useDBRecentChanges("user", name);
   useEffect(() => {
-    DB_INSTANCE.getDocs("user", name, (docs) => {
-      setCurrentUser(docs[0]);
+    DB_INSTANCE.find({type: "user", name}, (docs2) => {
+      setCurrentUser(docs2[0]);
     });
+    setCurrentUser(docs[0]);
   }, [name, change]);
   const updateUser = (changeset) => {
     const changed = applyChangeset(currentUser, changeset);
-    DB_INSTANCE.putDoc(changed);
+    DB_INSTANCE.put(changed);
   };
   return [currentUser, updateUser];
 }
@@ -36,16 +42,16 @@ function useNotes(name) {
   const [currentNotes, setCurrentNotes] = useState([]);
   const change = useDBRecentChanges("note", name);
   useEffect(() => {
-    DB_INSTANCE.getDocs("note", name, (docs) => {
-      setCurrentNotes(docs);
+    DB_INSTANCE.find({type: "note", name}, (docs2) => {
+      setCurrentNotes(docs2);
     });
   }, [name, change]);
   const addNote = (author, noteText) => {
-    let n = applyChangeset(DB_INSTANCE.genDocBase("note", name), {
+    let n = applyChangeset(genDocBase("note", name), {
       note: noteText,
       author
     });
-    DB_INSTANCE.putDoc(n);
+    DB_INSTANCE.put(n);
   };
   return [currentNotes, addNote];
 }
@@ -53,7 +59,10 @@ function useNames() {
   const [names, setNames] = useState([]);
   const change = useDBRecentChanges("user", "");
   useEffect(() => {
-    DB_INSTANCE.getUserNames(setNames);
+    DB_INSTANCE.find({type: "user"}, (docs2) => {
+      const sorted = sortByName(docs2);
+      setNames(docs2.map((d) => d.name));
+    });
   }, [change]);
   return names;
 }
@@ -61,15 +70,15 @@ function useUserProperty(name, property) {
   const [currentUser, setCurrentUser] = useState(EMPTY_USER_TEMPLATE);
   const change = useDBRecentChanges("user", name);
   useEffect(() => {
-    DB_INSTANCE.getDocs("user", name, (docs) => {
-      setCurrentUser(docs[0]);
+    DB_INSTANCE.find({type: "user", name}, (docs2) => {
+      setCurrentUser(docs2[0]);
     });
   }, [name, change]);
   const updateUserProperty = (val) => {
     let changeset = {};
     changeset[property] = val;
     const changed = applyChangeset(currentUser, changeset);
-    DB_INSTANCE.putDoc(changed);
+    DB_INSTANCE.put(changed);
   };
   return [currentUser[property], updateUserProperty];
 }
@@ -77,11 +86,13 @@ function useCallers() {
   const [callers, setCallers] = useState({list: []});
   const change = useDBRecentChanges("meta", "callers");
   useEffect(() => {
-    DB_INSTANCE.getDocs("meta", "callers", (docs) => {
-      if (docs.length === 0) {
-        DB_INSTANCE.addCallerList();
+    DB_INSTANCE.find({type: "meta", name: "callers"}, (docs2) => {
+      if (docs2.length === 0) {
+        let base = genDocBase("meta", "callers");
+        base.list = [];
+        DB_INSTANCE.put(base);
       } else {
-        setCallers(docs[0]);
+        setCallers(docs2[0]);
       }
     });
   }, [change]);
@@ -89,7 +100,7 @@ function useCallers() {
     let newList = [...callers.list];
     newList.push(name);
     let n = applyChangeset(callers, {list: newList});
-    DB_INSTANCE.putDoc(n);
+    DB_INSTANCE.put(n);
   };
   const removeCaller = (name) => {
     let newList = [...callers.list];
@@ -98,18 +109,16 @@ function useCallers() {
       newList.splice(ind, 1);
     }
     let n = applyChangeset(callers, {list: newList});
-    DB_INSTANCE.putDoc(n);
+    DB_INSTANCE.put(n);
   };
-  return [callers.list, addCaller, removeCaller];
+  return [callers.list.sort(), addCaller, removeCaller];
 }
 function useSearch(selector) {
   const [results, setResults] = useState([]);
   const change = useDBRecentChanges("", "");
   useEffect(() => {
-    DB_INSTANCE.pouchdb.find({selector}).then((res) => {
-      setResults(sortByLastName(res.docs));
-    }).catch((err) => {
-      console.log(err);
+    DB_INSTANCE.find(selector, (docs2) => {
+      setResults(sortByName(docs2));
     });
   }, [selector, change]);
   return results;
