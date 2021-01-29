@@ -2,6 +2,7 @@ import {h} from "../../web_modules/preact.js";
 import ButtonLink from "../element/buttonlink.js";
 import SS from "../element/sectionsubtitle.js";
 import Section from "../element/section.js";
+import FakeLink from "../element/fakelink.js";
 function LeaderPage() {
   return /* @__PURE__ */ h("div", {
     className: "page"
@@ -20,7 +21,7 @@ function LeaderPage() {
   }, /* @__PURE__ */ h(SS, null, "Home Evening Group Leaders"), /* @__PURE__ */ h(ButtonLink, {
     href: "/heleaders"
   }, "HE Groups"), /* @__PURE__ */ h(Section, {
-    abstract: "Blurbs",
+    abstract: /* @__PURE__ */ h(FakeLink, null, "Blurbs"),
     centered: true
   }, /* @__PURE__ */ h(ButtonLink, {
     href: "https://docs.google.com/document/d/1YFIrhwQA3CBK5F70_A8JudSFDbrTzlEJoZE0JaXlBc0/edit?usp=sharing"
