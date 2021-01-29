@@ -20,7 +20,8 @@ function LeaderPage() {
   }, /* @__PURE__ */ h(SS, null, "Home Evening Group Leaders"), /* @__PURE__ */ h(ButtonLink, {
     href: "/heleaders"
   }, "HE Groups"), /* @__PURE__ */ h(Section, {
-    abstract: "Blurbs"
+    abstract: "Blurbs",
+    centered: true
   }, /* @__PURE__ */ h(ButtonLink, {
     href: "https://docs.google.com/document/d/1YFIrhwQA3CBK5F70_A8JudSFDbrTzlEJoZE0JaXlBc0/edit?usp=sharing"
   }, "Cameron"), /* @__PURE__ */ h(ButtonLink, {

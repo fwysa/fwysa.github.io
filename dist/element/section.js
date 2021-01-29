@@ -17,7 +17,9 @@ export default function Section(props) {
     onClick: () => {
       setShowing(!showing);
     }
-  }, /* @__PURE__ */ h("span", null, props.abstract), /* @__PURE__ */ h("img", {
+  }, props.centered === true ? /* @__PURE__ */ h("span", {
+    className: "padleft"
+  }) : null, /* @__PURE__ */ h("span", null, props.abstract), /* @__PURE__ */ h("img", {
     src: showing ? expand_less : expand_more
   })), showing ? content : null);
 }
