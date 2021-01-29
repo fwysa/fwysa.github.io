@@ -5,8 +5,10 @@ const CONSTANTS = {
     "Assigned",
     "Contacted",
     "Not Interested",
+    "Do Not Contact",
     "Unable to Contact",
-    "YSA Member"
+    "YSA Member",
+    "Other"
   ],
   fheGroups: ["Cameron", "Maryville", "Kearney", "Gallatin", "Virtual"],
   homeWards: [

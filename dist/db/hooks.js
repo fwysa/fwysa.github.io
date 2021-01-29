@@ -3,6 +3,7 @@ import PouchDBFind from "../../web_modules/pouchdb-find.js";
 import PouchDB from "../../web_modules/pouchdb-browser.js";
 PouchDB.plugin(PouchDBFind);
 import DB_INSTANCE, {EMPTY_USER_TEMPLATE, applyChangeset} from "./db.js";
+import {sortByLastName} from "./helper.js";
 function useDBRecentChanges(type = "", name = "") {
   const [last, setLast] = useState({});
   useEffect(() => {
@@ -106,7 +107,7 @@ function useSearch(selector) {
   const change = useDBRecentChanges("", "");
   useEffect(() => {
     DB_INSTANCE.pouchdb.find({selector}).then((res) => {
-      setResults(res.docs);
+      setResults(sortByLastName(res.docs));
     }).catch((err) => {
       console.log(err);
     });
