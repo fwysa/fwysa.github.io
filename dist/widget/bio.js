@@ -1,6 +1,6 @@
 import {h} from "../../web_modules/preact.js";
 import {useState, useEffect} from "../../web_modules/preact/hooks.js";
-import {useCallers, useUserProperty} from "../db/hooks.js";
+import {useList, useUserProperty} from "../db/hooks.js";
 import expand_less from "../img/round_expand_less_black_18dp.png.proxy.js";
 import expand_more from "../img/round_expand_more_black_18dp.png.proxy.js";
 import create_icon from "../img/outline_create_black_18dp.png.proxy.js";
@@ -15,7 +15,7 @@ import "./css/bio.css.proxy.js";
 export default function Bio(props) {
   const [showMore, setShowMore] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
-  const [callerList, ,] = useCallers();
+  const [callerList, ,] = useList("callers");
   const showMoreClickHandler = () => {
     if (isEditing) {
       setIsEditing(false);
@@ -70,6 +70,8 @@ export default function Bio(props) {
     className: "bio"
   }, /* @__PURE__ */ h("div", {
     className: "bioabovefold"
+  }, /* @__PURE__ */ h("div", {
+    className: "bioupper"
   }, /* @__PURE__ */ h("div", {
     className: "bioimg",
     onClick: showMoreClickHandler
@@ -157,9 +159,10 @@ export default function Bio(props) {
     name: props.name,
     property: "preferredContactValue",
     show: isEditing
-  })), /* @__PURE__ */ h(EditableTextArea, {
+  }))))), /* @__PURE__ */ h("hr", null), /* @__PURE__ */ h("div", null, /* @__PURE__ */ h(EditableTextArea, {
     name: props.name,
     property: "infotext",
-    show: isEditing
-  }, "Info:")))), showMore ? /* @__PURE__ */ h("hr", null) : null, showMore ? belowFold : null);
+    show: isEditing || props.extrainfo === true,
+    highlight: props.extrainfo === true
+  }, "Info:"))), showMore ? /* @__PURE__ */ h("hr", null) : null, showMore ? belowFold : null);
 }

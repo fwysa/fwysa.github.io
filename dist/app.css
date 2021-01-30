@@ -26,6 +26,10 @@
   box-shadow: var(--shadowdetails);
 }
 
+.highlight {
+  background-color: var(--lightblue) !important;
+}
+
 .horizontal {
   display: flex;
   flex-direction: row;
@@ -54,6 +58,10 @@
 
 .smaller {
   font-size: smaller;
+}
+
+.bold {
+  font-weight: bold;
 }
 
 hr {

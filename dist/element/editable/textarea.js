@@ -11,6 +11,7 @@ export default function EditableText(props) {
     disabled: true
   }));
   const editing = /* @__PURE__ */ h("span", null, /* @__PURE__ */ h("textarea", {
+    className: props.highlight === true ? "highlight" : "",
     value,
     onChange: editChangeHandler,
     placeholder: "Add useful info here"

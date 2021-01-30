@@ -1,6 +1,6 @@
 import {h} from "../../web_modules/preact.js";
 import {useState, useEffect} from "../../web_modules/preact/hooks.js";
-import CallerList from "../widget/callerlist.js";
+import List from "../widget/list.js";
 import SearchResults from "../widget/searchresults.js";
 import SearchBar from "../widget/searchbar.js";
 import Section from "../element/section.js";
@@ -41,6 +41,9 @@ function AssignPage() {
     selector,
     cb: searchResultHandler,
     countcb: setCount
-  }), /* @__PURE__ */ h("hr", null), /* @__PURE__ */ h(CallerList, null));
+  }), /* @__PURE__ */ h("hr", null), /* @__PURE__ */ h(List, {
+    label: "Fellowshippers (List of Callers):",
+    list: "callers"
+  }));
 }
 export default AssignPage;

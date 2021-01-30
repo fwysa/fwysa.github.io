@@ -78,5 +78,5 @@ export default function NewNameBar(props) {
     onChange: (e) => {
       setHouseholdEmail(e.target.value);
     }
-  }))));
+  })), /* @__PURE__ */ h(SS, null, "Notes"), /* @__PURE__ */ h("span", null, "FIXME: Add Note Bar")));
 }

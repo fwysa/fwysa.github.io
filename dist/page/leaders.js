@@ -8,7 +8,7 @@ function LeaderPage() {
     className: "page"
   }, /* @__PURE__ */ h(ButtonLink, {
     href: "/notes"
-  }, "YSA Info and Notes"), /* @__PURE__ */ h("div", {
+  }, "YSA Info"), /* @__PURE__ */ h("div", {
     className: "whitebackground"
   }, /* @__PURE__ */ h(SS, null, "Relief Society and Elders Quorum"), /* @__PURE__ */ h(ButtonLink, {
     href: "/addnames"
@@ -41,10 +41,10 @@ function LeaderPage() {
     className: "whitebackground"
   }, /* @__PURE__ */ h(SS, null, "Activities and Facebook"), /* @__PURE__ */ h(ButtonLink, {
     href: "/"
-  }, "Group"), /* @__PURE__ */ h(ButtonLink, {
+  }, "Activity Group"), /* @__PURE__ */ h(ButtonLink, {
     href: "https://docs.google.com/document/d/1H2Bk0TcUIcdA-m5u6N8HRbGFK7e0kXc8hKTUmu4lLnQ/edit?usp=sharing"
   }, "Activity Blurb"), /* @__PURE__ */ h(ButtonLink, {
     href: "/"
-  }, "Facebook Status (FIXME: better name)")));
+  }, "Facebook Group")));
 }
 export default LeaderPage;

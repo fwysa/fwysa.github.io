@@ -23,7 +23,7 @@ export default function NoteBar(props) {
   });
   return /* @__PURE__ */ h("div", {
     className: "notebar"
-  }, /* @__PURE__ */ h("div", {
+  }, props.hideadd !== true ? /* @__PURE__ */ h("div", {
     className: "whitebackground addnote"
   }, /* @__PURE__ */ h("span", null, "Add a note:"), /* @__PURE__ */ h("textarea", {
     value: noteText,
@@ -38,7 +38,7 @@ export default function NoteBar(props) {
     placeholder: "Enter your name here"
   }), /* @__PURE__ */ h("button", {
     onClick: noteAddHandler
-  }, "Add"))), /* @__PURE__ */ h("div", {
+  }, "Add"))) : null, /* @__PURE__ */ h("div", {
     className: "notebarnotes"
   }, formattedNotes));
 }

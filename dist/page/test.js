@@ -1,4 +1,5 @@
 import {h} from "../../web_modules/preact.js";
+import {useUser} from "../db/hooks.js";
 function TestPage() {
   return /* @__PURE__ */ h("div", {
     className: "page"

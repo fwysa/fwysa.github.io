@@ -2,6 +2,11 @@ import {h} from "../../web_modules/preact.js";
 import {useState} from "../../web_modules/preact/hooks.js";
 import CONSTANTS from "../constants.js";
 import DB from "../db/db.js";
+import {
+  EMPTY_USER_TEMPLATE,
+  genDocBase,
+  applyChangeset
+} from "../db/helper.js";
 import SS from "../element/sectionsubtitle.js";
 import HL from "../element/horizontallabel.js";
 import Selection from "../element/selection.js";
@@ -34,18 +39,14 @@ function AddNamesPage() {
     names.forEach((n) => {
       if (n.name !== "") {
         console.log(n.name);
-        DB.addUser(n.name, () => {
-          DB.updateRecord(n.name, "user", (rec) => {
-            let change = {
-              ...n,
-              homeWard: ward,
-              fheGroup,
-              source,
-              status
-            };
-            return {...rec, ...change};
-          });
+        const us = applyChangeset(applyChangeset(genDocBase("user", n.name), EMPTY_USER_TEMPLATE), {
+          ...n,
+          homeWard: ward,
+          fheGroup,
+          source,
+          status
         });
+        DB.put(us);
       }
     });
     setNames([]);
@@ -73,7 +74,9 @@ function AddNamesPage() {
   }, /* @__PURE__ */ h(Selection, {
     value: source,
     cb: setSource,
-    options: CONSTANTS.sources
+    options: CONSTANTS.sources,
+    addblank: true,
+    allowblank: true
   })), /* @__PURE__ */ h(HL, {
     label: "Status:"
   }, /* @__PURE__ */ h(Selection, {

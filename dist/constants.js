@@ -27,25 +27,48 @@ const CONSTANTS = {
     "Yellow Creek Branch"
   ],
   contactMethods: ["Text", "Call", "Email"],
+  communication: {
+    contactMethods: ["Text", "Call", "Email", "Visit"],
+    choiceMatrix: {
+      "": [],
+      Text: [0, 1, 2],
+      Call: [3, 4, 2],
+      Email: [5, 6, 7],
+      Visit: [8, 9, 10]
+    },
+    statusMatrix: [
+      [],
+      [2, 3, 4, 7],
+      [1, 5, 7],
+      [],
+      [2, 3, 4, 7],
+      [],
+      [2, 3, 4, 7],
+      [1, 5, 7],
+      [],
+      [2, 3, 4, 7],
+      [1, 5, 7]
+    ],
+    results: [
+      "Left a text message",
+      "Had text conversation",
+      "Wrong number",
+      "Left a voicemail",
+      "Had a conversation",
+      "Emailed but no response",
+      "Had an email conversation",
+      "Wrong email address",
+      "Visited but not home/available",
+      "Visited and had a conversation",
+      "Wrong address"
+    ]
+  },
   sources: [
     "YSA Fellowship",
     "Church",
     "YSA Activity",
     "Home Evening",
     "Other"
-  ],
-  fheLeaders: {
-    Cameron: [{name: "Mailey Simpson", phone: "816-284-5790"}],
-    Gallatin: [{name: "Camille Perry", phone: "801-674-3403"}],
-    Kearney: [
-      {name: "Jose Dominguez", phone: "816-778-9336"},
-      {name: "Jenette Pratt", phone: "816-877-2998"}
-    ],
-    Maryville: [
-      {name: "Kasey Ryan", phone: "907-715-8819"},
-      {name: "Danielle Magnuson", phone: "816-209-2551"}
-    ],
-    Virtual: [{name: "Chance Rogers", phone: "816-885-2924"}]
-  }
+  ]
 };
 export default CONSTANTS;

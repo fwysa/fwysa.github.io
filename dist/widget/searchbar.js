@@ -2,13 +2,13 @@ import {h} from "../../web_modules/preact.js";
 import {useState, useEffect} from "../../web_modules/preact/hooks.js";
 import Selection from "../element/selection.js";
 import CONSTANTS from "../constants.js";
-import {useCallers} from "../db/hooks.js";
+import {useList} from "../db/hooks.js";
 export default function SearchBar(props) {
   const initialGender = props.initialgender !== void 0 ? props.initialgender : "";
   const initialHomeWard = props.initialhomeward !== void 0 ? props.initialhomeward : "";
   const initialStatus = props.initialstatus !== void 0 ? props.initialstatus : "";
   const initialAssignedCaller = props.initialassignedcaller !== void 0 ? props.initialassignedcaller : "";
-  const [callers, ,] = useCallers();
+  const [callers, ,] = useList("callers");
   const [gender, setGender] = useState(initialGender);
   const [homeWard, setHomeWard] = useState(initialHomeWard);
   const [status, setStatus] = useState(initialStatus);

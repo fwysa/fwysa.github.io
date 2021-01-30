@@ -1,15 +1,19 @@
 import {h} from "../../web_modules/preact.js";
 import {useState} from "../../web_modules/preact/hooks.js";
-import {useCallers} from "../db/hooks.js";
+import {useObject, useList} from "../db/hooks.js";
 import {callScript, textScript} from "./helper/callscripts.js";
 import Section from "../element/section.js";
+import SS from "../element/sectionsubtitle.js";
 import HL from "../element/horizontallabel.js";
 import Selection from "../element/selection.js";
 import Bio from "../widget/bio.js";
+import WholeUserInfo from "../widget/wholeuserinfo.js";
 import SearchResults from "../widget/searchresults.js";
+import FHELeaderInfoBox from "../widget/fheleaderinfobox.js";
+import CallingForm from "../widget/callingform.js";
 import CONSTANTS from "../constants.js";
 function CallingPage() {
-  const [callers, ,] = useCallers();
+  const [callers, ,] = useList("callers");
   const [name, setName] = useState("");
   const [count, setCount] = useState(0);
   const [selectedName, setSelectedName] = useState("");
@@ -21,17 +25,27 @@ function CallingPage() {
   const formatName = (n) => {
     return /* @__PURE__ */ h(Section, {
       abstract: n.name
-    }, /* @__PURE__ */ h(Bio, {
-      name: n.name
+    }, /* @__PURE__ */ h(WholeUserInfo, {
+      name: n.name,
+      hideadd: true,
+      extrainfo: true
     }), /* @__PURE__ */ h("hr", null), /* @__PURE__ */ h("div", {
-      className: "whitebackground"
-    }, /* @__PURE__ */ h("span", null, "Stuff here for actual calling / adding notes. If they contacted, have them set the preferred contact info for a person if they know it")), /* @__PURE__ */ h(Section, {
+      className: "whitebackground highlight"
+    }, /* @__PURE__ */ h(CallingForm, {
+      current: n
+    })), /* @__PURE__ */ h(Section, {
       abstract: "Phone Call / Voicemail"
     }, callScript), /* @__PURE__ */ h(Section, {
       abstract: "Text"
     }, textScript), /* @__PURE__ */ h(Section, {
       abstract: "Information for Call and Follow up Text / Email"
-    }));
+    }, /* @__PURE__ */ h(SS, null, "Links"), /* @__PURE__ */ h("span", null, "Link to website:", " ", /* @__PURE__ */ h("a", {
+      href: "https://fwysa.github.io"
+    }, "https://fwysa.github.io")), /* @__PURE__ */ h("span", null, "Link to Facebook:", " ", /* @__PURE__ */ h("a", {
+      href: "https://www.facebook.com/groups/1281844478535182"
+    }, "Far West Missouri Stake YSA")), /* @__PURE__ */ h(SS, null, "HE Group Leaders"), /* @__PURE__ */ h(FHELeaderInfoBox, {
+      current: n
+    })));
   };
   return /* @__PURE__ */ h("div", {
     className: "page"
