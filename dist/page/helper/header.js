@@ -15,7 +15,13 @@ export default function Header() {
   }, /* @__PURE__ */ h("img", {
     src: img_bg
   }))), /* @__PURE__ */ h("div", {
-    className: "icons"
+    className: "onlyshowprint"
+  }, /* @__PURE__ */ h("h1", null, "Far West YSA Outreach Report"), /* @__PURE__ */ h("div", {
+    className: "horizontal flexcenter"
+  }, /* @__PURE__ */ h("div", null), /* @__PURE__ */ h("span", null, "Dated: ", new Date().toLocaleDateString()), /* @__PURE__ */ h("div", null))), /* @__PURE__ */ h("div", {
+    className: "onlyshowprint dummylogoright"
+  }), /* @__PURE__ */ h("div", {
+    className: "icons printnoshow"
   }, /* @__PURE__ */ h(HeaderLink, {
     text: "HE Leaders",
     img: img_bulletin,

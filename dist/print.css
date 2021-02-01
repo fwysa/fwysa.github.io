@@ -1,0 +1,18 @@
+@media only print {
+  .app {
+    background-image: none;
+    background-color: white;
+  }
+  .page {
+    overflow: visible;
+  }
+  .nopagebreak {
+    page-break-inside: avoid;
+  }
+  .printnoshow {
+    display: none !important;
+  }
+  .onlyshowprint {
+    display: inline;
+  }
+}

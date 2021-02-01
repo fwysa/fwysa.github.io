@@ -25,3 +25,7 @@
 .header .icons {
   display: flex;
 }
+
+.header .dummylogoright {
+  width: 74px;
+}
