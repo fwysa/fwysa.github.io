@@ -1,7 +1,7 @@
 import {h, Fragment} from "../../web_modules/preact.js";
 import {useState} from "../../web_modules/preact/hooks.js";
 import CONSTANTS from "../constants.js";
-import {useNotes} from "../db/hooks.js";
+import {useUserProperty, useNotes} from "../db/hooks.js";
 import Selection from "../element/selection.js";
 import Block from "../element/block.js";
 import SS from "../element/sectionsubtitle.js";
@@ -14,16 +14,32 @@ export default function CallingForm(props) {
   const [result, setResult] = useState("");
   const [currentNote, setCurrentNote] = useState("");
   const [newStatus, setNewStatus] = useState(props.current.status);
+  const [currentStatus, setCurrentStatus] = useUserProperty(props.current.name, "status");
   const [, addNote] = useNotes(props.current.name);
   const submitHandler = () => {
-    if (currentNote !== "") {
-      addNote(props.current.assignedCaller, currentNote);
-    } else {
+    addNote(props.current.assignedCaller, currentNote, {
+      metaSource: "callingform",
+      actionTaken: action,
+      result,
+      oldStatus: currentStatus,
+      newStatus
+    });
+    if (newStatus !== currentStatus) {
+      setCurrentStatus(newStatus);
     }
     setAction("");
     setResult("");
     setCurrentNote("");
     setNewStatus("");
+  };
+  const updateAction = (v) => {
+    setAction(v);
+    setResult("");
+    setNewStatus("");
+  };
+  const updateResult = (v) => {
+    setResult(v);
+    setNewStatus(props.current.status);
   };
   const resultChoices = CONSTANTS.communication.choiceMatrix[action].map((n) => {
     return CONSTANTS.communication.results[n];
@@ -43,7 +59,7 @@ export default function CallingForm(props) {
     label: "Action Taken:"
   }, /* @__PURE__ */ h(Selection, {
     value: action,
-    cb: setAction,
+    cb: updateAction,
     options: CONSTANTS.communication.contactMethods
   })), action !== "" ? /* @__PURE__ */ h(Fragment, null, /* @__PURE__ */ h("span", {
     className: "padright"
@@ -51,7 +67,7 @@ export default function CallingForm(props) {
     label: "Result:"
   }, /* @__PURE__ */ h(Selection, {
     value: result,
-    cb: setResult,
+    cb: updateResult,
     options: resultChoices
   }))) : null), result !== "" && statusChoices.length > 0 ? /* @__PURE__ */ h(Fragment, null, /* @__PURE__ */ h(SS, null, "Status"), statusChoices[0] === CONSTANTS.statuses[1] ? /* @__PURE__ */ h("span", {
     className: "smaller"

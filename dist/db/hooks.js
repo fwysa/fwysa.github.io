@@ -45,14 +45,15 @@ function useNotes(name) {
       setCurrentNotes(docs);
     });
   }, [name, change]);
-  const addNote = (author, noteText) => {
+  const addNote = (author, noteText, meta = {}) => {
     let n = applyChangeset(genDocBase("note", name), {
       note: noteText,
       author
     });
+    n = applyChangeset(n, meta);
     DB_INSTANCE.put(n);
   };
-  return [currentNotes, addNote];
+  return [currentNotes.reverse(), addNote];
 }
 function useNames() {
   const [names, setNames] = useState([]);
