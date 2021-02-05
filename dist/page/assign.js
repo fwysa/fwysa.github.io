@@ -20,6 +20,7 @@ function AssignPage() {
       return "";
     }
     return /* @__PURE__ */ h(Section, {
+      key: r._id,
       abstract: r.name
     }, /* @__PURE__ */ h(Bio, {
       id: r._id

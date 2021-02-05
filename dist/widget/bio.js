@@ -1,10 +1,12 @@
 import {h} from "../../web_modules/preact.js";
 import {useState, useEffect} from "../../web_modules/preact/hooks.js";
 import {useList} from "../db/hooks.js";
+import DB from "../db/db.js";
 import expand_less from "../img/round_expand_less_black_18dp.png.proxy.js";
 import expand_more from "../img/round_expand_more_black_18dp.png.proxy.js";
 import create_icon from "../img/outline_create_black_18dp.png.proxy.js";
 import save_icon from "../img/outline_save_black_18dp.png.proxy.js";
+import delete_icon from "../img/round_delete_black_18dp.png.proxy.js";
 import EditableText from "../element/editable/text.js";
 import EditableTextArea from "../element/editable/textarea.js";
 import EditableCheckBox from "../element/editable/checkbox.js";
@@ -25,6 +27,13 @@ export default function Bio(props) {
   const editClickHandler = () => {
     setShowMore(!isEditing);
     setIsEditing(!isEditing);
+  };
+  const deleteClickHandler = () => {
+    DB.get(props.id, (doc) => {
+      console.log("GOT DOC, deleting", doc.name);
+      doc._deleted = true;
+      DB.put(doc);
+    });
   };
   const belowFold = /* @__PURE__ */ h("div", {
     className: "smaller biobelowfold"
@@ -95,7 +104,12 @@ export default function Bio(props) {
     onClick: editClickHandler
   }, /* @__PURE__ */ h("img", {
     src: isEditing ? save_icon : create_icon
-  })))), /* @__PURE__ */ h("hr", null), /* @__PURE__ */ h("div", {
+  })), isEditing ? /* @__PURE__ */ h("div", {
+    className: "deletebutton",
+    onClick: deleteClickHandler
+  }, /* @__PURE__ */ h("img", {
+    src: delete_icon
+  })) : null)), /* @__PURE__ */ h("hr", null), /* @__PURE__ */ h("div", {
     className: "smaller bioinfolower"
   }, /* @__PURE__ */ h("div", {
     className: "bioinfostatus"

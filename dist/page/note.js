@@ -36,6 +36,7 @@ function NotePage() {
       return "";
     }
     return /* @__PURE__ */ h(Section, {
+      key: m._id,
       abstract: m.name
     }, /* @__PURE__ */ h(WholeUserInfo, {
       id: m._id

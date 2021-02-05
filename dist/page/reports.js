@@ -14,6 +14,7 @@ function ReportPage() {
   const formatUser = (u) => {
     console.log("FORMAT USER", u);
     return /* @__PURE__ */ h("div", {
+      key: u._id,
       className: "whitebackground nopagebreak"
     }, /* @__PURE__ */ h(ReadOnlyBio, {
       user: u

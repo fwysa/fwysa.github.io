@@ -38,6 +38,7 @@ function CallingPage() {
   }, [name]);
   const formatName = (n) => {
     return /* @__PURE__ */ h(Section, {
+      key: n._id,
       abstract: n.name
     }, /* @__PURE__ */ h(WholeUserInfo, {
       id: n._id,
