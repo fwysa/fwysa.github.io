@@ -3,6 +3,7 @@ const CONSTANTS = {
   statuses: [
     "Unassigned",
     "Assigned",
+    "Continue to Follow Up",
     "Contacted",
     "Not Interested",
     "Do Not Contact",
@@ -38,16 +39,16 @@ const CONSTANTS = {
     },
     statusMatrix: [
       [],
-      [2, 3, 4, 7],
-      [1, 5, 7],
+      [2, 3, 4, 5, 8],
+      [1, 6, 8],
       [],
-      [2, 3, 4, 7],
+      [2, 3, 4, 5, 8],
       [],
-      [2, 3, 4, 7],
-      [1, 5, 7],
+      [2, 3, 4, 5, 8],
+      [1, 6, 8],
       [],
-      [2, 3, 4, 7],
-      [1, 5, 7]
+      [2, 3, 4, 5, 8],
+      [1, 6, 8]
     ],
     results: [
       "Left a text message",
@@ -73,6 +74,13 @@ const CONSTANTS = {
   lists: {
     callers: "d45d3ef9-d25c-422c-8d22-1263564a281d",
     fheLeaders: "b6609528-3e1e-410f-97fa-b418d2fbc923"
+  },
+  authorizationsRoles: {
+    Bishopric: {},
+    "Tech Team": {},
+    "EQ / RS Leader": {},
+    "HE Group Leader": {},
+    Fellowshipper: {}
   }
 };
 export default CONSTANTS;

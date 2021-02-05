@@ -8,6 +8,7 @@ import SS from "../element/sectionsubtitle.js";
 import HL from "../element/horizontallabel.js";
 import EditableCheckBox from "../element/editable/checkbox.js";
 import EditableText from "../element/editable/text.js";
+import EditableDate from "../element/editable/date.js";
 import EditableMultipleChoice from "../element/editable/multiplechoice.js";
 export default function CallingForm(props) {
   const [action, setAction] = useState("");
@@ -69,38 +70,72 @@ export default function CallingForm(props) {
     value: result,
     cb: updateResult,
     options: resultChoices
-  }))) : null), result !== "" && statusChoices.length > 0 ? /* @__PURE__ */ h(Fragment, null, /* @__PURE__ */ h(SS, null, "Status"), statusChoices[0] === CONSTANTS.statuses[1] ? /* @__PURE__ */ h("span", {
+  }))) : null), action !== "" && result === "" ? /* @__PURE__ */ h(Fragment, null, action === CONSTANTS.communication.contactMethods[0] || action === CONSTANTS.communication.contactMethods[1] ? /* @__PURE__ */ h(Fragment, null, /* @__PURE__ */ h(HL, {
+    label: "Individual Phone:"
+  }, /* @__PURE__ */ h(EditableText, {
+    id: props.current._id,
+    property: "individualPhone",
+    show: false,
+    linkType: "phone"
+  })), /* @__PURE__ */ h(HL, {
+    label: "Household Phone:"
+  }, /* @__PURE__ */ h(EditableText, {
+    id: props.current._id,
+    property: "householdPhone",
+    show: false,
+    linkType: "phone"
+  }))) : null, action === CONSTANTS.communication.contactMethods[2] ? /* @__PURE__ */ h(Fragment, null, /* @__PURE__ */ h(HL, {
+    label: "Individual Email:"
+  }, /* @__PURE__ */ h(EditableText, {
+    id: props.current._id,
+    property: "individualEmail",
+    show: false,
+    linkType: "email"
+  })), /* @__PURE__ */ h(HL, {
+    label: "Household Email:"
+  }, /* @__PURE__ */ h(EditableText, {
+    id: props.current._id,
+    property: "householdEmail",
+    show: false,
+    linkType: "email"
+  }))) : null) : null, result !== "" && statusChoices.length > 0 ? /* @__PURE__ */ h(Fragment, null, /* @__PURE__ */ h(SS, null, "Status"), statusChoices[0] === CONSTANTS.statuses[1] ? /* @__PURE__ */ h("span", {
     className: "smaller"
   }, "Keep as ", /* @__PURE__ */ h("strong", null, "assigned"), " until you've exhausted all forms of communication. Changing the status from", " ", /* @__PURE__ */ h("strong", null, "assigned"), " will remove", " ", /* @__PURE__ */ h("strong", null, props.current.name), " from your calling list.") : null, /* @__PURE__ */ h(Selection, {
     value: newStatus,
     cb: setNewStatus,
     options: statusChoices
-  }), newStatus === CONSTANTS.statuses[2] || newStatus === CONSTANTS.statuses[7] ? /* @__PURE__ */ h(Fragment, null, /* @__PURE__ */ h(HL, {
-    label: "Notify about FHE?"
+  }), newStatus === CONSTANTS.statuses[3] || newStatus === CONSTANTS.statuses[2] || newStatus === CONSTANTS.statuses[8] ? /* @__PURE__ */ h(Fragment, null, /* @__PURE__ */ h(HL, {
+    label: "Notify about HE?"
   }, /* @__PURE__ */ h(EditableCheckBox, {
     show: true,
-    name: props.current.name,
+    id: props.current._id,
     property: "notifyHomeEvening"
   })), /* @__PURE__ */ h(HL, {
     label: "Notify about activities?"
   }, /* @__PURE__ */ h(EditableCheckBox, {
     show: true,
-    name: props.current.name,
+    id: props.current._id,
     property: "notifyWardActivity"
   })), /* @__PURE__ */ h(HL, {
     label: "Preferred Contact:"
   }, /* @__PURE__ */ h(EditableMultipleChoice, {
-    name: props.current.name,
+    id: props.current._id,
     property: "preferredContactType",
     show: true,
     options: CONSTANTS.contactMethods
   }), /* @__PURE__ */ h("span", {
     className: "padleft"
   }), /* @__PURE__ */ h(EditableText, {
-    name: props.current.name,
+    id: props.current._id,
     property: "preferredContactValue",
     show: true
-  }))) : null) : null, result !== "" ? /* @__PURE__ */ h(Fragment, null, /* @__PURE__ */ h(SS, null, "Notes"), /* @__PURE__ */ h("textarea", {
+  }))) : null, newStatus === CONSTANTS.statuses[2] ? /* @__PURE__ */ h(HL, {
+    label: "Follow-up Date:"
+  }, /* @__PURE__ */ h(EditableDate, {
+    id: props.current._id,
+    property: "followupDate",
+    show: true
+  })) : null) : null, result !== "" ? /* @__PURE__ */ h(Fragment, null, /* @__PURE__ */ h(SS, null, "Notes"), /* @__PURE__ */ h("textarea", {
     placeholder: "Enter note here...",
     value: currentNote,
     onChange: (e) => {

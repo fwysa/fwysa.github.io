@@ -16,9 +16,10 @@ import CONSTANTS from "../constants.js";
 function CallingPage() {
   const [callerIDs, ,] = useList(CONSTANTS.lists.callers);
   const [callers, setCallers] = useState([]);
+  const [status, setStatus] = useState(CONSTANTS.statuses[1]);
   const [selector, setSelector] = useState({
     type: "user",
-    status: CONSTANTS.statuses[1],
+    status,
     assignedCaller: "NONEXISTENT"
   });
   useEffect(() => {
@@ -36,6 +37,9 @@ function CallingPage() {
       setSelector({...selector, assignedCaller: r});
     });
   }, [name]);
+  useEffect(() => {
+    setSelector({...selector, status});
+  }, [status]);
   const formatName = (n) => {
     return /* @__PURE__ */ h(Section, {
       key: n._id,
@@ -74,7 +78,15 @@ function CallingPage() {
     options: callers
   }), name !== "" ? /* @__PURE__ */ h("span", {
     className: "padleft"
-  }, /* @__PURE__ */ h("strong", null, "(", count, ")")) : null)), name !== "" ? /* @__PURE__ */ h(SearchResults, {
+  }, /* @__PURE__ */ h("strong", null, "(", count, ")")) : null), /* @__PURE__ */ h("span", {
+    className: "padleft"
+  }), /* @__PURE__ */ h(HL, {
+    label: "Select a status:"
+  }, /* @__PURE__ */ h(Selection, {
+    value: status,
+    cb: setStatus,
+    options: CONSTANTS.statuses
+  }))), name !== "" ? /* @__PURE__ */ h(SearchResults, {
     sort: sortByName,
     selector,
     cb: formatName,

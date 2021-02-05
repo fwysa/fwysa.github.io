@@ -25,7 +25,7 @@ export default function ReadOnlyBio(props) {
   }, props.user.status), /* @__PURE__ */ h("div", {
     className: "padleft horizontal"
   }, /* @__PURE__ */ h(HL, {
-    label: "FHE?"
+    label: "HE?"
   }, /* @__PURE__ */ h("input", {
     type: "checkbox",
     checked: props.user.notifyHomeEvening

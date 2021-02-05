@@ -125,7 +125,7 @@ export default function Bio(props) {
   })), /* @__PURE__ */ h("div", {
     className: "padleft horizontal"
   }, /* @__PURE__ */ h(HL, {
-    label: "FHE?"
+    label: "HE?"
   }, /* @__PURE__ */ h(EditableCheckBox, {
     id: props.id,
     property: "notifyHomeEvening",
