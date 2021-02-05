@@ -38,7 +38,12 @@ function CallingPage() {
     });
   }, [name]);
   useEffect(() => {
-    setSelector({...selector, status});
+    if (status === "") {
+      delete selector.status;
+      setSelector({...selector});
+    } else {
+      setSelector({...selector, status});
+    }
   }, [status]);
   const formatName = (n) => {
     return /* @__PURE__ */ h(Section, {
@@ -85,7 +90,9 @@ function CallingPage() {
   }, /* @__PURE__ */ h(Selection, {
     value: status,
     cb: setStatus,
-    options: CONSTANTS.statuses
+    options: CONSTANTS.statuses,
+    addblank: true,
+    allowblank: true
   }))), name !== "" ? /* @__PURE__ */ h(SearchResults, {
     sort: sortByName,
     selector,
