@@ -143,7 +143,9 @@ export default function Bio(props) {
     property: "assignedCaller",
     show: isEditing,
     options: callerList,
-    asnames: true
+    asnames: true,
+    addblank: true,
+    allowblank: true
   }))), /* @__PURE__ */ h(HL, {
     label: "Gender:"
   }, /* @__PURE__ */ h(EditableMultipleChoice, {

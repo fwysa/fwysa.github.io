@@ -31,7 +31,9 @@ export default function EditableMultipleChoice(props) {
         setValue(v);
       }
     },
-    options: opts
+    options: opts,
+    addblank: props.addblank,
+    allowblank: props.allowblank
   });
   return /* @__PURE__ */ h("span", {
     className: "editablemultiplechoice"

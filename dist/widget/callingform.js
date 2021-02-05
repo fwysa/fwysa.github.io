@@ -61,8 +61,7 @@ export default function CallingForm(props) {
   }, /* @__PURE__ */ h(Selection, {
     value: action,
     cb: updateAction,
-    options: CONSTANTS.communication.contactMethods,
-    addblank: true
+    options: CONSTANTS.communication.contactMethods
   })), action !== "" ? /* @__PURE__ */ h(Fragment, null, /* @__PURE__ */ h("span", {
     className: "padright"
   }), /* @__PURE__ */ h(HL, {
@@ -70,8 +69,7 @@ export default function CallingForm(props) {
   }, /* @__PURE__ */ h(Selection, {
     value: result,
     cb: updateResult,
-    options: resultChoices,
-    addblank: true
+    options: resultChoices
   }))) : null), action !== "" && result === "" ? /* @__PURE__ */ h(Fragment, null, action === CONSTANTS.communication.contactMethods[0] || action === CONSTANTS.communication.contactMethods[1] ? /* @__PURE__ */ h(Fragment, null, /* @__PURE__ */ h(HL, {
     label: "Individual Phone:"
   }, /* @__PURE__ */ h(EditableText, {
@@ -105,8 +103,7 @@ export default function CallingForm(props) {
   }, "Keep as ", /* @__PURE__ */ h("strong", null, "assigned"), " until you've exhausted all forms of communication. Changing the status from", " ", /* @__PURE__ */ h("strong", null, "assigned"), " will remove", " ", /* @__PURE__ */ h("strong", null, props.current.name), " from your calling list.") : null, /* @__PURE__ */ h(Selection, {
     value: newStatus,
     cb: setNewStatus,
-    options: statusChoices,
-    addblank: true
+    options: statusChoices
   }), newStatus === CONSTANTS.statuses[3] || newStatus === CONSTANTS.statuses[2] || newStatus === CONSTANTS.statuses[8] ? /* @__PURE__ */ h(Fragment, null, /* @__PURE__ */ h(HL, {
     label: "Notify about HE?"
   }, /* @__PURE__ */ h(EditableCheckBox, {

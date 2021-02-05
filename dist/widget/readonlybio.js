@@ -1,7 +1,15 @@
 import {h} from "../../web_modules/preact.js";
+import {useState, useEffect} from "../../web_modules/preact/hooks.js";
+import {IDToName} from "../db/helper.js";
 import HL from "../element/horizontallabel.js";
 import "./css/bio.css.proxy.js";
 export default function ReadOnlyBio(props) {
+  const [assignedCaller, setAssignedCaller] = useState("");
+  useEffect(() => {
+    IDToName(props.user.assignedCaller).then((r) => {
+      setAssignedCaller(r);
+    });
+  }, [props]);
   return /* @__PURE__ */ h("div", {
     className: "bio"
   }, /* @__PURE__ */ h("div", {
@@ -36,7 +44,7 @@ export default function ReadOnlyBio(props) {
     checked: props.user.notifyWardActivity
   })))), /* @__PURE__ */ h(HL, {
     label: "Assigned Fellowshipper:"
-  }, props.user.assignedCaller)), /* @__PURE__ */ h(HL, {
+  }, assignedCaller)), /* @__PURE__ */ h(HL, {
     label: "Gender:"
   }, props.user.gender), /* @__PURE__ */ h(HL, {
     label: "Home Evening Group:"
