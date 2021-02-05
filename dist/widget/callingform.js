@@ -62,7 +62,7 @@ export default function CallingForm(props) {
     value: action,
     cb: updateAction,
     options: CONSTANTS.communication.contactMethods,
-    addhidden: true
+    addblank: true
   })), action !== "" ? /* @__PURE__ */ h(Fragment, null, /* @__PURE__ */ h("span", {
     className: "padright"
   }), /* @__PURE__ */ h(HL, {
@@ -71,7 +71,7 @@ export default function CallingForm(props) {
     value: result,
     cb: updateResult,
     options: resultChoices,
-    addhidden: true
+    addblank: true
   }))) : null), action !== "" && result === "" ? /* @__PURE__ */ h(Fragment, null, action === CONSTANTS.communication.contactMethods[0] || action === CONSTANTS.communication.contactMethods[1] ? /* @__PURE__ */ h(Fragment, null, /* @__PURE__ */ h(HL, {
     label: "Individual Phone:"
   }, /* @__PURE__ */ h(EditableText, {
@@ -106,7 +106,7 @@ export default function CallingForm(props) {
     value: newStatus,
     cb: setNewStatus,
     options: statusChoices,
-    addhidden: true
+    addblank: true
   }), newStatus === CONSTANTS.statuses[3] || newStatus === CONSTANTS.statuses[2] || newStatus === CONSTANTS.statuses[8] ? /* @__PURE__ */ h(Fragment, null, /* @__PURE__ */ h(HL, {
     label: "Notify about HE?"
   }, /* @__PURE__ */ h(EditableCheckBox, {
