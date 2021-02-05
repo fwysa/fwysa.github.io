@@ -29,7 +29,7 @@ export default function NoteBar(props) {
   });
   const bg = props.nobg === true ? "addnote" : "whitebackground addnote";
   return /* @__PURE__ */ h("div", {
-    className: "notebar"
+    className: "notebar nopagebreak"
   }, props.hideadd !== true ? /* @__PURE__ */ h("div", {
     className: bg
   }, /* @__PURE__ */ h("span", null, "Add a note:"), /* @__PURE__ */ h("textarea", {

@@ -1,4 +1,4 @@
-import {h} from "../../web_modules/preact.js";
+import {h, Fragment} from "../../web_modules/preact.js";
 import "./css/note.css.proxy.js";
 import {useState} from "../../web_modules/preact/hooks.js";
 import EditableText from "./editable/text.js";
@@ -35,7 +35,7 @@ export default function Note(props) {
     className: "whitebackground note"
   }, /* @__PURE__ */ h("div", null, editing ? edit : normal), /* @__PURE__ */ h("hr", null), /* @__PURE__ */ h("div", {
     className: "smaller notelower"
-  }, /* @__PURE__ */ h("span", null, formattedDate), /* @__PURE__ */ h("div", null, /* @__PURE__ */ h("span", {
+  }, /* @__PURE__ */ h("span", null, formattedDate), /* @__PURE__ */ h("div", null, props.data.actionTaken !== void 0 ? /* @__PURE__ */ h(Fragment, null, /* @__PURE__ */ h("span", null, props.data.actionTaken)) : null, props.data.result !== void 0 ? /* @__PURE__ */ h(Fragment, null, /* @__PURE__ */ h("span", null, " | "), /* @__PURE__ */ h("span", null, props.data.result)) : null, props.data.newStatus !== void 0 ? /* @__PURE__ */ h(Fragment, null, /* @__PURE__ */ h("span", null, " | "), /* @__PURE__ */ h("span", null, props.data.newStatus)) : null, props.data.followupDate !== void 0 ? /* @__PURE__ */ h(Fragment, null, /* @__PURE__ */ h("span", null, ": "), /* @__PURE__ */ h("span", null, props.data.followupDate)) : null), /* @__PURE__ */ h("div", null, /* @__PURE__ */ h("span", {
     className: "padright"
   }, props.data.author), /* @__PURE__ */ h("span", null, "| "), /* @__PURE__ */ h("a", {
     href: "",

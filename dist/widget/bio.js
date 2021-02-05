@@ -12,12 +12,14 @@ import EditableTextArea from "../element/editable/textarea.js";
 import EditableCheckBox from "../element/editable/checkbox.js";
 import EditableMultipleChoice from "../element/editable/multiplechoice.js";
 import HL from "../element/horizontallabel.js";
+import UserImage from "./userimage.js";
 import CONSTANTS from "../constants.js";
 import "./css/bio.css.proxy.js";
 export default function Bio(props) {
   const [showMore, setShowMore] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
   const [callerList, ,] = useList(CONSTANTS.lists.callers);
+  const [imgUrl, setImgUrl] = useState("");
   const showMoreClickHandler = () => {
     if (isEditing) {
       setIsEditing(false);
@@ -35,6 +37,7 @@ export default function Bio(props) {
       DB.put(doc);
     });
   };
+  const bioImgClasses = imgUrl === "" ? "bioimg bluebackground" : "bioimg";
   const belowFold = /* @__PURE__ */ h("div", {
     className: "smaller biobelowfold"
   }, /* @__PURE__ */ h(HL, {
@@ -82,9 +85,12 @@ export default function Bio(props) {
   }, /* @__PURE__ */ h("div", {
     className: "bioupper"
   }, /* @__PURE__ */ h("div", {
-    className: "bioimg",
+    className: bioImgClasses,
     onClick: showMoreClickHandler
-  }), /* @__PURE__ */ h("div", {
+  }, /* @__PURE__ */ h(UserImage, {
+    id: props.id,
+    cb: setImgUrl
+  })), /* @__PURE__ */ h("div", {
     className: "bioinfo"
   }, /* @__PURE__ */ h("div", {
     className: "bioinfoupper"

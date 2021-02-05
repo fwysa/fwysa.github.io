@@ -23,7 +23,8 @@ function AddNamesPage() {
       homeWard: ward,
       fheGroup,
       source,
-      status
+      status,
+      name: "Name here"
     });
     DB.put(base);
     const updateArray = [...ids, base._id];
@@ -37,7 +38,11 @@ function AddNamesPage() {
   });
   const submitHandler = () => {
     console.log("SUBMIT", ids);
-    setNames([]);
+    const curURL = window.location.href;
+    const newURL = curURL.substring(0, curURL.indexOf("addnames")) + "leaders";
+    setIDs([]);
+    console.log("Redirect may be hacky", newURL);
+    window.location.href = newURL;
   };
   return /* @__PURE__ */ h("div", {
     className: "page"

@@ -10,15 +10,19 @@ export default function ReadOnlyBio(props) {
       setAssignedCaller(r);
     });
   }, [props]);
+  const bioImgClasses = props.user.imageUrl === "" ? "bioimg bluebackground" : "bioimg";
   return /* @__PURE__ */ h("div", {
-    className: "bio"
+    className: "bio nopagebreak"
   }, /* @__PURE__ */ h("div", {
     className: "bioabovefold"
   }, /* @__PURE__ */ h("div", {
     className: "bioupper"
   }, /* @__PURE__ */ h("div", {
-    className: "bioimg"
-  }), /* @__PURE__ */ h("div", {
+    className: bioImgClasses
+  }, props.user.imageUrl !== "" ? /* @__PURE__ */ h("img", {
+    className: "userimage",
+    src: props.user.imageUrl
+  }) : null), /* @__PURE__ */ h("div", {
     className: "bioinfo"
   }, /* @__PURE__ */ h("div", {
     className: "bioinfoupper"

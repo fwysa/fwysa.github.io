@@ -1,7 +1,8 @@
 import {h, Fragment} from "../../web_modules/preact.js";
-import {useState} from "../../web_modules/preact/hooks.js";
+import {useState, useEffect} from "../../web_modules/preact/hooks.js";
 import CONSTANTS from "../constants.js";
 import {useProperty, useNotes} from "../db/hooks.js";
+import {IDToName} from "../db/helper.js";
 import Selection from "../element/selection.js";
 import Block from "../element/block.js";
 import SS from "../element/sectionsubtitle.js";
@@ -15,15 +16,23 @@ export default function CallingForm(props) {
   const [result, setResult] = useState("");
   const [currentNote, setCurrentNote] = useState("");
   const [newStatus, setNewStatus] = useState(props.current.status);
+  const [author, setAuthor] = useState("");
+  const [followupDate, setFollowupDate] = useState("");
+  useEffect(() => {
+    IDToName(props.current.assignedCaller).then((r) => {
+      setAuthor(r);
+    });
+  }, [props.current]);
   const [currentStatus, setCurrentStatus] = useProperty(props.current._id, "status");
   const [, addNote] = useNotes(props.current._id);
   const submitHandler = () => {
-    addNote(props.current.assignedCaller, currentNote, {
+    addNote(author, currentNote, {
       metaSource: "callingform",
       actionTaken: action,
       result,
       oldStatus: currentStatus,
-      newStatus
+      newStatus,
+      followupDate
     });
     if (newStatus !== currentStatus) {
       setCurrentStatus(newStatus);
@@ -131,10 +140,12 @@ export default function CallingForm(props) {
     show: true
   }))) : null, newStatus === CONSTANTS.statuses[2] ? /* @__PURE__ */ h(HL, {
     label: "Follow-up Date:"
-  }, /* @__PURE__ */ h(EditableDate, {
-    id: props.current._id,
-    property: "followupDate",
-    show: true
+  }, /* @__PURE__ */ h("input", {
+    type: "date",
+    value: followupDate,
+    onChange: (e) => {
+      setFollowupDate(e.target.value);
+    }
   })) : null) : null, result !== "" ? /* @__PURE__ */ h(Fragment, null, /* @__PURE__ */ h(SS, null, "Notes"), /* @__PURE__ */ h("textarea", {
     placeholder: "Enter note here...",
     value: currentNote,

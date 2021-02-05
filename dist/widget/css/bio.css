@@ -11,8 +11,8 @@
 
 .bioimg {
   min-width: 100px;
-  background-color: lightblue;
 }
+
 .bioinfo {
   margin-left: 5px;
   flex-grow: 1;

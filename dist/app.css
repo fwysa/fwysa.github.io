@@ -26,6 +26,10 @@
   box-shadow: var(--shadowdetails);
 }
 
+.bluebackground {
+  background-color: lightblue;
+}
+
 .highlight {
   background-color: var(--lightblue) !important;
 }
@@ -110,4 +114,11 @@ h1 {
 
 .flexcenter {
   justify-content: center;
+}
+
+.userimage {
+  max-width: 100px;
+  max-height: 150px;
+  border: var(--borderdetails);
+  box-shadow: var(--shadowdetails);
 }

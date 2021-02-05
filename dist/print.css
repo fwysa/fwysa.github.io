@@ -2,12 +2,18 @@
   .app {
     background-image: none;
     background-color: white;
+    display: block !important;
   }
   .page {
     overflow: visible;
   }
   .nopagebreak {
+    break-inside: avoid;
     page-break-inside: avoid;
+    /*
+    break-before: auto;
+    break-after: auto;
+    */
   }
   .printnoshow {
     display: none !important;

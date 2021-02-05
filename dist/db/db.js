@@ -82,7 +82,7 @@ class DB {
   put(dat, cb) {
     this.pouchdb.put(dat).then((res) => {
       if (cb !== void 0) {
-        cb(result);
+        cb(res);
       }
     }).catch((err) => {
       console.log("UPDATE RECORD ERROR", err);
