@@ -69,6 +69,10 @@ const CONSTANTS = {
     "YSA Activity",
     "Home Evening",
     "Other"
-  ]
+  ],
+  lists: {
+    callers: "d45d3ef9-d25c-422c-8d22-1263564a281d",
+    fheLeaders: "b6609528-3e1e-410f-97fa-b418d2fbc923"
+  }
 };
 export default CONSTANTS;

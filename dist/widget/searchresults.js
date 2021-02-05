@@ -5,7 +5,11 @@ export default function SearchResults(props) {
   if (props.countcb !== void 0) {
     props.countcb(results.length);
   }
-  const formattedResults = results.map((r) => {
+  let fres = results;
+  if (props.sort !== void 0) {
+    fres = props.sort(results);
+  }
+  const formattedResults = fres.map((r) => {
     return props.cb(r);
   });
   return /* @__PURE__ */ h("div", {

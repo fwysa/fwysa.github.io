@@ -4,11 +4,11 @@ import List from "../widget/list.js";
 import SearchResults from "../widget/searchresults.js";
 import SearchBar from "../widget/searchbar.js";
 import Section from "../element/section.js";
-import Selection from "../element/selection.js";
 import AssignBox from "../widget/assignbox.js";
 import Bio from "../widget/bio.js";
 import Block from "../element/block.js";
 import CONSTANTS from "../constants.js";
+import {sortByName} from "../db/helper.js";
 function AssignPage() {
   const [gender, setGender] = useState("");
   const [homeWard, setHomeWard] = useState("");
@@ -22,9 +22,9 @@ function AssignPage() {
     return /* @__PURE__ */ h(Section, {
       abstract: r.name
     }, /* @__PURE__ */ h(Bio, {
-      name: r.name
+      id: r._id
     }), /* @__PURE__ */ h(AssignBox, {
-      name: r.name
+      id: r._id
     }));
   };
   return /* @__PURE__ */ h("div", {
@@ -37,13 +37,14 @@ function AssignPage() {
     className: "whitebackground"
   }, /* @__PURE__ */ h(Block, null, /* @__PURE__ */ h("span", {
     className: "smaller"
-  }, " ", "* If you can't select the name of the person you want to assign the name to, scroll to the bottom and add it to the list of fellowshippers."))), /* @__PURE__ */ h(SearchResults, {
+  }, "* If you can't select the name of the person you want to assign the name to, scroll to the bottom and add it to the list of fellowshippers."))), /* @__PURE__ */ h(SearchResults, {
     selector,
     cb: searchResultHandler,
-    countcb: setCount
+    countcb: setCount,
+    sort: sortByName
   }), /* @__PURE__ */ h("hr", null), /* @__PURE__ */ h(List, {
     label: "Fellowshippers (List of Callers):",
-    list: "callers"
+    list: CONSTANTS.lists.callers
   }));
 }
 export default AssignPage;

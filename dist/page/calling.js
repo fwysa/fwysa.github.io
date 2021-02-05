@@ -1,6 +1,7 @@
 import {h} from "../../web_modules/preact.js";
-import {useState} from "../../web_modules/preact/hooks.js";
-import {useObject, useList} from "../db/hooks.js";
+import {useEffect, useState} from "../../web_modules/preact/hooks.js";
+import {useList, usePromise} from "../db/hooks.js";
+import {sortByName, nameToID, mapIDToName} from "../db/helper.js";
 import {callScript, textScript} from "./helper/callscripts.js";
 import Section from "../element/section.js";
 import SS from "../element/sectionsubtitle.js";
@@ -13,20 +14,33 @@ import FHELeaderInfoBox from "../widget/fheleaderinfobox.js";
 import CallingForm from "../widget/callingform.js";
 import CONSTANTS from "../constants.js";
 function CallingPage() {
-  const [callers, ,] = useList("callers");
+  const [callerIDs, ,] = useList(CONSTANTS.lists.callers);
+  const [callers, setCallers] = useState([]);
+  const [selector, setSelector] = useState({
+    type: "user",
+    status: CONSTANTS.statuses[1],
+    assignedCaller: "NONEXISTENT"
+  });
+  useEffect(() => {
+    if (callerIDs.length > 0) {
+      mapIDToName(callerIDs).then((r) => {
+        setCallers(r);
+      });
+    }
+  }, [callerIDs]);
   const [name, setName] = useState("");
   const [count, setCount] = useState(0);
   const [selectedName, setSelectedName] = useState("");
-  const selector = {
-    type: "user",
-    assignedCaller: name,
-    status: CONSTANTS.statuses[1]
-  };
+  useEffect(() => {
+    nameToID(name).then((r) => {
+      setSelector({...selector, assignedCaller: r});
+    });
+  }, [name]);
   const formatName = (n) => {
     return /* @__PURE__ */ h(Section, {
       abstract: n.name
     }, /* @__PURE__ */ h(WholeUserInfo, {
-      name: n.name,
+      id: n._id,
       hideadd: true,
       extrainfo: true
     }), /* @__PURE__ */ h("hr", null), /* @__PURE__ */ h("div", {
@@ -60,6 +74,7 @@ function CallingPage() {
   }), name !== "" ? /* @__PURE__ */ h("span", {
     className: "padleft"
   }, /* @__PURE__ */ h("strong", null, "(", count, ")")) : null)), name !== "" ? /* @__PURE__ */ h(SearchResults, {
+    sort: sortByName,
     selector,
     cb: formatName,
     countcb: setCount

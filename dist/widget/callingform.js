@@ -1,7 +1,7 @@
 import {h, Fragment} from "../../web_modules/preact.js";
 import {useState} from "../../web_modules/preact/hooks.js";
 import CONSTANTS from "../constants.js";
-import {useUserProperty, useNotes} from "../db/hooks.js";
+import {useProperty, useNotes} from "../db/hooks.js";
 import Selection from "../element/selection.js";
 import Block from "../element/block.js";
 import SS from "../element/sectionsubtitle.js";
@@ -14,8 +14,8 @@ export default function CallingForm(props) {
   const [result, setResult] = useState("");
   const [currentNote, setCurrentNote] = useState("");
   const [newStatus, setNewStatus] = useState(props.current.status);
-  const [currentStatus, setCurrentStatus] = useUserProperty(props.current.name, "status");
-  const [, addNote] = useNotes(props.current.name);
+  const [currentStatus, setCurrentStatus] = useProperty(props.current._id, "status");
+  const [, addNote] = useNotes(props.current._id);
   const submitHandler = () => {
     addNote(props.current.assignedCaller, currentNote, {
       metaSource: "callingform",

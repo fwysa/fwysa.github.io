@@ -5,6 +5,7 @@
     "preact": "./preact.js",
     "preact-router": "./preact-router.js",
     "preact/devtools": "./preact/devtools.js",
-    "preact/hooks": "./preact/hooks.js"
+    "preact/hooks": "./preact/hooks.js",
+    "uuid": "./uuid.js"
   }
 }

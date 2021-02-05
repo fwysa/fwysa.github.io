@@ -11,19 +11,43 @@ const SYNC_OPTS = {
 class DB {
   constructor() {
     this.pouchdb = new PouchDB("ocz");
-    this.startReplication();
+    this.replicationReady = this.startReplication();
     this.changeListeners = {};
     this.listenForChanges();
     this.listenID = 0;
+    this.nameIDMatrix = {};
+    this.IDNameMatrix = {};
+    this.matrixReady = this.populateMatrices();
   }
-  startReplication() {
-    this.pouchdb.replicate.from(CLOUDANT_URL).on("complete", (info) => {
-      console.log("FINISHED INITIAL REPLICATION");
-      this.pouchdb.sync(CLOUDANT_URL, SYNC_OPTS).on("error", (e) => {
-        console.log("SYNC ERROR", e);
+  startReplication(cb) {
+    return new Promise((re, rj) => {
+      this.pouchdb.replicate.from(CLOUDANT_URL).on("complete", (info) => {
+        console.log("1. FINISHED INITIAL REPLICATION");
+        re();
+        this.pouchdb.sync(CLOUDANT_URL, SYNC_OPTS).on("error", (e) => {
+          console.log("SYNC ERROR", e);
+        });
+      }).on("error", (e) => {
+        console.log("INITIAL REPLICATION ERROR", e);
+        rj();
       });
-    }).on("error", (e) => {
-      console.log("INITIAL REPLICATION ERROR", e);
+    });
+  }
+  populateMatrices() {
+    let NI = this.nameIDMatrix;
+    let IN = this.IDNameMatrix;
+    let t = this;
+    return this.replicationReady.then(() => {
+      return new Promise((re, rj) => {
+        t.find({type: "user"}, (docs) => {
+          docs.forEach((d) => {
+            NI[d.name] = d._id;
+            IN[d._id] = d.name;
+          });
+          console.log("2. MATRICES POPULATED");
+          re();
+        });
+      });
     });
   }
   addChangeListener(cb) {
@@ -48,6 +72,13 @@ class DB {
       console.log(e);
     });
   }
+  get(id, cb) {
+    this.pouchdb.get(id).then((res) => {
+      cb(res);
+    }).catch((err) => {
+      console.log("GET ERROR", err, "ID:", id);
+    });
+  }
   put(dat, cb) {
     this.pouchdb.put(dat).then((res) => {
       if (cb !== void 0) {
@@ -63,6 +94,9 @@ class DB {
     }).catch((err) => {
       console.log(err);
     });
+  }
+  remove(doc) {
+    return this.pouchdb.remove(doc);
   }
 }
 let DB_INSTANCE = new DB();

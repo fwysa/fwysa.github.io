@@ -9,51 +9,60 @@ import {
   genDocBase,
   sortByName
 } from "./helper.js";
-function useDBRecentChanges(type = "", name = "") {
+function useDBRecentChanges(type = "", id = "") {
   const [last, setLast] = useState({});
   useEffect(() => {
     let chg = DB_INSTANCE.addChangeListener((doc) => {
-      if ((type === "" || type === doc.type) && (name === "" || name === doc.name)) {
+      if ((type === "" || type === doc.type) && (id === "" || id === doc._id)) {
         setLast(doc);
       }
     });
     return () => {
       DB_INSTANCE.removeChangeListener(chg);
     };
-  }, [type, name]);
+  }, [type, id]);
   return last;
 }
-function useUser(name) {
-  const [currentUser, setCurrentUser] = useState(EMPTY_USER_TEMPLATE);
-  const change = useDBRecentChanges("user", name);
+function useDoc(id) {
+  const [currentDoc, setCurrentDoc] = useState({});
+  const change = useDBRecentChanges("", id);
   useEffect(() => {
-    DB_INSTANCE.find({type: "user", name}, (docs) => {
-      setCurrentUser(docs[0]);
+    DB_INSTANCE.get(id, (doc) => {
+      setCurrentDoc(doc);
     });
-  }, [name, change]);
-  const updateUser = (changeset) => {
-    const changed = applyChangeset(currentUser, changeset);
+  }, [id, change]);
+  const updateDoc = (changeset) => {
+    const changed = applyChangeset(currentDoc, changeset);
     DB_INSTANCE.put(changed);
   };
-  return [currentUser, updateUser];
+  return [currentDoc, updateDoc];
 }
-function useNotes(name) {
+function useName(id) {
+  const [currentDoc] = useDoc(id);
+  if (currentDoc === void 0) {
+    return void 0;
+  } else {
+    return currentDoc.name;
+  }
+}
+function useNotes(id) {
   const [currentNotes, setCurrentNotes] = useState([]);
-  const change = useDBRecentChanges("note", name);
+  const change = useDBRecentChanges("note");
   useEffect(() => {
-    DB_INSTANCE.find({type: "note", name}, (docs) => {
+    DB_INSTANCE.find({type: "note", parentID: id}, (docs) => {
       setCurrentNotes(docs);
     });
-  }, [name, change]);
+  }, [id, change]);
   const addNote = (author, noteText, meta = {}) => {
-    let n = applyChangeset(genDocBase("note", name), {
+    let n = applyChangeset(genDocBase("note"), {
+      parentID: id,
       note: noteText,
       author
     });
     n = applyChangeset(n, meta);
     DB_INSTANCE.put(n);
   };
-  return [currentNotes.reverse(), addNote];
+  return [[...currentNotes].reverse(), addNote];
 }
 function useNames() {
   const [names, setNames] = useState([]);
@@ -66,92 +75,86 @@ function useNames() {
   }, [change]);
   return names;
 }
-function useUserProperty(name, property) {
-  const [currentUser, setCurrentUser] = useState(EMPTY_USER_TEMPLATE);
-  const change = useDBRecentChanges("user", name);
+function useProperty(id, property) {
+  const [currentDoc, setCurrentDoc] = useState({});
+  const change = useDBRecentChanges("", id);
   useEffect(() => {
-    DB_INSTANCE.find({type: "user", name}, (docs) => {
-      setCurrentUser(docs[0]);
+    DB_INSTANCE.get(id, (doc) => {
+      setCurrentDoc(doc);
     });
-  }, [name, change]);
+  }, [id, change]);
   const updateUserProperty = (val) => {
     let changeset = {};
     changeset[property] = val;
-    const changed = applyChangeset(currentUser, changeset);
+    const changed = applyChangeset(currentDoc, changeset);
     DB_INSTANCE.put(changed);
   };
-  return [currentUser[property], updateUserProperty];
-}
-function useList(name, dontSort = false) {
-  const [callers, setCallers] = useState({list: []});
-  const change = useDBRecentChanges("meta", name);
-  useEffect(() => {
-    DB_INSTANCE.find({type: "meta", name}, (docs) => {
-      if (docs.length === 0) {
-        let base = genDocBase("meta", name);
-        base.list = [];
-        DB_INSTANCE.put(base);
-      } else {
-        setCallers(docs[0]);
-      }
-    });
-  }, [name, change]);
-  const addCaller = (name2) => {
-    let newList = [...callers.list];
-    newList.push(name2);
-    let n = applyChangeset(callers, {list: newList});
-    DB_INSTANCE.put(n);
-  };
-  const removeCaller = (name2) => {
-    let newList = [...callers.list];
-    const ind = newList.indexOf(name2);
-    if (ind > -1) {
-      newList.splice(ind, 1);
-    }
-    let n = applyChangeset(callers, {list: newList});
-    DB_INSTANCE.put(n);
-  };
-  if (!dontSort) {
-    callers.list.sort();
+  let ret = currentDoc[property];
+  if (ret === void 0) {
+    ret = "";
   }
-  return [callers.list, addCaller, removeCaller];
+  return [ret, updateUserProperty];
 }
 function useSearch(selector) {
   const [results, setResults] = useState([]);
   const change = useDBRecentChanges("", "");
   useEffect(() => {
     DB_INSTANCE.find(selector, (docs) => {
-      setResults(sortByName(docs));
+      setResults(docs);
     });
   }, [selector, change]);
   return results;
 }
-const EMPTY_OBJECT = {data: {}};
-function useObject(name) {
-  const [doc, setDoc] = useState(EMPTY_OBJECT);
-  const change = useDBRecentChanges("meta", name);
+function useList(id) {
+  const [currentList, setCurrentList] = useState({list: []});
+  const change = useDBRecentChanges("meta", id);
   useEffect(() => {
-    DB_INSTANCE.find({type: "meta", name}, (docs) => {
-      if (docs.length === 0) {
-        const n = applyChangeset(genDocBase("meta", name), EMPTY_OBJECT);
-        DB_INSTANCE.put(n);
+    DB_INSTANCE.get(id, (doc) => {
+      if (doc === void 0) {
+        let base = genDocBase("meta");
+        base._id = id;
+        base.list = [];
+        DB_INSTANCE.put(base);
       } else {
-        setDoc(docs[0]);
+        setCurrentList(doc);
       }
     });
   }, [name, change]);
-  const updateObject = (mutatedObject) => {
-    DB_INSTANCE.put(mutatedObject);
+  const addToList = (id2) => {
+    let newList = [...currentList.list];
+    newList.push(id2);
+    let n = applyChangeset(currentList, {list: newList});
+    DB_INSTANCE.put(n);
   };
-  return [doc, updateObject];
+  const removeFromList = (id2) => {
+    let newList = [...currentList.list];
+    const ind = newList.indexOf(id2);
+    if (ind > -1) {
+      newList.splice(ind, 1);
+    }
+    let n = applyChangeset(currentList, {list: newList});
+    DB_INSTANCE.put(n);
+  };
+  return [currentList.list, addToList, removeFromList];
+}
+function usePromise(p, def) {
+  const [state, setState] = useState(def);
+  useEffect(() => {
+    p.then((r) => {
+      console.log("GOT PROMISED STATE", r);
+      setState(r);
+    }).catch((err) => {
+      console.log(err);
+    });
+  }, []);
+  return state;
 }
 export {
-  useDBRecentChanges,
-  useUser,
-  useNotes,
-  useNames,
-  useUserProperty,
+  useDoc,
   useList,
   useSearch,
-  useObject
+  useProperty,
+  useNotes,
+  useNames,
+  usePromise
 };

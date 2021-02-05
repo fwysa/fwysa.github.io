@@ -6,16 +6,29 @@ import SearchBar from "../widget/searchbar.js";
 import SearchResults from "../widget/searchresults.js";
 import WholeUserInfo from "../widget/wholeuserinfo.js";
 import {useNotes, useNames} from "../db/hooks.js";
-import DB from "../db/db.js";
+import {sortByName, nameToID} from "../db/helper.js";
 function NotePage() {
   const names = useNames();
   const [name, setName] = useState("");
+  const [id, setID] = useState("");
   const [count, setCount] = useState(0);
   const [selector, setSelector] = useState({type: "user"});
+  useEffect(() => {
+    if (name === "") {
+      setID("");
+    } else {
+      nameToID(name).then((r) => {
+        setID(r);
+      });
+    }
+  }, [name]);
   const updateSelector = (s) => {
     setName("");
     setSelector(s);
     console.log("selector now", s);
+  };
+  const updateName = (n) => {
+    setName(n);
   };
   const listUsers = (m) => {
     if (m.type !== "user") {
@@ -25,9 +38,10 @@ function NotePage() {
     return /* @__PURE__ */ h(Section, {
       abstract: m.name
     }, /* @__PURE__ */ h(WholeUserInfo, {
-      name: m.name
+      id: m._id
     }));
   };
+  console.log("CURRENTID", id);
   return /* @__PURE__ */ h("div", {
     className: "page"
   }, /* @__PURE__ */ h("div", {
@@ -37,9 +51,7 @@ function NotePage() {
   }, "Choose a name:"), /* @__PURE__ */ h(Selection, {
     value: name,
     options: names,
-    cb: (choice) => {
-      setName(choice);
-    },
+    cb: updateName,
     addblank: true,
     allowblank: true
   }), /* @__PURE__ */ h("span", {
@@ -47,12 +59,13 @@ function NotePage() {
   }, /* @__PURE__ */ h("strong", null, "OR")), /* @__PURE__ */ h(SearchBar, {
     count,
     cb: updateSelector
-  })), name !== "" ? /* @__PURE__ */ h(WholeUserInfo, {
-    name
+  })), id !== "" ? /* @__PURE__ */ h(WholeUserInfo, {
+    id
   }) : /* @__PURE__ */ h(SearchResults, {
     selector,
     cb: listUsers,
-    countcb: setCount
+    countcb: setCount,
+    sort: sortByName
   }));
 }
 export default NotePage;

@@ -17,38 +17,26 @@ function AddNamesPage() {
   const [fheGroup, setFheGroup] = useState("");
   const [source, setSource] = useState(CONSTANTS.sources[0]);
   const [status, setStatus] = useState(CONSTANTS.statuses[0]);
-  const [names, setNames] = useState([]);
+  const [ids, setIDs] = useState([]);
   const addNameHandler = () => {
-    const updateArray = [...names, {}];
-    setNames(updateArray);
+    const base = applyChangeset(applyChangeset(genDocBase("user"), EMPTY_USER_TEMPLATE), {
+      homeWard: ward,
+      fheGroup,
+      source,
+      status
+    });
+    DB.put(base);
+    const updateArray = [...ids, base._id];
+    setIDs(updateArray);
   };
-  const updateNameHandler = (n) => {
-    console.log("UPDATING NAMES FROM", names, " TO ", n);
-    setNames(n);
-  };
-  const formattedNames = names.map((n, ind) => {
-    console.log("FORMATTING names");
+  const formattedNames = ids.map((n) => {
+    console.log("FORMATTING names", n);
     return /* @__PURE__ */ h(NewNameBar, {
-      whole: names,
-      updatecb: updateNameHandler,
-      ind
+      id: n
     });
   });
   const submitHandler = () => {
-    console.log("SUBMIT", names);
-    names.forEach((n) => {
-      if (n.name !== "") {
-        console.log(n.name);
-        const us = applyChangeset(applyChangeset(genDocBase("user", n.name), EMPTY_USER_TEMPLATE), {
-          ...n,
-          homeWard: ward,
-          fheGroup,
-          source,
-          status
-        });
-        DB.put(us);
-      }
-    });
+    console.log("SUBMIT", ids);
     setNames([]);
   };
   return /* @__PURE__ */ h("div", {

@@ -1,7 +1,7 @@
 import {h} from "../../../web_modules/preact.js";
-import {useUserProperty} from "../../db/hooks.js";
+import {useProperty} from "../../db/hooks.js";
 export default function EditableCheckBox(props) {
-  const [value, setValue] = useUserProperty(props.name, props.property);
+  const [value, setValue] = useProperty(props.id, props.property);
   const editChangeHandler = (e) => {
     setValue(e.target.checked);
   };

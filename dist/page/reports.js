@@ -6,7 +6,7 @@ import SearchBar from "../widget/searchbar.js";
 import SearchResults from "../widget/searchresults.js";
 import ReadOnlyBio from "../widget/readonlybio.js";
 import NoteBar from "../widget/notebar.js";
-const REPORTS = ["Elders Quorum", "Relief Society"];
+import {sortByName} from "../db/helper.js";
 function ReportPage() {
   const [count, setCount] = useState("");
   const [selector, setSelector] = useState({type: "user"});
@@ -18,7 +18,7 @@ function ReportPage() {
     }, /* @__PURE__ */ h(ReadOnlyBio, {
       user: u
     }), /* @__PURE__ */ h("span", null, "Notes:"), /* @__PURE__ */ h("hr", null), /* @__PURE__ */ h(NoteBar, {
-      name: u.name,
+      id: u._id,
       hideadd: true
     }));
   };
@@ -37,6 +37,7 @@ function ReportPage() {
       window.print();
     }
   }, "Print"))), /* @__PURE__ */ h(SearchResults, {
+    sort: sortByName,
     selector,
     cb: formatUser,
     countcb: setCount
