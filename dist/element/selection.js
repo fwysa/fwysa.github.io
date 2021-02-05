@@ -11,6 +11,12 @@ export default function Selection(props) {
       value: ""
     }));
   }
+  if (props.addhidden) {
+    options.unshift(/* @__PURE__ */ h("optgroup", {
+      disabled: true,
+      hidden: true
+    }));
+  }
   return /* @__PURE__ */ h("div", {
     className: "selection"
   }, /* @__PURE__ */ h("select", {
