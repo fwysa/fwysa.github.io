@@ -63,15 +63,19 @@ function ManageUsersPage() {
     countcb: setUserCount
   })), /* @__PURE__ */ h("div", {
     className: "whitebackground"
-  }, /* @__PURE__ */ h(SS, null, "Generate a new code:"), /* @__PURE__ */ h(Selection, {
+  }, /* @__PURE__ */ h(SS, null, "Generate a new code:"), /* @__PURE__ */ h(HL, {
+    label: "Name:"
+  }, /* @__PURE__ */ h(Selection, {
     value: curName,
     cb: setCurName,
     options: names
-  }), /* @__PURE__ */ h(Selection, {
+  })), /* @__PURE__ */ h(HL, {
+    label: "Role:"
+  }, /* @__PURE__ */ h(Selection, {
     value: curRole,
     cb: setCurRole,
     options: CONSTANTS.roles
-  }), /* @__PURE__ */ h("button", {
+  })), /* @__PURE__ */ h("button", {
     onClick: generateHandler
   }, "Generate Code"), /* @__PURE__ */ h("hr", null), /* @__PURE__ */ h("span", null, result.code)), /* @__PURE__ */ h("div", {
     className: "whitebackground"
