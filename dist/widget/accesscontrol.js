@@ -9,7 +9,8 @@ export default function AccessControl(props) {
   urlComponents.pop();
   const baseURL = urlComponents.join("/");
   if (loginInfo === void 0) {
-    window.location.href = baseURL + "/login";
+    const newURL = baseURL + "/login";
+    console.log("REDIRECTING TO LOGIN", newURL, baseURL);
     return null;
   } else if (loginInfo === false) {
     return null;
