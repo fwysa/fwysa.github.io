@@ -5,15 +5,23 @@ import Section from "../element/section.js";
 import FakeLink from "../element/fakelink.js";
 import AccessControl from "../widget/accesscontrol.js";
 import HideByRole from "../widget/hidebyrole.js";
+import CONSTANTS from "../constants.js";
 function LeaderPage() {
   return /* @__PURE__ */ h(AccessControl, {
-    allowed: ["Admin"]
+    allowed: CONSTANTS.roles
   }, /* @__PURE__ */ h("div", {
     className: "page"
+  }, /* @__PURE__ */ h(HideByRole, {
+    allowed: [
+      CONSTANTS.roles[0],
+      CONSTANTS.roles[1],
+      CONSTANTS.roles[2],
+      CONSTANTS.roles[3]
+    ]
   }, /* @__PURE__ */ h(ButtonLink, {
     href: "/notes"
-  }, "YSA Info"), /* @__PURE__ */ h(HideByRole, {
-    allowed: ["Admin"]
+  }, "YSA Info")), /* @__PURE__ */ h(HideByRole, {
+    allowed: [CONSTANTS.roles[0], CONSTANTS.roles[1]]
   }, /* @__PURE__ */ h("div", {
     className: "whitebackground"
   }, /* @__PURE__ */ h(SS, null, "Relief Society and Elders Quorum"), /* @__PURE__ */ h(ButtonLink, {
@@ -22,7 +30,14 @@ function LeaderPage() {
     href: "/assign"
   }, "Assign Fellowshippers"), /* @__PURE__ */ h(ButtonLink, {
     href: "/reports"
-  }, "Reports"))), /* @__PURE__ */ h("div", {
+  }, "Reports"))), /* @__PURE__ */ h(HideByRole, {
+    allowed: [
+      CONSTANTS.roles[0],
+      CONSTANTS.roles[1],
+      CONSTANTS.roles[2],
+      CONSTANTS.roles[3]
+    ]
+  }, /* @__PURE__ */ h("div", {
     className: "whitebackground"
   }, /* @__PURE__ */ h(SS, null, "Home Evening Group Leaders"), /* @__PURE__ */ h(ButtonLink, {
     href: "/heleaders"
@@ -39,11 +54,15 @@ function LeaderPage() {
     href: "https://docs.google.com/document/d/1ndaF8FSBP5WtTzGKL3Mfmhba44bafvgLUcVgsG9lOYU/edit?usp=sharing"
   }, "Kearney"), /* @__PURE__ */ h(ButtonLink, {
     href: "https://docs.google.com/document/d/1NAKrnWUAsRouiRbLsP2rammYsL_UT8I7VvCOqaTFfSs/edit?usp=sharing"
-  }, "Virtual"))), /* @__PURE__ */ h("div", {
+  }, "Virtual")))), /* @__PURE__ */ h(HideByRole, {
+    allowed: [CONSTANTS.roles[0], CONSTANTS.roles[1], CONSTANTS.roles[4]]
+  }, /* @__PURE__ */ h("div", {
     className: "whitebackground"
   }, /* @__PURE__ */ h(SS, null, "Fellowshippers"), /* @__PURE__ */ h(ButtonLink, {
     href: "/calling"
-  }, "Calling Dashboard")), /* @__PURE__ */ h("div", {
+  }, "Calling Dashboard"))), /* @__PURE__ */ h(HideByRole, {
+    allowed: [CONSTANTS.roles[0], CONSTANTS.roles[1], CONSTANTS.roles[2]]
+  }, /* @__PURE__ */ h("div", {
     className: "whitebackground"
   }, /* @__PURE__ */ h(SS, null, "Activities and Facebook"), /* @__PURE__ */ h(ButtonLink, {
     href: "/"
@@ -51,6 +70,12 @@ function LeaderPage() {
     href: "https://docs.google.com/document/d/1H2Bk0TcUIcdA-m5u6N8HRbGFK7e0kXc8hKTUmu4lLnQ/edit?usp=sharing"
   }, "Activity Blurb"), /* @__PURE__ */ h(ButtonLink, {
     href: "/"
-  }, "Facebook Group"))));
+  }, "Facebook Group"))), /* @__PURE__ */ h(HideByRole, {
+    allowed: [CONSTANTS.roles[0]]
+  }, /* @__PURE__ */ h("div", {
+    className: "whitebackground"
+  }, /* @__PURE__ */ h(SS, null, "Admin"), /* @__PURE__ */ h(ButtonLink, {
+    href: "/manageusers"
+  }, "Manage Users")))));
 }
 export default LeaderPage;

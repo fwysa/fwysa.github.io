@@ -1,5 +1,6 @@
 import {h} from "../../web_modules/preact.js";
 import {useState} from "../../web_modules/preact/hooks.js";
+import AccessControl from "../widget/accesscontrol.js";
 import CONSTANTS from "../constants.js";
 import DB from "../db/db.js";
 import {

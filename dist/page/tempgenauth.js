@@ -39,7 +39,7 @@ function TempGenAuthPage() {
   }), /* @__PURE__ */ h(Selection, {
     value: curRole,
     cb: setCurRole,
-    options: CONSTANTS.authorizationRoles
+    options: CONSTANTS.roles
   }), /* @__PURE__ */ h("button", {
     onClick: generateHandler
   }, "Generate Code"), /* @__PURE__ */ h("hr", null), /* @__PURE__ */ h("span", null, result.code)));
