@@ -31,11 +31,11 @@ export default function Bio(props) {
     setIsEditing(!isEditing);
   };
   const deleteClickHandler = () => {
-    DB.get(props.id, (doc) => {
+    DB.get(props.id).then((doc) => {
       console.log("GOT DOC, deleting", doc.name);
       doc._deleted = true;
-      DB.put(doc);
-    });
+      return DB.put(doc);
+    }).catch(console.log);
   };
   const bioImgClasses = imgUrl === "" ? "bioimg bluebackground" : "bioimg";
   const belowFold = /* @__PURE__ */ h("div", {

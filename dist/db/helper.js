@@ -90,16 +90,6 @@ function mapNameToID(names) {
   return Promise.all(names.map((n) => nameToID(n)));
 }
 
-function usePromise(p, def) {
-  const [val, setVal] = useState(def);
-  useEffect(() => {
-    p.then((r) => {
-      setVal(r);
-    });
-  }, [p]);
-  return val;
-}
-
 export {
   genID,
   genTimestamp,
@@ -111,5 +101,4 @@ export {
   nameToID,
   IDToName,
   mapIDToName,
-  usePromise,
 };

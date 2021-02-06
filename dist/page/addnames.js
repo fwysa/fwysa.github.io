@@ -26,7 +26,7 @@ function AddNamesPage() {
       status,
       name: "Name here"
     });
-    DB.put(base);
+    DB.put(base).catch(console.log);
     const updateArray = [...ids, base._id];
     setIDs(updateArray);
   };

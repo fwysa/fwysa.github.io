@@ -1,13 +1,18 @@
 import {h, Fragment} from "../../web_modules/preact.js";
 import "./css/note.css.proxy.js";
-import {useState} from "../../web_modules/preact/hooks.js";
+import {useState, useEffect} from "../../web_modules/preact/hooks.js";
 import EditableText from "./editable/text.js";
 import DB from "../db/db.js";
+import {IDToName} from "../db/helper.js";
 export default function Note(props) {
   const d = new Date(props.data.created);
   const formattedDate = d.toLocaleTimeString() + " " + d.toLocaleDateString();
   const [note, setNote] = useState(props.data.note);
   const [editing, setEditing] = useState(false);
+  const [author, setAuthor] = useState("");
+  useEffect(() => {
+    IDToName(props.data.author).then(setAuthor).catch(console.log);
+  }, [props.data.author]);
   const normal = /* @__PURE__ */ h("span", null, note);
   const edit = /* @__PURE__ */ h("span", null, /* @__PURE__ */ h("textarea", {
     placeholder: "Enter note here",
@@ -21,7 +26,7 @@ export default function Note(props) {
     if (editing) {
       setEditing(false);
       props.data.note = note;
-      DB.put(props.data);
+      DB.put(props.data).catch(console.log);
     } else {
       setEditing(true);
     }
@@ -29,19 +34,19 @@ export default function Note(props) {
   const deleteHandler = (e) => {
     e.preventDefault();
     props.data._deleted = true;
-    DB.put(props.data);
+    DB.put(props.data).catch(console.log);
   };
   return /* @__PURE__ */ h("div", {
     className: "whitebackground note"
   }, /* @__PURE__ */ h("div", null, editing ? edit : normal), /* @__PURE__ */ h("hr", null), /* @__PURE__ */ h("div", {
     className: "smaller notelower"
-  }, /* @__PURE__ */ h("span", null, formattedDate), /* @__PURE__ */ h("div", null, props.data.actionTaken !== void 0 ? /* @__PURE__ */ h(Fragment, null, /* @__PURE__ */ h("span", null, props.data.actionTaken)) : null, props.data.result !== void 0 ? /* @__PURE__ */ h(Fragment, null, /* @__PURE__ */ h("span", null, " | "), /* @__PURE__ */ h("span", null, props.data.result)) : null, props.data.newStatus !== void 0 ? /* @__PURE__ */ h(Fragment, null, /* @__PURE__ */ h("span", null, " | "), /* @__PURE__ */ h("span", null, props.data.newStatus)) : null, props.data.followupDate !== void 0 ? /* @__PURE__ */ h(Fragment, null, /* @__PURE__ */ h("span", null, ": "), /* @__PURE__ */ h("span", null, props.data.followupDate)) : null), /* @__PURE__ */ h("div", null, /* @__PURE__ */ h("span", {
-    className: "padright"
-  }, props.data.author), /* @__PURE__ */ h("span", null, "| "), /* @__PURE__ */ h("a", {
+  }, /* @__PURE__ */ h("span", null, formattedDate), /* @__PURE__ */ h("div", null, props.data.actionTaken !== void 0 ? /* @__PURE__ */ h(Fragment, null, /* @__PURE__ */ h("span", null, props.data.actionTaken)) : null, props.data.result !== void 0 ? /* @__PURE__ */ h(Fragment, null, /* @__PURE__ */ h("span", null, " | "), /* @__PURE__ */ h("span", null, props.data.result)) : null, props.data.newStatus !== void 0 ? /* @__PURE__ */ h(Fragment, null, /* @__PURE__ */ h("span", null, " | "), /* @__PURE__ */ h("span", null, props.data.newStatus)) : null, props.data.followupDate !== void 0 ? /* @__PURE__ */ h(Fragment, null, /* @__PURE__ */ h("span", null, ": "), /* @__PURE__ */ h("span", null, props.data.followupDate)) : null), /* @__PURE__ */ h("div", null, /* @__PURE__ */ h("span", null, author), /* @__PURE__ */ h("span", {
+    className: "padleft printnoshow"
+  }, /* @__PURE__ */ h("span", null, "| "), /* @__PURE__ */ h("a", {
     href: "",
     onClick: editHandler
   }, editing ? "save" : "edit"), /* @__PURE__ */ h("span", null, " | "), /* @__PURE__ */ h("a", {
     href: "",
     onClick: deleteHandler
-  }, "delete"), /* @__PURE__ */ h("span", null, " |"))));
+  }, "delete"), /* @__PURE__ */ h("span", null, " |")))));
 }

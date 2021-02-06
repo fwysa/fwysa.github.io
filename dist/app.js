@@ -12,11 +12,17 @@ import TestPage from "./page/test.js";
 import CallingPage from "./page/calling.js";
 import ReportPage from "./page/reports.js";
 import FHEGLPage from "./page/fhegl.js";
+import LoginPage from "./page/login.js";
+import DeniedPage from "./page/denied.js";
 function App() {
   return /* @__PURE__ */ h("div", {
     className: "app"
   }, /* @__PURE__ */ h(Header, null), /* @__PURE__ */ h(Router, null, /* @__PURE__ */ h(DefaultPage, {
     path: "/"
+  }), /* @__PURE__ */ h(LoginPage, {
+    path: "/login"
+  }), /* @__PURE__ */ h(DeniedPage, {
+    path: "/denied"
   }), /* @__PURE__ */ h(NotePage, {
     path: "/notes"
   }), /* @__PURE__ */ h(LeaderPage, {

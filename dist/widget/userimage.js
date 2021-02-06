@@ -4,7 +4,7 @@ import DB from "../db/db.js";
 export default function UserImage(props) {
   const [imgSrc, setImgSrc] = useState("");
   useEffect(() => {
-    DB.get(props.id, (d) => {
+    DB.get(props.id).then((d) => {
       setImgSrc(d.imageUrl);
       if (props.cb !== void 0) {
         props.cb(d.imageUrl);

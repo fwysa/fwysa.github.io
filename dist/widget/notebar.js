@@ -1,9 +1,10 @@
 import {h} from "../../web_modules/preact.js";
 import {useState} from "../../web_modules/preact/hooks.js";
-import {useNotes} from "../db/hooks.js";
+import {useNotes, useLogin} from "../db/hooks.js";
 import Note from "../element/note.js";
 export default function NoteBar(props) {
-  const [author, setAuthor] = useState("");
+  const loginInfo = useLogin();
+  const author = loginInfo !== false ? loginInfo.userID : "";
   const [noteText, setNoteText] = useState("");
   const [notes, addNote] = useNotes(props.id);
   const setNoteHandler = (e) => {
@@ -38,12 +39,7 @@ export default function NoteBar(props) {
     placeholder: "Enter note here"
   }), /* @__PURE__ */ h("div", {
     className: "addnotelower"
-  }, /* @__PURE__ */ h("input", {
-    type: "text",
-    value: author,
-    onChange: setAuthorHandler,
-    placeholder: "Enter your name here"
-  }), /* @__PURE__ */ h("button", {
+  }, /* @__PURE__ */ h("button", {
     onClick: noteAddHandler
   }, "Add"))) : null, /* @__PURE__ */ h("div", {
     className: "notebarnotes"

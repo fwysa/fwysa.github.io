@@ -76,10 +76,9 @@ const CONSTANTS = {
     fheLeaders: "b6609528-3e1e-410f-97fa-b418d2fbc923"
   },
   authorizationsRoles: {
-    Bishopric: {},
-    "Tech Team": {},
-    "EQ / RS Leader": {},
-    "HE Group Leader": {},
+    Admin: {},
+    Leader: {},
+    "Group Leader": {},
     Fellowshipper: {}
   }
 };

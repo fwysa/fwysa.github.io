@@ -3,12 +3,18 @@ import ButtonLink from "../element/buttonlink.js";
 import SS from "../element/sectionsubtitle.js";
 import Section from "../element/section.js";
 import FakeLink from "../element/fakelink.js";
+import AccessControl from "../widget/accesscontrol.js";
+import HideByRole from "../widget/hidebyrole.js";
 function LeaderPage() {
-  return /* @__PURE__ */ h("div", {
+  return /* @__PURE__ */ h(AccessControl, {
+    allowed: ["Admin"]
+  }, /* @__PURE__ */ h("div", {
     className: "page"
   }, /* @__PURE__ */ h(ButtonLink, {
     href: "/notes"
-  }, "YSA Info"), /* @__PURE__ */ h("div", {
+  }, "YSA Info"), /* @__PURE__ */ h(HideByRole, {
+    allowed: ["Admin"]
+  }, /* @__PURE__ */ h("div", {
     className: "whitebackground"
   }, /* @__PURE__ */ h(SS, null, "Relief Society and Elders Quorum"), /* @__PURE__ */ h(ButtonLink, {
     href: "/addnames"
@@ -16,7 +22,7 @@ function LeaderPage() {
     href: "/assign"
   }, "Assign Fellowshippers"), /* @__PURE__ */ h(ButtonLink, {
     href: "/reports"
-  }, "Reports")), /* @__PURE__ */ h("div", {
+  }, "Reports"))), /* @__PURE__ */ h("div", {
     className: "whitebackground"
   }, /* @__PURE__ */ h(SS, null, "Home Evening Group Leaders"), /* @__PURE__ */ h(ButtonLink, {
     href: "/heleaders"
@@ -45,6 +51,6 @@ function LeaderPage() {
     href: "https://docs.google.com/document/d/1H2Bk0TcUIcdA-m5u6N8HRbGFK7e0kXc8hKTUmu4lLnQ/edit?usp=sharing"
   }, "Activity Blurb"), /* @__PURE__ */ h(ButtonLink, {
     href: "/"
-  }, "Facebook Group")));
+  }, "Facebook Group"))));
 }
 export default LeaderPage;

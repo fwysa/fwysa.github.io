@@ -1,8 +1,7 @@
 import {h, Fragment} from "../../web_modules/preact.js";
 import {useState, useEffect} from "../../web_modules/preact/hooks.js";
 import CONSTANTS from "../constants.js";
-import {useProperty, useNotes} from "../db/hooks.js";
-import {IDToName} from "../db/helper.js";
+import {useProperty, useNotes, useLogin} from "../db/hooks.js";
 import Selection from "../element/selection.js";
 import Block from "../element/block.js";
 import SS from "../element/sectionsubtitle.js";
@@ -12,20 +11,17 @@ import EditableText from "../element/editable/text.js";
 import EditableDate from "../element/editable/date.js";
 import EditableMultipleChoice from "../element/editable/multiplechoice.js";
 export default function CallingForm(props) {
+  const loginInfo = useLogin();
+  const author = loginInfo !== false ? loginInfo.userID : "";
   const [action, setAction] = useState("");
   const [result, setResult] = useState("");
   const [currentNote, setCurrentNote] = useState("");
   const [newStatus, setNewStatus] = useState(props.current.status);
-  const [author, setAuthor] = useState("");
   const [followupDate, setFollowupDate] = useState("");
-  useEffect(() => {
-    IDToName(props.current.assignedCaller).then((r) => {
-      setAuthor(r);
-    });
-  }, [props.current]);
   const [currentStatus, setCurrentStatus] = useProperty(props.current._id, "status");
   const [, addNote] = useNotes(props.current._id);
   const submitHandler = () => {
+    console.log("ADDING NOTE BY", author, loginInfo);
     addNote(author, currentNote, {
       metaSource: "callingform",
       actionTaken: action,

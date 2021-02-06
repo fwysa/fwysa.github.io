@@ -1,6 +1,6 @@
 import {h} from "../../web_modules/preact.js";
 import {useEffect, useState} from "../../web_modules/preact/hooks.js";
-import {useList, usePromise} from "../db/hooks.js";
+import {useList} from "../db/hooks.js";
 import {sortByName, nameToID, mapIDToName} from "../db/helper.js";
 import {callScript, textScript} from "./helper/callscripts.js";
 import Section from "../element/section.js";
