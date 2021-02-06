@@ -1,22 +1,16 @@
 import {h} from "../../web_modules/preact.js";
 import {useLogin} from "../db/hooks.js";
+import {redirect} from "../db/helper.js";
 export default function AccessControl(props) {
   const loginInfo = useLogin();
-  const urlComponents = window.location.href.split("/");
-  if (urlComponents.length !== 4) {
-    console.log("URL COMPONENT LENGTH IS NOT 4", window.location.href);
-  }
-  urlComponents.pop();
-  const baseURL = urlComponents.join("/");
   if (loginInfo === void 0) {
-    const newURL = baseURL + "/login";
-    console.log("REDIRECTING TO LOGIN", newURL, baseURL);
+    redirect("login");
     return null;
   } else if (loginInfo === false) {
     return null;
   } else {
     if (props.allowed.indexOf(loginInfo.role) < 0) {
-      window.location.href = baseURL + "/denied";
+      redirect("denied");
       return null;
     } else {
       return props.children;

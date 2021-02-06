@@ -90,6 +90,22 @@ function mapNameToID(names) {
   return Promise.all(names.map((n) => nameToID(n)));
 }
 
+function redirect(page) {
+  let urlComponents = window.location.href.split('/');
+  if (urlComponents[urlComponents.length - 1] === '') {
+    urlComponents.pop();
+  }
+  if (urlComponents.length !== 4) {
+    console.log('URL COMPONENT LENGTH IS NOT 4', window.location.href);
+  }
+  urlComponents.pop(); // FIXME: only if on subpage
+  const baseURL = urlComponents.join('/');
+
+  const newURL = baseURL + '/' + page;
+  console.log('REDIRECTING TO', page, newURL);
+  window.location.href = newURL;
+}
+
 export {
   genID,
   genTimestamp,
@@ -101,4 +117,5 @@ export {
   nameToID,
   IDToName,
   mapIDToName,
+  redirect,
 };

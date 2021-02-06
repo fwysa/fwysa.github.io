@@ -50,7 +50,7 @@ class DB {
     const url = AUTH_URL + "?action=login&user=" + encodeURI(user) + "&pass=" + encodeURI(pass);
     console.log(url);
     let t = this;
-    fetch(url).then((d) => d.json()).then((r) => {
+    return fetch(url).then((d) => d.json()).then((r) => {
       if (!r.ok) {
         console.log("LOGIN FAILED", r);
       } else {
@@ -59,7 +59,25 @@ class DB {
         t.pouchdb.put({_id: LOCAL_USER, ...r}).catch(console.log);
         t.finishedLogin(r);
       }
+      return r;
     });
+  }
+  createAuth(code, user, pass) {
+    const url = AUTH_URL + "?action=createauth&code=" + encodeURI(code) + "&user=" + encodeURI(user) + "&pass=" + encodeURI(pass);
+    console.log(url);
+    let t = this;
+    return fetch(url).then((d) => d.json()).then((r) => {
+      if (!r.ok) {
+        console.log("CREATEAUTH FAILED", r);
+      } else {
+        console.log("CREATEAUTH SUCCESS", r);
+      }
+      return r;
+    });
+  }
+  genCode() {
+    const url = AUTH_URL + "?action=gencode";
+    return fetch(url).then((d) => d.json()).then((r) => r.code);
   }
   logout() {
     this.DBURL = "";
