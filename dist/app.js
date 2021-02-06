@@ -14,7 +14,8 @@ import ReportPage from "./page/reports.js";
 import FHEGLPage from "./page/fhegl.js";
 import LoginPage from "./page/login.js";
 import DeniedPage from "./page/denied.js";
-import TempGenAuthPage from "./page/tempgenauth.js";
+import ManageUsersPage from "./page/manageusers.js";
+import FormPage from "./page/form.js";
 function App() {
   return /* @__PURE__ */ h("div", {
     className: "app"
@@ -40,8 +41,10 @@ function App() {
     path: "/reports"
   }), /* @__PURE__ */ h(FHEGLPage, {
     path: "/heleaders"
-  }), /* @__PURE__ */ h(TempGenAuthPage, {
-    path: "/tempgenauth"
+  }), /* @__PURE__ */ h(FormPage, {
+    path: "/form"
+  }), /* @__PURE__ */ h(ManageUsersPage, {
+    path: "/manageusers"
   })));
 }
 export default App;
