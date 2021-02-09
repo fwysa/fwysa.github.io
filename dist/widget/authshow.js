@@ -24,7 +24,7 @@ export default function PendingAuthShow(props) {
     src: delete_icon
   })), /* @__PURE__ */ h("span", {
     className: "padright"
-  }, name, ": (username: ", props.val.code, ", role:", " "), /* @__PURE__ */ h(EditableMultipleChoice, {
+  }, name, ": (username: ", props.val.username, ", role:", " "), /* @__PURE__ */ h(EditableMultipleChoice, {
     id: props.val._id,
     property: "role",
     options: CONSTANTS.roles,
