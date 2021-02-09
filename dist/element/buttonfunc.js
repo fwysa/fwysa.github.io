@@ -2,7 +2,7 @@ import {h} from "../../web_modules/preact.js";
 import "./css/buttons.css.proxy.js";
 export default function ButtonLink(props) {
   return /* @__PURE__ */ h("div", {
-    className: "whitebackground button",
+    className: "whitebackground buttons",
     onClick: props.cb
   }, /* @__PURE__ */ h("a", {
     href: "#",

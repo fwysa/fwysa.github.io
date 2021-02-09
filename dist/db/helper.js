@@ -97,14 +97,25 @@ function redirect(page) {
   }
   if (urlComponents.length !== 4) {
     console.log('URL COMPONENT LENGTH IS NOT 4', window.location.href);
+  } else {
+    urlComponents.pop();
   }
-  urlComponents.pop(); // FIXME: only if on subpage
   const baseURL = urlComponents.join('/');
 
   const newURL = baseURL + '/' + page;
   console.log('REDIRECTING TO', page, newURL);
   window.location.href = newURL;
 }
+
+/*
+function tempUserQuery(selector) {
+  return DB_INSTANCE.find(selector).then((r) => {
+    return sortByName(r);
+  })
+}
+
+console.log("TEMP USER QUERY", tempUserQuery);
+*/
 
 export {
   genID,

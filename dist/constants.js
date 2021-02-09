@@ -27,15 +27,16 @@ const CONSTANTS = {
     "Whitmer Ward",
     "Yellow Creek Branch"
   ],
-  contactMethods: ["Text", "Call", "Email"],
+  contactMethods: ["Text", "Call", "Email", "FB Messenger", "Other"],
   communication: {
-    contactMethods: ["Text", "Call", "Email", "Visit"],
+    contactMethods: ["Text", "Call", "Email", "Visit", "FB Messenger"],
     choiceMatrix: {
       "": [],
       Text: [0, 1, 2],
       Call: [3, 4, 2],
       Email: [5, 6, 7],
-      Visit: [8, 9, 10]
+      Visit: [8, 9, 10],
+      "FB Messenger": [11, 4, 12]
     },
     statusMatrix: [
       [],
@@ -48,6 +49,8 @@ const CONSTANTS = {
       [1, 6, 8],
       [],
       [2, 3, 4, 5, 8],
+      [1, 6, 8],
+      [],
       [1, 6, 8]
     ],
     results: [
@@ -61,7 +64,9 @@ const CONSTANTS = {
       "Wrong email address",
       "Visited but not home/available",
       "Visited and had a conversation",
-      "Wrong address"
+      "Wrong address",
+      "Left a message on FB",
+      "Couldn't find on FB"
     ]
   },
   sources: [

@@ -24,6 +24,8 @@
 
 .header .icons {
   display: flex;
+  align-items: center;
+  height: 100%;
 }
 
 .header .dummylogoright {

@@ -126,3 +126,19 @@ h1 {
 .imgicon {
   max-height: 1.7em;
 }
+
+button {
+  background-color: var(--white);
+  border: var(--borderdetails);
+  box-shadow: var(--shadowdetails);
+  padding: var(--sectionmargin);
+  margin: var(--sectionmargin);
+}
+
+button:hover {
+  background-color: #eee;
+}
+
+button:active {
+  background-color: var(--lightblue);
+}
