@@ -77,7 +77,7 @@ function ManageUsersPage() {
     options: CONSTANTS.roles
   })), /* @__PURE__ */ h("button", {
     onClick: generateHandler
-  }, "Generate Code"), /* @__PURE__ */ h("hr", null), /* @__PURE__ */ h("span", null, result.code)), /* @__PURE__ */ h("div", {
+  }, "Generate Code"), result !== "" ? /* @__PURE__ */ h("hr", null) : null, /* @__PURE__ */ h("span", null, result.code)), /* @__PURE__ */ h("div", {
     className: "whitebackground"
   }, /* @__PURE__ */ h(SS, null, "Pending Codes: ", codeShow), /* @__PURE__ */ h(SearchResults, {
     selector: codeSelector,
