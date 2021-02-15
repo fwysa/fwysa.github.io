@@ -45,7 +45,9 @@ function AddNamesPage() {
     console.log("Redirect may be hacky", newURL);
     window.location.href = newURL;
   };
-  return /* @__PURE__ */ h("div", {
+  return /* @__PURE__ */ h(AccessControl, {
+    allowed: "addnames"
+  }, /* @__PURE__ */ h("div", {
     className: "page"
   }, /* @__PURE__ */ h("div", {
     className: "whitebackground"
@@ -81,6 +83,6 @@ function AddNamesPage() {
     cb: addNameHandler
   }, "Add Name"), /* @__PURE__ */ h(ButtonFunc, {
     cb: submitHandler
-  }, "Submit"));
+  }, "Submit")));
 }
 export default AddNamesPage;

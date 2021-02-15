@@ -1,5 +1,6 @@
 import {h} from "../../web_modules/preact.js";
 import {useState} from "../../web_modules/preact/hooks.js";
+import AccessControl from "../widget/accesscontrol.js";
 import SS from "../element/sectionsubtitle.js";
 import Selection from "../element/selection.js";
 import SearchBar from "../widget/searchbar.js";
@@ -23,7 +24,9 @@ function ReportPage() {
       hideadd: true
     }));
   };
-  return /* @__PURE__ */ h("div", {
+  return /* @__PURE__ */ h(AccessControl, {
+    allowed: "reports"
+  }, /* @__PURE__ */ h("div", {
     className: "page"
   }, /* @__PURE__ */ h("div", {
     className: "printnoshow"
@@ -42,6 +45,6 @@ function ReportPage() {
     selector,
     cb: formatUser,
     countcb: setCount
-  }));
+  })));
 }
 export default ReportPage;

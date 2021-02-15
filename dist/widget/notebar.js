@@ -41,7 +41,7 @@ export default function NoteBar(props) {
     className: "addnotelower"
   }, /* @__PURE__ */ h("button", {
     onClick: noteAddHandler
-  }, "Add"))) : null, /* @__PURE__ */ h("div", {
+  }, "Add note"))) : null, /* @__PURE__ */ h("div", {
     className: "notebarnotes"
   }, formattedNotes));
 }

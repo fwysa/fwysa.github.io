@@ -1,5 +1,6 @@
 import {h} from "../../web_modules/preact.js";
 import {useState, useEffect} from "../../web_modules/preact/hooks.js";
+import AccessControl from "../widget/accesscontrol.js";
 import List from "../widget/list.js";
 import SearchResults from "../widget/searchresults.js";
 import SearchBar from "../widget/searchbar.js";
@@ -28,7 +29,9 @@ function AssignPage() {
       id: r._id
     }));
   };
-  return /* @__PURE__ */ h("div", {
+  return /* @__PURE__ */ h(AccessControl, {
+    allowed: "assign"
+  }, /* @__PURE__ */ h("div", {
     className: "page"
   }, /* @__PURE__ */ h(SearchBar, {
     initialstatus: CONSTANTS.statuses[0],
@@ -46,6 +49,6 @@ function AssignPage() {
   }), /* @__PURE__ */ h("hr", null), /* @__PURE__ */ h(List, {
     label: "Fellowshippers (List of Callers):",
     list: CONSTANTS.lists.callers
-  }));
+  })));
 }
 export default AssignPage;

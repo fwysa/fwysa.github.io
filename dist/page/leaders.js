@@ -8,7 +8,7 @@ import HideByRole from "../widget/hidebyrole.js";
 import CONSTANTS from "../constants.js";
 function LeaderPage() {
   return /* @__PURE__ */ h(AccessControl, {
-    allowed: CONSTANTS.roles
+    allowed: "leaders"
   }, /* @__PURE__ */ h("div", {
     className: "page"
   }, /* @__PURE__ */ h(HideByRole, {

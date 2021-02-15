@@ -2,6 +2,7 @@ import {h} from "../../web_modules/preact.js";
 import {useEffect, useState} from "../../web_modules/preact/hooks.js";
 import {useList} from "../db/hooks.js";
 import {sortByName, nameToID, mapIDToName} from "../db/helper.js";
+import AccessControl from "../widget/accesscontrol.js";
 import {callScript, textScript} from "./helper/callscripts.js";
 import Section from "../element/section.js";
 import SS from "../element/sectionsubtitle.js";
@@ -71,7 +72,9 @@ function CallingPage() {
       current: n
     })));
   };
-  return /* @__PURE__ */ h("div", {
+  return /* @__PURE__ */ h(AccessControl, {
+    allowed: "calling"
+  }, /* @__PURE__ */ h("div", {
     className: "page"
   }, /* @__PURE__ */ h("div", {
     className: "whitebackground horizontal"
@@ -98,6 +101,6 @@ function CallingPage() {
     selector,
     cb: formatName,
     countcb: setCount
-  }) : null);
+  }) : null));
 }
 export default CallingPage;

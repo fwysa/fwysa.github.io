@@ -86,6 +86,24 @@ const CONSTANTS = {
     "Activities",
     "HE Group Leader",
     "Fellowshipper"
-  ]
+  ],
+  pageAccess: {
+    leaders: [0, 1, 2, 3, 4],
+    notes: [0, 1, 2, 3],
+    addnames: [0, 1],
+    assign: [0, 1],
+    reports: [0, 1],
+    groups: [0, 1, 2, 3],
+    calling: [0, 1, 4],
+    activities: [0, 1, 2],
+    manageusers: [0],
+    NULL: []
+  }
 };
+const getAccessRoles = (page) => {
+  return CONSTANTS.pageAccess[page].map((i) => {
+    return CONSTANTS.roles[i];
+  });
+};
+export {getAccessRoles};
 export default CONSTANTS;

@@ -1,5 +1,6 @@
 import {h} from "../../web_modules/preact.js";
 import {useState, useEffect} from "../../web_modules/preact/hooks.js";
+import AccessControl from "../widget/accesscontrol.js";
 import SS from "../element/sectionsubtitle.js";
 import HL from "../element/horizontallabel.js";
 import Selection from "../element/selection.js";
@@ -53,7 +54,9 @@ function ManageUsersPage() {
       return DB.put(base);
     }).catch(console.log);
   };
-  return /* @__PURE__ */ h("div", {
+  return /* @__PURE__ */ h(AccessControl, {
+    allowed: "manageusers"
+  }, /* @__PURE__ */ h("div", {
     className: "page"
   }, /* @__PURE__ */ h("div", {
     className: "whitebackground"
@@ -83,6 +86,6 @@ function ManageUsersPage() {
     selector: codeSelector,
     cb: listCodes,
     countcb: setCodeCount
-  })));
+  }))));
 }
 export default ManageUsersPage;

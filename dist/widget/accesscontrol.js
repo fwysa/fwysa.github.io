@@ -1,6 +1,7 @@
 import {h} from "../../web_modules/preact.js";
 import {useLogin} from "../db/hooks.js";
 import {redirect} from "../db/helper.js";
+import {getAccessRoles} from "../constants.js";
 export default function AccessControl(props) {
   const loginInfo = useLogin();
   if (loginInfo === void 0) {
@@ -9,7 +10,7 @@ export default function AccessControl(props) {
   } else if (loginInfo === false) {
     return null;
   } else {
-    if (props.allowed.indexOf(loginInfo.role) < 0) {
+    if (getAccessRoles(props.allowed).indexOf(loginInfo.role) < 0) {
       redirect("denied");
       return null;
     } else {
