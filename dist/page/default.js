@@ -7,9 +7,9 @@ function DefaultPage() {
     className: "page"
   }, /* @__PURE__ */ h(Section, {
     abstract: "Zoom Links"
-  }, /* @__PURE__ */ h("p", null, "Sacrament Meeting, Sunday School, Elder's Quorum, Relief Society, Home Evening, and Self Reliance:"), /* @__PURE__ */ h(Block, null, /* @__PURE__ */ h("span", null, "Meeting ID:", " ", /* @__PURE__ */ h("a", {
-    href: "https://us02web.zoom.us/j/83949872985?pwd=MFNJd0FqaWxZd0VhN1VMSWdhYU9udz09"
-  }, "839 4987 2985")), /* @__PURE__ */ h("br", null), /* @__PURE__ */ h("span", null, "Passcode: No passcode required")), /* @__PURE__ */ h("p", null, "Institute:"), /* @__PURE__ */ h(Block, null, /* @__PURE__ */ h("span", null, "Meeting ID:", " ", /* @__PURE__ */ h("a", {
+  }, /* @__PURE__ */ h("p", null, "Sacrament Meeting, Sunday School, Elder's Quorum, Relief Society, Home Evening, and Self Reliance:"), /* @__PURE__ */ h(Block, null, /* @__PURE__ */ h("span", null, "Webinar ID:", " ", /* @__PURE__ */ h("a", {
+    href: "https://zoom.us/j/91899468398?pwd=UHRiYnBEcG8wY0x1dHRBajJPSjlhUT09"
+  }, "918 9946 8398")), /* @__PURE__ */ h("br", null), /* @__PURE__ */ h("span", null, "Passcode: 812396")), /* @__PURE__ */ h("p", null, "Institute:"), /* @__PURE__ */ h(Block, null, /* @__PURE__ */ h("span", null, "Meeting ID:", " ", /* @__PURE__ */ h("a", {
     href: "https://byui.zoom.us/j/6727612227"
   }, "672 761 2227")), /* @__PURE__ */ h("br", null), /* @__PURE__ */ h("span", null, "No passcode required")), /* @__PURE__ */ h("p", null, "Ward Bulletin:", " ", /* @__PURE__ */ h("a", {
     href: "https://docs.google.com/document/d/1gQjsqxztvckqbMVCGPzMPUiBKqdorx-uD1ELMQeVZhU/edit"
