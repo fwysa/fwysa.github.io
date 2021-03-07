@@ -1,11 +1,16 @@
 import {h} from "../../web_modules/preact.js";
 import Section from "../element/section.js";
+import SS from "../element/sectionsubtitle.js";
 import Block from "../element/block.js";
 import EmbeddedDoc from "../widget/embedded_doc.js";
 function DefaultPage() {
   return /* @__PURE__ */ h("div", {
     className: "page"
-  }, /* @__PURE__ */ h(Section, {
+  }, /* @__PURE__ */ h("div", {
+    className: "whitebackground"
+  }, /* @__PURE__ */ h(SS, null, "Announcements"), /* @__PURE__ */ h(EmbeddedDoc, {
+    url: "https://docs.google.com/document/d/e/2PACX-1vTvWdv9uUYu-16SAsfhozgmp-P3yiCmQ5XiLWC2xrW9KFtHvXOsh0r7OeqVU-mqnjREnddp-iw1vXxX/pub?embedded=true"
+  })), /* @__PURE__ */ h(Section, {
     abstract: "Zoom Links"
   }, /* @__PURE__ */ h("p", null, "Sacrament Meeting, Sunday School, Elder's Quorum, Relief Society, Home Evening, and Self Reliance:"), /* @__PURE__ */ h(Block, null, /* @__PURE__ */ h("span", null, "Webinar ID:", " ", /* @__PURE__ */ h("a", {
     href: "https://zoom.us/j/91899468398?pwd=UHRiYnBEcG8wY0x1dHRBajJPSjlhUT09"
