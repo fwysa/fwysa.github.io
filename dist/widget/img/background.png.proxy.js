@@ -1,1 +1,0 @@
-export default "/dist/widget/img/background.png";

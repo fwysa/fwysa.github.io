@@ -1,1 +1,0 @@
-export default "/dist/widget/img/outline_table_view_black_18dp.png";

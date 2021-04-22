@@ -1,1 +1,0 @@
-export default "/dist/img/outline_highlight_off_black_18dp.png";
